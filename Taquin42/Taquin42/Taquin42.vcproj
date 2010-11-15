@@ -175,6 +175,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FileLoader.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
 				>
 			</File>
@@ -186,6 +190,10 @@
 			>
 			<File
 				RelativePath=".\debug_aff.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FileLoader.h"
 				>
 			</File>
 		</Filter>
