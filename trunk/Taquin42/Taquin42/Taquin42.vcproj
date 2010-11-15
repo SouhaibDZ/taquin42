@@ -179,7 +179,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\IAPlayer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Puzzle.cpp"
 				>
 			</File>
 		</Filter>
@@ -194,6 +202,14 @@
 			</File>
 			<File
 				RelativePath=".\FileLoader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\IAPlayer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Puzzle.h"
 				>
 			</File>
 		</Filter>

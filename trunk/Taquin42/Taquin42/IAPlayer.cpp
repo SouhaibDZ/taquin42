@@ -15,25 +15,25 @@ IAPlayer::~IAPlayer()
 
 int						IAPlayer::GetMovesNb(void) const
 {
-	return (this->GetMovesNb);
+	return (this->MovesNb);
 }
 
 const std::string &		IAPlayer::GetStatesTime(void) const
 {
-	return (this->GetStatesTime);
+	return (this->StatesTime);
 }
 
 int						IAPlayer::GetStatesSize(void) const
 {
-	return (this->GetStatesSize);
+	return (this->StatesSize);
 }
 
 int						IAPlayer::GetTotalCosts(void) const
 {
-	return (this->GetTotalCosts);
+	return (this->TotalCosts);
 }
 
 const std::string &		IAPlayer::GetOrderedSequence(void) const
 {
-	return (this->GetOrderedSequence);
+	return (this->OrderedSequence);
 }
