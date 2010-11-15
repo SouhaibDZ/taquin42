@@ -1,37 +1,52 @@
 #include <string>
 #include <sstream>
+#include <vector>
 #include "debug_aff.h"
 
-size_t count_char(std::string const& str)
+unsigned int count_char(std::string const& str)
 {
-  size_t max = str.size();
-  size_t ret = 0;
+	unsigned int	max = str.size();
+	unsigned int	ret = 0;
+	char			prev = '0';
 
-  for (size_t i = 0; i < max; ++i)
-    {
-      if (str.at(i) == ' ')
-      ret++;
-    }
-  return (ret + 1);
+	for (unsigned int i = 0; i < max; ++i)
+	{
+		if (prev != ' ' && str.at(i) == ' ')
+			ret++;
+		prev = str.at(i);
+	}
+	return (ret + 1);
 }
 
 void					put_in_array(std::string const & str)
 {
-  int					tab[3][3];
-  std::istringstream	is(str);
+	std::vector<std::vector<int> >	tab;
+	std::istringstream				is(str);
+	int								tmp;
+	int								pos = str.find_first_of('\n');
+	unsigned int					scale = count_char(str.substr(0, pos));
 
-  for(int i = 0; i < 3; ++i)
-  {
-     for(int j = 0; j < 3; ++j)
-    {
-      is >> tab[i][j];
-      std::cout << tab[i][j];
-    }
-    std::cout << std::endl;
-  }
+	for(unsigned int i = 0; i < scale; ++i)
+	{
+	  std::vector<int> line;
+	 for(unsigned int j = 0; j < scale; ++j)
+	{
+	  is >> tmp;
+	  line.push_back(tmp);
+	}
+	 tab.push_back(line);
+	}
+
+	for (unsigned int i = 0; i < scale; ++i)
+	{
+		for (unsigned int j = 0; j < scale; ++j)
+			std::cout << tab[i][j] << "\t";
+		std::cout << std::endl;
+	}
+
 }
 
 void aff(std::string const& str)
 {
- put_in_array(str);
+	put_in_array(str);
 }
