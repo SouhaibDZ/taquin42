@@ -11,15 +11,14 @@ FileLoader::~FileLoader()
 }
 
 
-void				FileLoader::LoadFile(const std::string & Filename)
+void				FileLoader::LoadFile(const std::string & Filename, std::string& out)
 {
-	std::string		buf;
 	std::string		tmp;
 
+	out = "";
 	this->OpenFile(Filename.c_str());
 	while (std::getline(this->Infile, tmp))
-		buf += tmp + "\n";
-	std::cout << buf << std::endl;
+		out += tmp + "\n";
 }
 
 void				FileLoader::OpenFile(const std::string & Filename)

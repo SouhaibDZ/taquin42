@@ -4,6 +4,9 @@
 int main()
 {
 	FileLoader	F;
-	F.LoadFile("TaquinA3.txt");
+	std::string S;
+
+	F.LoadFile("TaquinA3.txt", S);
+	aff(S.c_str());
 	return (0);
 }

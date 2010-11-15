@@ -16,7 +16,7 @@ private:
 	FileLoader &	operator=(const FileLoader &);
 
 public:
-	void				LoadFile(const std::string &);
+	void				LoadFile(const std::string &, std::string&);
 	void				OpenFile(const std::string &);
 	void				CloseFile(void);
 
