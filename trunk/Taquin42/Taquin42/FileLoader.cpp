@@ -14,9 +14,11 @@ FileLoader::~FileLoader()
 void				FileLoader::LoadFile(const std::string & Filename)
 {
 	std::string		buf;
+	std::string		tmp;
 
 	this->OpenFile(Filename.c_str());
-	this->Infile >> buf;
+	while (std::getline(this->Infile, tmp))
+		buf += tmp + "\n";
 	std::cout << buf << std::endl;
 }
 
