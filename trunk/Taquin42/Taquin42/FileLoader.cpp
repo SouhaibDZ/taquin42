@@ -10,8 +10,7 @@ FileLoader::~FileLoader()
 	std::cout << "Parsing  done :)" << std::endl;
 }
 
-
-void				FileLoader::LoadFile(const std::string & Filename, std::string& out)
+void				FileLoader::LoadFile(const std::string & Filename, std::string & out)
 {
 	std::string		tmp;
 
