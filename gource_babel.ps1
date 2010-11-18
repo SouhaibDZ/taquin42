@@ -1,1 +1,1 @@
-/gource/gource.exe .
+gource/gource.exe .
