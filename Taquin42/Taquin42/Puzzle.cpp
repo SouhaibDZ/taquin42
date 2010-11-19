@@ -56,3 +56,14 @@ const std::vector<std::vector <int> > &		Puzzle::GetMap(void) const
 {
 	return (this->PuzzleMap);
 }
+
+bool									GenerateSolution(int PuzzleScale)
+{
+  if (PuzzleScale > 100)
+    return (false);
+  else
+    {
+      std::cout << "BOUouououououououououououu" << std::endl;
+      return (false);
+    }
+}
