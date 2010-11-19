@@ -57,13 +57,78 @@ const std::vector<std::vector <int> > &		Puzzle::GetMap(void) const
 	return (this->PuzzleMap);
 }
 
-bool									GenerateSolution(int PuzzleScale)
+bool									Puzzle::GenerateSolution(const int PuzzleScale)
 {
   if (PuzzleScale > 100)
-    return (false);
+  {
+	std::cerr << "The taquin is too big" << std::endl;
+	return (false);
+  }
   else
     {
-      std::cout << "BOUouououououououououououu" << std::endl;
-      return (false);
+		int num = 1;
+		int x_min, x_max, x_cur;
+		int y_min, y_max, y_cur;
+
+		x_max = y_max = PuzzleScale;
+		x_min = y_min = 0;
+		x_cur = y_cur = 0;
+
+		int** tab;
+		tab = new int*[PuzzleScale];
+		for (int i = 0; i < PuzzleScale; i++)
+			tab[i] = new int[PuzzleScale];
+
+		while (x_min <= x_max && y_min <= y_max)
+		{
+			while (x_cur < x_max)
+			{
+				tab[x_cur][y_cur] = num;
+				x_cur++;
+				num++;
+			}
+			// x_cur 
+			x_cur--;
+			x_max--;
+			y_cur++;
+			while (y_cur < y_max)
+			{
+				tab[x_cur][y_cur] = num;
+				y_cur++;
+				num++;
+			}
+			y_cur--;
+			y_max--;
+			x_cur--;
+			while (x_cur > x_min - 1)
+			{
+				tab[x_cur][y_cur] = num;
+				x_cur--;
+				num++;
+			}
+			x_cur++;
+			x_min++;
+			y_cur--;
+			while (y_cur > y_min)
+			{
+				tab[x_cur][y_cur] = num;
+				y_cur--;
+				num++;
+			}
+			y_cur++;
+			y_min++;
+			x_cur++;
+		}
+		for (int i = 0; i < PuzzleScale; ++i)
+		{
+			for (int j = 0; j < PuzzleScale; ++j)
+			{
+				if (tab[i][j] == PuzzleScale * PuzzleScale)
+					tab[i][j] = 0;
+				std::cout << tab[j][i] << "\t";
+			}
+			std::cout << std::endl;
+		}
     }
+  return (true);
 }

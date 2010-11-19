@@ -7,8 +7,10 @@ int main()
 	FileLoader	F;
 	Puzzle		P;
 	std::string S;
+	
 
 	F.LoadFile("TaquinA3.txt", S);
 	P.CreatePuzzle(S);
+	P.GenerateSolution(10);
 	return (0);
 }
