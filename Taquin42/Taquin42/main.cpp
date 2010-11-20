@@ -1,6 +1,7 @@
 #include "debug_aff.h"
 #include "FileLoader.h"
 #include "Puzzle.h"
+#include "SolutionGenerator.h"
 
 int main()
 {
@@ -8,9 +9,7 @@ int main()
 	Puzzle		P;
 	std::string S;
 	
-
 	F.LoadFile("TaquinA3.txt", S);
 	P.CreatePuzzle(S);
-	P.GenerateSolution(10);
 	return (0);
 }

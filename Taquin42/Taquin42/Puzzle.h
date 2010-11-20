@@ -18,7 +18,6 @@ private:
 public:
 	const std::vector<std::vector <int> > &	GetMap(void) const;
 	void									CreatePuzzle(const std::string &);
-	bool									GenerateSolution(const int PuzzleScale = 100);
 
 private:
 	unsigned int							CountScales(const std::string &) const;
