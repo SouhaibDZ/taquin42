@@ -25,8 +25,6 @@ void				FileLoader::OpenFile(const std::string & Filename)
 	this->Infile.open(Filename.c_str());
 	if (! (this->Infile.is_open()))
 		std::cerr << Filename << " : No such file or directory" << std::endl;
-	else
-		std::cout << Filename << " : File opened successfully" << std::endl;
 }
 
 void				FileLoader::CloseFile(void)
