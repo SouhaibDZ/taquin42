@@ -20,21 +20,17 @@ unsigned int count_char(std::string const& str)
 
 void					put_in_array(std::string const & str)
 {
-	std::vector<std::vector<int> >	tab;
+	int								**tab;
 	std::istringstream				is(str);
-	int								tmp;
 	int								pos = str.find_first_of('\n');
 	unsigned int					scale = count_char(str.substr(0, pos));
 
-	for(unsigned int i = 0; i < scale; ++i)
+	tab = new int*[scale];
+	for (unsigned int i = 0; i < scale; ++i)
 	{
-	  std::vector<int> line;
-	 for(unsigned int j = 0; j < scale; ++j)
-	{
-	  is >> tmp;
-	  line.push_back(tmp);
-	}
-	 tab.push_back(line);
+		tab[i] = new int[scale];
+		for(unsigned int j = 0; j < scale; ++j)
+			is >> tab[i][j];
 	}
 
 	for (unsigned int i = 0; i < scale; ++i)
