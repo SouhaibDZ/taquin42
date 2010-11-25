@@ -30,3 +30,4 @@ private:
 };
 
 #endif /* _SOLUTIONGENERATOR_H_ */
+ 
