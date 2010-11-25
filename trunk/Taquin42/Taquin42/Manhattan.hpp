@@ -16,9 +16,14 @@ private:
   Manhattan &			operator=(const Manhattan &);
 
 public:
-  inline int			Theory(int Node_px, int Node_py);
+  inline int			Theory(const sPostions & NodePos, const sPostions & GoalNodePos)
+  {
+    return ();
+  }
+  
   inline const sPositions &	GetCurrentPos(int CurrentNodeName);
-  inline bool			CanMove(sPositions CurrentNodePos, const std::vector< std::vector <int> > & PuzzleMap);
+  inline bool			CanMove(sPositions CurrentNodePos,
+					const std::vector< std::vector <int> > & PuzzleMap);
 
 public:
   virtual int			GetMovesNb(void) const;
