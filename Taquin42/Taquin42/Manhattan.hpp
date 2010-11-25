@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Variables.hpp"
 
 class				Manhattan
 {
@@ -18,10 +19,20 @@ private:
 public:
   inline int			Theory(const sPostions & NodePos, const sPostions & GoalNodePos)
   {
-    return ();
+    return (abs(NodePos->Node_px - GoalNodePos->GoalNode_px) + abs(NodePos->Node_py - GoalNodePos->GoalNode_py));
   }
   
-  inline const sPositions &	GetCurrentPos(int CurrentNodeName);
+  inline const sPositions	GetCurrentPos(int CurrentNodeName)
+  {
+    for (int i = 0; i < PuzzleScale; ++i)
+      {
+	    for (int j = 0; j < PuzzleScale; ++j)
+	      {
+		if ()
+	      }
+      }
+  }
+
   inline bool			CanMove(sPositions CurrentNodePos,
 					const std::vector< std::vector <int> > & PuzzleMap);
 
@@ -32,12 +43,14 @@ public:
   virtual int			GetTotalCosts(void) const;
   virtual std::string &		GetOrderedSequence(void) const;
 
-public:
+private:
   int				MovesNb;
   std::string			StatesTime;
   int				StatesSize;
   int				TotalCosts;
   std::string			OrderedSequence;
+  int				PuzzleScale;
+  sPositions			CurrentPos;
 };
 
 #endif //_MANHATTAN_HPP_
