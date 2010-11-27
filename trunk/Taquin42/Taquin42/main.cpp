@@ -9,7 +9,7 @@ int main()
 	Puzzle		P;
 	std::string S;
 	
-	F.LoadFile("TaquinA3.txt", S);
+	F.LoadFile("TaquinA5.txt", S);
 	P.CreatePuzzle(S);
 	return (0);
 }

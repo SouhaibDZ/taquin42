@@ -16,14 +16,14 @@ private:
 	Puzzle &								operator=(const Puzzle &);
 
 public:
-	const std::vector<std::vector <int> > &	GetMap(void) const;
+	int** const								GetMap(void) const;
 	void									CreatePuzzle(const std::string &);
 
 private:
 	unsigned int							CountScales(const std::string &) const;
 
 private:
-	std::vector<std::vector <int> >			PuzzleMap;
+	int**									PuzzleMap;
 };
 
 #endif //__PUZZLE_H__

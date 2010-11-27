@@ -13,20 +13,16 @@ Puzzle::~Puzzle()
 void										Puzzle::CreatePuzzle(const std::string & Contents)
 {
 	std::istringstream						in(Contents);
-	int										tmp;
 	int										pos = Contents.find_first_of('\n');
 	unsigned int							scale = this->CountScales(Contents.substr(0, pos));
 	SolutionGenerator						Sg(scale);
 
+	this->PuzzleMap = new int*[scale];
 	for (unsigned int i = 0; i < scale; ++i)
 	{
-		std::vector<int> line;
+		this->PuzzleMap[i] = new int[scale];
 		for(unsigned int j = 0; j < scale; ++j)
-		{
-		  in >> tmp;
-		  line.push_back(tmp);
-		}
-		this->PuzzleMap.push_back(line);
+		  in >> this->PuzzleMap[i][j];
 	}
 	// This part was put only for debug
 	// It will be deleted at the end of project.
@@ -56,7 +52,7 @@ unsigned int								Puzzle::CountScales(const std::string & Contents) const
 	return (ret + 1);
 }
 
-const std::vector<std::vector <int> > &		Puzzle::GetMap(void) const
+int**	const					Puzzle::GetMap(void) const
 {
 	return (this->PuzzleMap);
 }
