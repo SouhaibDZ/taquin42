@@ -1,5 +1,5 @@
-#include "Puzzle.h"
-#include "SolutionGenerator.h"
+#include "Puzzle.hpp"
+#include "SolutionGenerator.hpp"
 #include <sstream>
 
 Puzzle::Puzzle()
@@ -67,7 +67,7 @@ unsigned int								Puzzle::CountScales(const std::string & Contents) const
 	return (ret + 1);
 }
 
-int**	const					Puzzle::GetMap(void) const
+int**						Puzzle::GetMap(void) const
 {
 	return (this->PuzzleMap);
 }
