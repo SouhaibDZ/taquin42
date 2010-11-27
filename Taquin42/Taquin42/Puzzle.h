@@ -25,6 +25,7 @@ private:
 	
 private:
 	int**									PuzzleMap;
+	unsigned int							PuzzleScale;
 };
 
 #endif //__PUZZLE_HPP__

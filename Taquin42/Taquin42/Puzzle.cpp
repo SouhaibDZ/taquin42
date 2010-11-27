@@ -13,22 +13,22 @@ Puzzle::~Puzzle()
 void									Puzzle::CreatePuzzle(const std::string & Contents)
 {
 	std::istringstream						in(Contents);
-	int								pos = Contents.find_first_of('\n');
-	unsigned int							scale = this->CountScales(Contents.substr(0, pos));
-	SolutionGenerator						Sg(scale);
+	int										pos = Contents.find_first_of('\n');
+	this->PuzzleScale= this->CountScales(Contents.substr(0, pos));
+	SolutionGenerator						Sg(this->PuzzleScale);
 
-	this->PuzzleMap = new int*[scale];
-	for (unsigned int i = 0; i < scale; ++i)
+	this->PuzzleMap = new int*[this->PuzzleScale];
+	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
 	{
-		this->PuzzleMap[i] = new int[scale];
-		for(unsigned int j = 0; j < scale; ++j)
+		this->PuzzleMap[i] = new int[this->PuzzleScale];
+		for(unsigned int j = 0; j < this->PuzzleScale; ++j)
 		  in >> this->PuzzleMap[i][j];
 	}
 	// This part was put only for debug
 	// It will be deleted at the end of project.
-	for (unsigned int i = 0; i < scale; ++i)
+	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
 	{
-		for (unsigned int j = 0; j < scale; ++j)
+		for (unsigned int j = 0; j < this->PuzzleScale; ++j)
 			std::cout << this->PuzzleMap[i][j] << "\t";
 		std::cout << std::endl;
 	}
@@ -39,9 +39,9 @@ void									Puzzle::CreatePuzzle(const std::string & Contents)
 
 void									Puzzle::SetCurrentNodePos(int CurrentNodeName, sPositions sPos)
 {
-    for (int i = 0; i < PuzzleScale; ++i)
+    for (unsigned int i = 0; i < PuzzleScale; ++i)
       {
-	    for (int j = 0; j < PuzzleScale; ++j)
+	    for (unsigned int j = 0; j < PuzzleScale; ++j)
 	      {
 		if (PuzzleMap[i][j] == CurrentNodeName)
 		  {

@@ -1,4 +1,4 @@
-#include "SolutionGenerator.hpp"
+#include "SolutionGenerator.h"
 #include <iostream>
 
 SolutionGenerator::SolutionGenerator(const int Scale)
