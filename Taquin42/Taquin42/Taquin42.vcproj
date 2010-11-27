@@ -171,7 +171,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Chebyshev.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\debug_aff.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Euclidean.cpp"
 				>
 			</File>
 			<File
@@ -184,6 +192,10 @@
 			</File>
 			<File
 				RelativePath=".\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Manhattan.cpp"
 				>
 			</File>
 			<File
@@ -201,7 +213,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Chebyshev.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\debug_aff.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Euclidean.hpp"
 				>
 			</File>
 			<File
@@ -209,15 +229,31 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Heuristics.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\IAPlayer.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Puzzle.h"
+				RelativePath=".\Manhattan.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Puzzle.hpp"
 				>
 			</File>
 			<File
 				RelativePath=".\SolutionGenerator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SolutionGenerator.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Variables.hpp"
 				>
 			</File>
 		</Filter>
