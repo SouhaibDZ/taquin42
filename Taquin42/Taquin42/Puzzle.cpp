@@ -10,10 +10,10 @@ Puzzle::~Puzzle()
 {
 }
 
-void										Puzzle::CreatePuzzle(const std::string & Contents)
+void									Puzzle::CreatePuzzle(const std::string & Contents)
 {
 	std::istringstream						in(Contents);
-	int										pos = Contents.find_first_of('\n');
+	int								pos = Contents.find_first_of('\n');
 	unsigned int							scale = this->CountScales(Contents.substr(0, pos));
 	SolutionGenerator						Sg(scale);
 
@@ -35,6 +35,21 @@ void										Puzzle::CreatePuzzle(const std::string & Contents)
 	std::cout << "Puzzle Loaded successfully :)" << std::endl << std::endl;
 	std::cout << "##### Solution #####" << std::endl << std::endl;
 	Sg.GenerateSolution();
+}
+
+void									Puzzle::SetCurrentNodePos(int CurrentNodeName, sPositions sPos)
+{
+    for (int i = 0; i < PuzzleScale; ++i)
+      {
+	    for (int j = 0; j < PuzzleScale; ++j)
+	      {
+		if (PuzzleMap[i][j] == CurrentNodeName)
+		  {
+		    sPos.Node_px = i;
+		    sPos.Node_py = j; 
+		  }
+	      }
+     }
 }
 
 unsigned int								Puzzle::CountScales(const std::string & Contents) const

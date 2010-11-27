@@ -1,9 +1,10 @@
-#ifndef __PUZZLE_H__
-#define __PUZZLE_H__
+#ifndef __PUZZLE_HPP__
+#define __PUZZLE_HPP__
 
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Variables.hpp"
 
 class										Puzzle
 {
@@ -18,12 +19,12 @@ private:
 public:
 	int** const								GetMap(void) const;
 	void									CreatePuzzle(const std::string &);
-
+	void									SetCurrentNodePos(int CurrentNodeName, sPositions sPos);
 private:
-	unsigned int							CountScales(const std::string &) const;
-
+	unsigned int								CountScales(const std::string &) const;
+	
 private:
 	int**									PuzzleMap;
 };
 
-#endif //__PUZZLE_H__
+#endif //__PUZZLE_HPP__

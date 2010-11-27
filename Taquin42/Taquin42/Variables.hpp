@@ -7,7 +7,7 @@ struct	sPositions
   int	Node_py;
 };
 
-struct	sPositions
+struct	sGoalPositions
 {
   int	GoalNode_px;
   int	GoalNode_py;

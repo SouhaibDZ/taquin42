@@ -14,19 +14,19 @@ public:
   
 private:
   Heuristics(const Heuristics &);
-  Heuristics &			operator=(const Heuristics &);
+  Heuristics &		operator=(const Heuristics &);
 
 public:
   inline int			Theory(int Node_px, int Node_py);
-  inline const sPositions &	GetCurrentPos(int CurrentNodeName);
-  inline bool			CanMove(sPositions CurrentNodePos, const std::vector< std::vector <int> > & PuzzleMap);
+  inline bool			CanMove(sPositions CurrentNodePos,
+  				const int ** PuzzleMap);
 
 public:
   virtual int			GetMovesNb(void) const;
-  virtual std::string &		GetStatesTime(void) const;
+  virtual std::string &	GetStatesTime(void) const;
   virtual int			GetStatesSize(void) const;
   virtual int			GetTotalCosts(void) const;
-  virtual std::string &		GetOrderedSequence(void) const;
+  virtual std::string &	GetOrderedSequence(void) const;
 
 public:
   int				MovesNb;
