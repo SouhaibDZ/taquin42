@@ -1,5 +1,5 @@
-#ifndef _DIJKSTRA_HPP_
-# define _DIJKSTRA_HPP_
+#ifndef _CHEBYSHEV_HPP_
+# define _CHEBYSHEV_HPP_
 
 #include <iostream>
 #include <string>
@@ -7,15 +7,15 @@
 #include "Variables.hpp"
 #include <stdlib.h>
 
-class					Dijkstra
+class					Chebyshev
 {
 public:
-  Dijkstra();
-  ~Dijkstra();
+  Chebyshev();
+  ~Chebyshev();
   
 private:
-  Dijkstra(const Dijkstra &);
-  Dijkstra &				operator=(const Dijkstra &);
+  Chebyshev(const Chebyshev &);
+  Chebyshev &				operator=(const Chebyshev &);
 
 public:
   inline int				Theory(const sPositions  	& NodePos,
@@ -48,4 +48,4 @@ private:
   sPositions				CurrentPos;
 };
 
-#endif //_DIJKSTRA_HPP_
+#endif //_CHEBYSHEV_HPP_
