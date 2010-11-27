@@ -18,11 +18,18 @@ private:
   Chebyshev &				operator=(const Chebyshev &);
 
 public:
+  inline int				Max(int d1, int d2)
+  {
+  	return ((d1 > d2) ? d1 : d2); 
+  }
+  
   inline int				Theory(const sPositions  	& NodePos,
 				       	const sGoalPositions	& GoalNodePos)
   {
-    return (abs(NodePos.Node_px - GoalNodePos.GoalNode_px) +
-	    abs(NodePos.Node_py - GoalNodePos.GoalNode_py));
+  	int				dx = abs(NodePos.Node_px - GoalNodePos.GoalNode_px);
+  	int				dy = abs(NodePos.Node_py - GoalNodePos.GoalNode_py);
+  	
+	return (Max (dx, dy));
   }
   
   inline bool				CanMove(sPositions CurrentNodePos,
