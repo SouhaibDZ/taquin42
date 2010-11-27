@@ -67,7 +67,7 @@ unsigned int								Puzzle::CountScales(const std::string & Contents) const
 	return (ret + 1);
 }
 
-int**						Puzzle::GetMap(void) const
+int**	const					Puzzle::GetMap(void) const
 {
 	return (this->PuzzleMap);
 }

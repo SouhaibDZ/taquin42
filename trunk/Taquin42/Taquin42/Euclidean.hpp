@@ -6,6 +6,7 @@
 #include <vector>
 #include "Variables.hpp"
 #include <stdlib.h>
+#include <math.h>
 
 class					Euclidean
 {
@@ -21,8 +22,9 @@ public:
   inline int				Theory(const sPositions & NodePos,
 				       	const sGoalPositions & GoalNodePos)
   {
-    return (abs(NodePos.Node_px - GoalNodePos.GoalNode_px) +
-	    abs(NodePos.Node_py - GoalNodePos.GoalNode_py));
+  	double	dx = pow((NodePos.Node_px - GoalNodePos.GoalNode_px), 2);
+  	double	dy = pow((NodePos.Node_py - GoalNodePos.GoalNode_py), 2);
+  	return (sqrt(dx + dy));
   }
   
   inline bool				CanMove(sPositions CurrentNodePos,

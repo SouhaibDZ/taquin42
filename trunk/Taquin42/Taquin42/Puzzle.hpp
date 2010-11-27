@@ -17,14 +17,14 @@ private:
 	Puzzle &								operator=(const Puzzle &);
 
 public:
-	int**									GetMap(void) const;
+	int** const								GetMap(void) const;
 	void									CreatePuzzle(const std::string &);
 	void									SetCurrentNodePos(int CurrentNodeName, sPositions sPos);
 private:
 	unsigned int								CountScales(const std::string &) const;
 	
 private:
-	int**									PuzzleMap;
+	int** 									PuzzleMap;
 	unsigned int								PuzzleScale;
 };
 
