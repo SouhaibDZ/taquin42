@@ -10,27 +10,27 @@ Euclidean::~Euclidean()
     std::cout << " *** Euclidean implementation Done ***" << std::endl;
 }
 
-int			Euclidean::GetMovesNb(void) const
+int				Euclidean::GetMovesNb(void) const
 {
   return (this->MovesNb);
 }
 
-std::string &		Euclidean::GetStatesTime(void) const
+const std::string &		Euclidean::GetStatesTime(void) const
 {
   return (this->StatesTime);
 }
 
-int			Euclidean::GetStatesSize(void) const
+int				Euclidean::GetStatesSize(void) const
 {
   return (this->StatesSize);
 }
 
-int			Euclidean::GetTotalCosts(void) const
+int				Euclidean::GetTotalCosts(void) const
 {
   return (this->TotalCosts);
 }
 
-std::string &		Euclidean::GetOrderedSequence(void) const
+const std::string &		Euclidean::GetOrderedSequence(void) const
 {
     return (this->OrderedSequence);
 }

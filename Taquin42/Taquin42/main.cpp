@@ -1,7 +1,7 @@
 #include "debug_aff.h"
 #include "FileLoader.h"
-#include "Puzzle.h"
-#include "SolutionGenerator.h"
+#include "Puzzle.hpp"
+#include "SolutionGenerator.hpp"
 
 int main()
 {

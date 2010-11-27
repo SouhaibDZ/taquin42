@@ -1,16 +1,16 @@
 #ifndef _VARIABLES_HPP_
 # define _VARIABLES_HPP_
 
-struct	sPositions
+typedef struct	Pos
 {
-  int	Node_px;
-  int	Node_py;
-};
+  int			Node_px;
+  int			Node_py;
+}sPositions;
 
-struct	sGoalPositions
+typedef struct	GoalPos
 {
-  int	GoalNode_px;
-  int	GoalNode_py;
-};
+  int			GoalNode_px;
+  int			GoalNode_py;
+}sGoalPositions;
 
 #endif // _VARIABLES_HPP_

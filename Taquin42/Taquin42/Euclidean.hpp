@@ -5,8 +5,9 @@
 #include <string>
 #include <vector>
 #include "Variables.hpp"
+#include <stdlib.h>
 
-class				Euclidean
+class					Euclidean
 {
 public:
   Euclidean();
@@ -14,37 +15,37 @@ public:
   
 private:
   Euclidean(const Euclidean &);
-  Euclidean &			operator=(const Euclidean &);
+  Euclidean &				operator=(const Euclidean &);
 
 public:
-  inline int			Theory(const sPostions & NodePos,
-				       const sPostions & GoalNodePos)
+  inline int				Theory(const sPositions & NodePos,
+				       	const sGoalPositions & GoalNodePos)
   {
-    return (abs(NodePos->Node_px - GoalNodePos->GoalNode_px) +
-	    abs(NodePos->Node_py - GoalNodePos->GoalNode_py));
+    return (abs(NodePos.Node_px - GoalNodePos.GoalNode_px) +
+	    abs(NodePos.Node_py - GoalNodePos.GoalNode_py));
   }
   
-  inline bool			CanMove(sPositions CurrentNodePos,
-					const int ** PuzzleMap)
+  inline bool				CanMove(sPositions CurrentNodePos,
+						const int ** PuzzleMap)
   {
     return (true);
   }
 
 public:
-  virtual int			GetMovesNb(void) const;
-  virtual std::string &	GetStatesTime(void) const;
-  virtual int			GetStatesSize(void) const;
-  virtual int			GetTotalCosts(void) const;
-  virtual std::string &	GetOrderedSequence(void) const;
+  virtual int				GetMovesNb(void) const;
+  virtual const std::string &	GetStatesTime(void) const;
+  virtual int				GetStatesSize(void) const;
+  virtual int				GetTotalCosts(void) const;
+  virtual const std::string &	GetOrderedSequence(void) const;
 
 private:
-  int				MovesNb;
-  std::string			StatesTime;
-  int				StatesSize;
-  int				TotalCosts;
-  std::string			OrderedSequence;
-  int				PuzzleScale;
-  sPositions			CurrentPos;
+  int					MovesNb;
+  std::string				StatesTime;
+  int					StatesSize;
+  int					TotalCosts;
+  std::string				OrderedSequence;
+  int					PuzzleScale;
+  sPositions				CurrentPos;
 };
 
 #endif //_EUCLIDEAN_HPP_
