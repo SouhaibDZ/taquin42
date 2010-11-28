@@ -5,11 +5,12 @@
 #include <string>
 #include <vector>
 #include "Variables.hpp"
+#include "Heuristics.hpp"
 
 class										Puzzle
 {
 public:
-	Puzzle();
+	Puzzle(const std::string&, Heuristics* AlgoResolution);
 	~Puzzle();
 
 private:
@@ -17,15 +18,17 @@ private:
 	Puzzle &								operator=(const Puzzle &);
 
 public:
-	int** const								GetMap(void) const;
-	void									CreatePuzzle(const std::string &);
-	void									SetCurrentNodePos(int CurrentNodeName, sPositions sPos);
+	int**									GetMap(void) const;
+	void									SetCurrentNodePos(int CurrentNodeName, sPositions& sPos);
+
 private:
+	void									CreatePuzzle(const std::string &);
 	unsigned int								CountScales(const std::string &) const;
 	
 private:
 	int** 									PuzzleMap;
 	unsigned int								PuzzleScale;
+	Heuristics*								AlgoResolution;
 };
 
 #endif //__PUZZLE_HPP__

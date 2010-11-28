@@ -19,11 +19,11 @@ private:
   Euclidean &				operator=(const Euclidean &);
 
 public:
-  inline int				Theory(const sPositions & NodePos,
+  inline double				Theory(const sPositions & NodePos,
 				       	const sGoalPositions & GoalNodePos)
   {
-  	double	dx = pow((NodePos.Node_px - GoalNodePos.GoalNode_px), 2);
-  	double	dy = pow((NodePos.Node_py - GoalNodePos.GoalNode_py), 2);
+ 	double	dx = pow(static_cast<double>(NodePos.Node_px - GoalNodePos.GoalNode_px), 2);
+ 	double	dy = pow(static_cast<double>(NodePos.Node_py - GoalNodePos.GoalNode_py), 2);
   	return (sqrt(dx + dy));
   }
   

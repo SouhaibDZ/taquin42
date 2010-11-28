@@ -2,8 +2,9 @@
 #include "SolutionGenerator.hpp"
 #include <sstream>
 
-Puzzle::Puzzle()
+Puzzle::Puzzle(const std::string& Contents, Heuristics* Algo) : PuzzleMap(NULL), AlgoResolution(Algo)
 {
+	this->CreatePuzzle(Contents);
 }
 
 Puzzle::~Puzzle()
@@ -37,7 +38,7 @@ void									Puzzle::CreatePuzzle(const std::string & Contents)
 	Sg.GenerateSolution();
 }
 
-void									Puzzle::SetCurrentNodePos(int CurrentNodeName, sPositions sPos)
+void									Puzzle::SetCurrentNodePos(int CurrentNodeName, sPositions& sPos)
 {
     for (unsigned int i = 0; i < PuzzleScale; ++i)
       {
@@ -67,7 +68,7 @@ unsigned int								Puzzle::CountScales(const std::string & Contents) const
 	return (ret + 1);
 }
 
-int**	const					Puzzle::GetMap(void) const
+int**							Puzzle::GetMap(void) const
 {
 	return (this->PuzzleMap);
 }
