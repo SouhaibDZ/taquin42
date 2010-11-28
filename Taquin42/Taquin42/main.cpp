@@ -6,10 +6,10 @@
 int main()
 {
 	FileLoader	F;
-	Puzzle		P;
 	std::string S;
 	
 	F.LoadFile("TaquinA5.txt", S);
-	P.CreatePuzzle(S);
+	Puzzle		P(S, NULL);
+
 	return (0);
 }
