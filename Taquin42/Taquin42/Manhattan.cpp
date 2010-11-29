@@ -3,34 +3,11 @@
 Manhattan::Manhattan()
 {
   std::cout << " *** Manhattan implementation ***" << std::endl;
+  this->CurrentNodeName = 1;
+  this->Direction[0] = '\0';
 }
 
 Manhattan::~Manhattan()
 {
     std::cout << " *** Manhattan implementation Done ***" << std::endl;
-}
-
-int				Manhattan::GetMovesNb(void) const
-{
-  return (this->MovesNb);
-}
-
-const std::string &		Manhattan::GetStatesTime(void) const
-{
-  return (this->StatesTime);
-}
-
-int				Manhattan::GetStatesSize(void) const
-{
-  return (this->StatesSize);
-}
-
-int				Manhattan::GetTotalCosts(void) const
-{
-  return (this->TotalCosts);
-}
-
-const std::string &		Manhattan::GetOrderedSequence(void) const
-{
-    return (this->OrderedSequence);
 }

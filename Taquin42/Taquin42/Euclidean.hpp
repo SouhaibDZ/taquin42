@@ -33,19 +33,7 @@ public:
     return (true);
   }
 
-public:
-  virtual int				GetMovesNb(void) const;
-  virtual const std::string &	GetStatesTime(void) const;
-  virtual int				GetStatesSize(void) const;
-  virtual int				GetTotalCosts(void) const;
-  virtual const std::string &	GetOrderedSequence(void) const;
-
 private:
-  int					MovesNb;
-  std::string				StatesTime;
-  int					StatesSize;
-  int					TotalCosts;
-  std::string				OrderedSequence;
   int					PuzzleScale;
   sPositions				CurrentPos;
 };
