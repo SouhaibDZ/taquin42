@@ -245,10 +245,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SolutionGenerator.h"
-				>
-			</File>
-			<File
 				RelativePath=".\SolutionGenerator.hpp"
 				>
 			</File>
