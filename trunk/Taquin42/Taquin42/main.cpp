@@ -3,6 +3,7 @@
 #include "Puzzle.hpp"
 #include "SolutionGenerator.hpp"
 
+
 int main()
 {
 	FileLoader	F;

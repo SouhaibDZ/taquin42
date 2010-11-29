@@ -22,11 +22,30 @@ public:
   				const int ** PuzzleMap);
 
 public:
-  virtual int			GetMovesNb(void) const;
-  virtual std::string &	GetStatesTime(void) const;
-  virtual int			GetStatesSize(void) const;
-  virtual int			GetTotalCosts(void) const;
-  virtual std::string &	GetOrderedSequence(void) const;
+  inline int			GetMovesNb(void) const
+  {
+	return (this->MovesNb);
+  }
+
+  inline const std::string &	GetStatesTime(void) const
+  {
+	return (this->StatesTime);
+  }
+
+  inline int			GetStatesSize(void) const
+  {
+	return (this->StatesSize);
+  }
+
+  inline int			GetTotalCosts(void) const
+  {
+	return (this->TotalCosts);
+  }
+
+  inline const std::string &	GetOrderedSequence(void) const
+  {
+	return (this->OrderedSequence);
+  }
 
 public:
   int				MovesNb;
