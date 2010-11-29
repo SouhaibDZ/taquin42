@@ -3,7 +3,7 @@
 #include <sstream>
 #include "Variables.hpp"
 
-Puzzle::Puzzle(const std::string& Contents, Heuristics* Algo) : PuzzleMap(NULL), AlgoResolution(Algo)
+Puzzle::Puzzle(const std::string& Contents, Heuristics* Algo) : PuzzleMap(NULL), AlgoResolution(Algo), SolutionPlate(NULL)
 {
 	this->CreatePuzzle(Contents);
 }
@@ -20,11 +20,12 @@ void									Puzzle::Resolve()
 void									Puzzle::CreatePuzzle(const std::string & Contents)
 {
 	std::istringstream						in(Contents);
-	int										pos = Contents.find_first_of('\n');
-	this->PuzzleScale= this->CountScales(Contents.substr(0, pos));
-	SolutionGenerator						Sg(this->PuzzleScale);
 
+	int	pos = Contents.find_first_of('\n');
+	this->PuzzleScale = this->CountScales(Contents.substr(0, pos));
+	this->SolutionPlate	= new SolutionGenerator(this->PuzzleScale);
 	this->PuzzleMap = new int*[this->PuzzleScale];
+
 	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
 	{
 		this->PuzzleMap[i] = new int[this->PuzzleScale];
@@ -41,10 +42,10 @@ void									Puzzle::CreatePuzzle(const std::string & Contents)
 	}
 	std::cout << "Puzzle Loaded successfully :)" << std::endl << std::endl;
 	std::cout << "##### Solution #####" << std::endl << std::endl;
-	Sg.GenerateSolution();
+	this->SolutionPlate->GenerateSolution();
 }
 
-void									Puzzle::ProcessCurrentNodePos(int CurrentNodeName, sPositions& sPos) const
+void									Puzzle::SearchCurrentNodePos(int CurrentNodeName, sPositions& sPos) const
 {
 	unsigned int i = 0;
 	unsigned int j = 0;
@@ -84,4 +85,9 @@ unsigned int								Puzzle::CountScales(const std::string & Contents) const
 int**							Puzzle::GetMap(void) const
 {
 	return (this->PuzzleMap);
+}
+
+const SolutionGenerator*		Puzzle::GetSolutionGenerator() const
+{
+	return (this->SolutionPlate);
 }

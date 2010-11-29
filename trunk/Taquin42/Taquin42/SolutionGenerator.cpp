@@ -1,7 +1,7 @@
 #include "SolutionGenerator.hpp"
 #include <iostream>
 
-SolutionGenerator::SolutionGenerator(const int Scale)
+SolutionGenerator::SolutionGenerator(unsigned int Scale)
 {
 	std::cout << "Solution Generating ....." << std::endl;
 	this->X_min = 0;
@@ -77,7 +77,7 @@ bool				SolutionGenerator::GenerateSolution()
 	}
 	this->X_max = this->Y_max = this->PuzzleScale;
 	this->Witness = new int*[this->PuzzleScale];
-	for (int i = 0; i < this->PuzzleScale; i++)
+	for (unsigned int i = 0; i < this->PuzzleScale; i++)
 		this->Witness[i] = new int[this->PuzzleScale];
 	while (this->X_min <= this->X_max && this->Y_min <= this->Y_max)
 	{
@@ -93,14 +93,36 @@ bool				SolutionGenerator::GenerateSolution()
 
 void				SolutionGenerator::DisplaySolution() const
 {
-	for (int i = 0; i < this->PuzzleScale; ++i)
+	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
 	{
-		for (int j = 0; j < this->PuzzleScale; ++j)
+		for (unsigned int j = 0; j < this->PuzzleScale; ++j)
 		{
 			if (this->Witness[i][j] == this->PuzzleScale * this->PuzzleScale)
 				this->Witness[i][j] = 0;
 			std::cout << this->Witness[j][i] << "\t";
 		}
 		std::cout << std::endl;
+	}
+}
+
+void				SolutionGenerator::SearchNodeGoalPos(int CurrentNodeName, sPositions& pos) const
+{
+	unsigned int i = 0;
+	unsigned int j = 0;
+	bool		 end = false;
+
+	while (i < this->PuzzleScale && !end)
+	{
+		j = 0;
+		while (j < this->PuzzleScale && !end)
+		{
+			if (this->Witness[i][j] == CurrentNodeName)
+			{
+				pos.Node_px = i;
+				pos.Node_py = j;
+			}
+			++j;
+		}
+		++i;
 	}
 }

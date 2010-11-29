@@ -6,6 +6,7 @@
 #include <vector>
 #include "Variables.hpp"
 #include "Heuristics.hpp"
+#include "SolutionGenerator.hpp"
 
 class										Heuristics;
 
@@ -21,19 +22,21 @@ private:
 
 public:
 	int**									GetMap(void) const;
-	void									ProcessCurrentNodePos(int CurrentNodeName, sPositions& sPos) const;
+	void									SearchCurrentNodePos(int CurrentNodeName, sPositions& sPos) const;
 
 private:
 	void									CreatePuzzle(const std::string &);
-	unsigned int								CountScales(const std::string &) const;
+	unsigned int							CountScales(const std::string &) const;
 
 public:
 	void									Resolve();
+	const SolutionGenerator*				GetSolutionGenerator() const;
 	
 private:
 	int** 									PuzzleMap;
-	unsigned int								PuzzleScale;
+	unsigned int							PuzzleScale;
 	Heuristics*								AlgoResolution;
+	SolutionGenerator*						SolutionPlate;
 };
 
 #endif //__PUZZLE_HPP__
