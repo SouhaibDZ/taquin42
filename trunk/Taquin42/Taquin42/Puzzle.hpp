@@ -7,6 +7,8 @@
 #include "Variables.hpp"
 #include "Heuristics.hpp"
 
+class										Heuristics;
+
 class										Puzzle
 {
 public:
@@ -19,11 +21,14 @@ private:
 
 public:
 	int**									GetMap(void) const;
-	void									SetCurrentNodePos(int CurrentNodeName, sPositions& sPos);
+	void									ProcessCurrentNodePos(int CurrentNodeName, sPositions& sPos) const;
 
 private:
 	void									CreatePuzzle(const std::string &);
 	unsigned int								CountScales(const std::string &) const;
+
+public:
+	void									Resolve();
 	
 private:
 	int** 									PuzzleMap;
