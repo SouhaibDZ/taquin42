@@ -10,8 +10,8 @@ int main()
 	FileLoader	F;
 	std::string S;
 	Heuristics* man = new Manhattan();
-	
-	F.LoadFile("TaquinA4.txt", S);
+
+	F.LoadFile("TaquinA5.txt", S);
 	Puzzle		P(S, man);
 	P.Resolve();
 
