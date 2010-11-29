@@ -1,6 +1,7 @@
 #include "Puzzle.hpp"
 #include "SolutionGenerator.hpp"
 #include <sstream>
+#include "Variables.hpp"
 
 Puzzle::Puzzle(const std::string& Contents, Heuristics* Algo) : PuzzleMap(NULL), AlgoResolution(Algo)
 {
@@ -9,6 +10,11 @@ Puzzle::Puzzle(const std::string& Contents, Heuristics* Algo) : PuzzleMap(NULL),
 
 Puzzle::~Puzzle()
 {
+}
+
+void									Puzzle::Resolve()
+{
+	this->AlgoResolution->Run(*this);
 }
 
 void									Puzzle::CreatePuzzle(const std::string & Contents)
@@ -38,19 +44,26 @@ void									Puzzle::CreatePuzzle(const std::string & Contents)
 	Sg.GenerateSolution();
 }
 
-void									Puzzle::SetCurrentNodePos(int CurrentNodeName, sPositions& sPos)
+void									Puzzle::ProcessCurrentNodePos(int CurrentNodeName, sPositions& sPos) const
 {
-    for (unsigned int i = 0; i < PuzzleScale; ++i)
-      {
-	    for (unsigned int j = 0; j < PuzzleScale; ++j)
-	      {
-		if (PuzzleMap[i][j] == CurrentNodeName)
-		  {
-		    sPos.Node_px = i;
-		    sPos.Node_py = j; 
-		  }
-	      }
-     }
+	unsigned int i = 0;
+	unsigned int j = 0;
+	bool		 end = false;
+
+	while (i < PuzzleScale && !end)
+	{
+		j = 0;
+		while (j < PuzzleScale && !end)
+		{
+			if (PuzzleMap[i][j] == CurrentNodeName)
+			{
+				sPos.Node_px = j;
+				sPos.Node_py = i;
+			}
+			++j;
+		}
+		++i;
+	}
 }
 
 unsigned int								Puzzle::CountScales(const std::string & Contents) const

@@ -5,12 +5,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Puzzle.hpp"
+
+class Puzzle;
 
 class				Heuristics
 {
 public:
-  Heuristics();
-  ~Heuristics();
+	Heuristics() {}
+  virtual ~Heuristics() {}
   
 private:
   Heuristics(const Heuristics &);
@@ -18,8 +21,8 @@ private:
 
 public:
   inline int			Theory(int Node_px, int Node_py);
-  inline bool			CanMove(sPositions CurrentNodePos,
-  				const int ** PuzzleMap);
+  inline bool			CanMove(sPositions CurrentNodePos, const int ** PuzzleMap);
+  virtual void			Run(Puzzle&) = 0;
 
 public:
   inline int			GetMovesNb(void) const

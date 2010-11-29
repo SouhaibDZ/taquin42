@@ -4,10 +4,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Variables.hpp"
 #include <stdlib.h>
+#include "Variables.hpp"
+#include "Heuristics.hpp"
 
-class					Manhattan
+class					Manhattan : public Heuristics
 {
 public:
   Manhattan();
@@ -31,22 +32,21 @@ public:
     return (true);
   }
 
-  // Go to the next node
-  void NextNode();
-
-  // find destination of zero
-  void SearchNextPosZero();
-
-  void showDirection();
-
-  void MoveZeroToPosDestination();
+public:
+  void						Run(Puzzle&);
 
 private:
-  int					PuzzleScale;
-  sPositions			CurrentPos;
-  sPositions			PosZeroDestination;
-  char					Direction[5];
-  int					CurrentNodeName;
+  void						NextNode(); // Go to the next node
+  void						SearchNextPosZero(Puzzle&); // find destination of zero
+  void						showDirection();
+  void						MoveZeroToPosDestination();
+
+private:
+  int						PuzzleScale;
+  sPositions				CurrentPos;
+  sPositions				PosZeroDestination;
+  char						Direction[5];
+  int						CurrentNodeName;
 };
 
 #endif //_MANHATTAN_HPP_

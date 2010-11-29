@@ -206,6 +206,10 @@
 				RelativePath=".\SolutionGenerator.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Variables.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Fichiers d&apos;en-tête"
