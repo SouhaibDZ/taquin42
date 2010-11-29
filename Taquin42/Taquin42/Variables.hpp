@@ -5,6 +5,7 @@ struct			sPositions
 {
 	sPositions();
 	sPositions(int x, int y);
+	bool		operator!=(const sPositions&);
 
 	int			Node_px;
 	int			Node_py;
