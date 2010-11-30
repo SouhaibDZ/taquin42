@@ -22,6 +22,7 @@ private:
 
 public:
 	int**									GetMap(void) const;
+	unsigned int							GetScale(void) const;
 	void									SearchCurrentNodePos(int CurrentNodeName, sPositions& sPos) const;
 
 private:
