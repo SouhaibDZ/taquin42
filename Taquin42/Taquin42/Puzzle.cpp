@@ -91,3 +91,8 @@ const SolutionGenerator*		Puzzle::GetSolutionGenerator() const
 {
 	return (this->SolutionPlate);
 }
+
+unsigned int					Puzzle::GetScale(void) const
+{
+	return (this->PuzzleScale);
+}

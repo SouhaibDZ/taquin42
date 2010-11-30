@@ -40,6 +40,7 @@ private:
   void						SearchNextPosZero(Puzzle&); // find destination of zero
   void						showDirection();
   void						MoveZeroToPosDestination();
+  void						Arbre(int**, unsigned int, sPositions);
 
 private:
   int						PuzzleScale;

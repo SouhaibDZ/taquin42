@@ -41,22 +41,31 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	{
 		//distance of Manhattan
 		//4 possible directions
-//		arbre();
+		this->Arbre(p.GetMap(), p.GetScale(), ZeroNodePos);
 		//to check the 4 possibilities
 	}
 }
-/*
-void arbre()
-{
+
+void					Manhattan::Arbre(int ** Map, unsigned int Size, sPositions Pos)
+{/*
+	if (Pos.Node_px > 0) //left
+		calMan();
+	if (Pos.Node_px < Size) //right
+		calMan();
+	if (Pos.Node_py > 0) //up
+		calMan();
+	if (Pos.Node_py < Size) //down
+		calMan();
+*/
 // Compute Manhattan distance from the closest cases
 // Next, choose way and sort this choose
-	
+	/*
 	damn(); 3
 	up(); 4
 	left(); 4 
-	right(); 5
+	right(); 5*/
 }
-
+/*
 void up()
 {
 	//stocker le chemin ds une liste
