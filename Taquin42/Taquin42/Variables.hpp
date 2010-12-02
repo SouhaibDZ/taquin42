@@ -17,9 +17,9 @@ struct						sPositions
 struct						ManhattanMoves
 {
 	ManhattanMoves();
-	ManhattanMoves(void (Manhattan::*)(), int);
+	ManhattanMoves(void (Manhattan::*)(sPositions Pos, sPositions& DestinationsPos), int);
 
-	void					(Manhattan::*Meth)();
+	void					(Manhattan::*Meth)(sPositions Pos, sPositions& DestinationsPos);
 	int						NbMove;
 };
 
