@@ -76,9 +76,9 @@ bool				SolutionGenerator::GenerateSolution()
 		return (false);
 	}
 	this->X_max = this->Y_max = this->PuzzleScale;
-	this->Witness = new int*[this->PuzzleScale];
+	this->Witness = new unsigned int*[this->PuzzleScale];
 	for (unsigned int i = 0; i < this->PuzzleScale; i++)
-		this->Witness[i] = new int[this->PuzzleScale];
+		this->Witness[i] = new unsigned int[this->PuzzleScale];
 	while (this->X_min <= this->X_max && this->Y_min <= this->Y_max)
 	{
 		this->FillTop();
@@ -107,7 +107,7 @@ void				SolutionGenerator::DisplaySolution() const
 	std::cout << "-------------------------------------" << std::endl << std::endl;
 }
 
-void				SolutionGenerator::SearchNodeGoalPos(int CurrentNodeName, sPositions& pos) const
+void				SolutionGenerator::SearchNodeGoalPos(unsigned int CurrentNodeName, sPositions& pos) const
 {
 	unsigned int i = 0;
 	unsigned int j = 0;
