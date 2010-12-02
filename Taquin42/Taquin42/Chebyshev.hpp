@@ -24,10 +24,10 @@ public:
   }
   
   inline int				Theory(const sPositions  	& NodePos,
-				       	const sGoalPositions	& GoalNodePos)
+				       	const sPositions	& GoalNodePos)
   {
-  	int				dx = abs(NodePos.Node_px - GoalNodePos.GoalNode_px);
-  	int				dy = abs(NodePos.Node_py - GoalNodePos.GoalNode_py);
+  	int				dx = abs(NodePos.Node_px - GoalNodePos.Node_px);
+  	int				dy = abs(NodePos.Node_py - GoalNodePos.Node_py);
   	
 	return (Max (dx, dy));
   }

@@ -93,6 +93,7 @@ bool				SolutionGenerator::GenerateSolution()
 
 void				SolutionGenerator::DisplaySolution() const
 {
+	std::cout << "-------------------------------------" << std::endl;
 	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
 	{
 		for (unsigned int j = 0; j < this->PuzzleScale; ++j)
@@ -103,6 +104,7 @@ void				SolutionGenerator::DisplaySolution() const
 		}
 		std::cout << std::endl;
 	}
+	std::cout << "-------------------------------------" << std::endl << std::endl;
 }
 
 void				SolutionGenerator::SearchNodeGoalPos(int CurrentNodeName, sPositions& pos) const

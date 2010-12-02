@@ -1,20 +1,15 @@
 #ifndef _VARIABLES_HPP_
 # define _VARIABLES_HPP_
 
-struct			sPositions
+struct						sPositions
 {
 	sPositions();
 	sPositions(int x, int y);
-	bool		operator!=(const sPositions&);
+	bool					operator!=(const sPositions&);
 
-	int			Node_px;
-	int			Node_py;
-};
-
-struct			sGoalPositions
-{
-	int			GoalNode_px;
-	int			GoalNode_py;
+	unsigned int			Node_px;
+	unsigned int			Node_py;
+	bool					Block;
 };
 
 #endif // _VARIABLES_HPP_

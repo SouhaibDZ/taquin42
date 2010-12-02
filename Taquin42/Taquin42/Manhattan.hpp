@@ -20,10 +20,10 @@ private:
 
 public:
   inline int				Theory(const sPositions & NodePos,
-				       	const sGoalPositions & GoalNodePos)
+				       	const sPositions & GoalNodePos)
   {
-    return (abs(NodePos.Node_px - GoalNodePos.GoalNode_px) +
-	    abs(NodePos.Node_py - GoalNodePos.GoalNode_py));
+	  return (abs(NodePos.Node_px - GoalNodePos.Node_px) +
+		  abs(NodePos.Node_py - GoalNodePos.Node_py));
   }
   
   inline bool				CanMove(sPositions CurrentNodePos,
@@ -40,7 +40,11 @@ private:
   void						SearchNextPosZero(Puzzle&); // find destination of zero
   void						showDirection();
   void						MoveZeroToPosDestination();
-  void						Arbre(int**, unsigned int, sPositions);
+  void						Arbre(int**, unsigned int, sPositions, sPositions&);
+  void						up();
+  void						down();
+  void						left();
+  void						right();
 
 private:
   int						PuzzleScale;

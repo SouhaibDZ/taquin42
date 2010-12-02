@@ -20,10 +20,10 @@ private:
 
 public:
   inline double				Theory(const sPositions & NodePos,
-				       	const sGoalPositions & GoalNodePos)
+	  const sPositions & GoalNodePos)
   {
- 	double	dx = pow(static_cast<double>(NodePos.Node_px - GoalNodePos.GoalNode_px), 2);
- 	double	dy = pow(static_cast<double>(NodePos.Node_py - GoalNodePos.GoalNode_py), 2);
+ 	double	dx = pow(static_cast<double>(NodePos.Node_px - GoalNodePos.Node_px), 2);
+ 	double	dy = pow(static_cast<double>(NodePos.Node_py - GoalNodePos.Node_py), 2);
   	return (sqrt(dx + dy));
   }
   
