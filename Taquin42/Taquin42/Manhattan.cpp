@@ -81,13 +81,14 @@ void									Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos,
 	std::list<ManhattanMoves>::iterator itb = dep.begin();
 	std::list<ManhattanMoves>::iterator ite = dep.end();
 	std::cout << "===== the list sorted ======"<< std::endl;
+	system("pause");
 	for (; itb != ite; ++itb)
 	{
-		std::cout << (*itb).NbMove << "-" ;
+		std::cout << (*itb).NbMove << "-" << std::endl;
 		(this->*(*itb).Meth)(NodePos, DestinationPos, Map, Size);
 	}
 	std::cout << std::endl;
-	system("pause");
+	
 // Compute Manhattan distance from the closest cases
 // Next, choose way and sort this choose
 	/*
@@ -131,12 +132,17 @@ void						Manhattan::Right(sPositions Pos, sPositions& DestinationsPos,
 	NewZeroPos.Node_px++;
 	this->ListMovement.push_back("Right");
 	this->Arbre(Map, Size, NewZeroPos, DestinationsPos);
-	//Pos = NewZeroPos;
 }
 
-void						Manhattan::MoveZeroToPosDestination()
+void						Manhattan::MoveZeroToPosDestination(std::list<std::string> ListMovement)
 {
+	std::list<std::string>::iterator	itb = ListMovement.begin();
+	std::list<std::string>::iterator	ite = ListMovement.end();
 
+	for (; itb != ite; ++itb)
+	{
+		;
+	}
 }
 
 void						Manhattan::SortList(std::list<ManhattanMoves> & ListToSort) const

@@ -39,7 +39,7 @@ public:
 private:
   void						NextNode();					// Go to the next node
   void						SearchNextPosZero(Puzzle&); // find destination of zero
-  void						MoveZeroToPosDestination();
+  void						MoveZeroToPosDestination(std::list<std::string>);
   void						Arbre(int**, unsigned int, sPositions, sPositions&);
   void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
   void						Down(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
