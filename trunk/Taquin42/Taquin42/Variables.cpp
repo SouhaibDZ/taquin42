@@ -18,6 +18,6 @@ ManhattanMoves::ManhattanMoves() : Meth(NULL), NbMove(0)
 {
 }
 
-ManhattanMoves::ManhattanMoves(void (Manhattan::*ptr)(sPositions Pos, sPositions& DestinationsPos), int nb) : Meth(ptr), NbMove(nb)
+ManhattanMoves::ManhattanMoves(void (Manhattan::*ptr)(sPositions Pos, sPositions& DestinationsPos, int** Map, int Size), int nb) : Meth(ptr), NbMove(nb)
 {
 }

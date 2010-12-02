@@ -84,7 +84,7 @@ void									Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos,
 	for (; itb != ite; ++itb)
 	{
 		std::cout << (*itb).NbMove << "-" ;
-		(this->*(*itb).Meth)(NodePos, DestinationPos);
+		(this->*(*itb).Meth)(NodePos, DestinationPos, Map, Size);
 	}
 	std::cout << std::endl;
 	system("pause");
