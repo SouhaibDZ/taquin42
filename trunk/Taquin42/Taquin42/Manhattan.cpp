@@ -1,4 +1,4 @@
-#include <map>
+#include <list>
 #include "Manhattan.hpp"
 
 Manhattan::Manhattan()
@@ -50,33 +50,32 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 
 void					Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos, sPositions& DestinationPos)
 {
-	std::map<void (Manhattan::*)(), int>		dep;
-	int											distance;
-
-	void	(Manhattan::*prout)();
-	prout = &Manhattan::left;
+	std::list<ManhattanMoves>			dep;
+	int									distance;
 
 	if (NodePos.Node_px > 0) //left
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px - 1, NodePos.Node_py), DestinationPos);
 		std::cout << "Left Distance : " << distance << std::endl;
-		//dep[&Manhattan::left] = distance;
-		//dep[*prout] = distance;
+		dep.push_back(ManhattanMoves(&Manhattan::left, distance));
 	}
 	if (NodePos.Node_px < Size - 1) //right
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px + 1, NodePos.Node_py), DestinationPos);
 		std::cout << "Right  Distance : " << distance << std::endl;
+		dep.push_back(ManhattanMoves(&Manhattan::right, distance));
 	}
 	if (NodePos.Node_py > 0) //up
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px, NodePos.Node_py - 1), DestinationPos);
 		std::cout << "Up  Distance : " << distance << std::endl;
+		dep.push_back(ManhattanMoves(&Manhattan::up, distance));
 	}
 	if (NodePos.Node_py < Size - 1) //down
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px, NodePos.Node_py + 1), DestinationPos);
 		std::cout << "Down  Distance : " << distance << std::endl;
+		dep.push_back(ManhattanMoves(&Manhattan::down, distance));
 	}
 	system("pause");
 // Compute Manhattan distance from the closest cases

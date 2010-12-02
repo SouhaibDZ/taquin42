@@ -1,6 +1,8 @@
 #ifndef _VARIABLES_HPP_
 # define _VARIABLES_HPP_
 
+class						Manhattan;
+
 struct						sPositions
 {
 	sPositions();
@@ -10,6 +12,15 @@ struct						sPositions
 	unsigned int			Node_px;
 	unsigned int			Node_py;
 	bool					Block;
+};
+
+struct						ManhattanMoves
+{
+	ManhattanMoves();
+	ManhattanMoves(void (Manhattan::*)(), int);
+
+	void					(Manhattan::*Meth)();
+	int						NbMove;
 };
 
 #endif // _VARIABLES_HPP_
