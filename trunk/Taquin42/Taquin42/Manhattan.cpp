@@ -34,7 +34,6 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	p.SearchCurrentNodePos(0, ZeroNodePos);
 	p.GetSolutionGenerator()->SearchNodeGoalPos(this->CurrentNodeName, CurrentNodeDestinationPos);
 	
-
 	std::cout << "CurrentNodeName : " << this->CurrentNodeName << "(" << CurrentNodePos.Node_px << "," << CurrentNodePos.Node_py << ")" << std::endl;
 	std::cout << "NodeName : 0(" << ZeroNodePos.Node_px << "," << ZeroNodePos.Node_py << ")" << std::endl;
 	std::cout << "Destination of current node : " << "(" << CurrentNodeDestinationPos.Node_px << "," << CurrentNodeDestinationPos.Node_py << ")" << std::endl;
@@ -48,7 +47,8 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	}
 }
 
-void					Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos, sPositions& DestinationPos)
+
+void									Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos, sPositions& DestinationPos)
 {
 	std::list<ManhattanMoves>			dep;
 	int									distance;
@@ -57,26 +57,36 @@ void					Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos, sPo
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px - 1, NodePos.Node_py), DestinationPos);
 		std::cout << "Left Distance : " << distance << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::left, distance));
+		dep.push_back(ManhattanMoves(&Manhattan::Left, distance));
 	}
 	if (NodePos.Node_px < Size - 1) //right
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px + 1, NodePos.Node_py), DestinationPos);
 		std::cout << "Right  Distance : " << distance << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::right, distance));
+		dep.push_back(ManhattanMoves(&Manhattan::Right, distance));
 	}
 	if (NodePos.Node_py > 0) //up
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px, NodePos.Node_py - 1), DestinationPos);
 		std::cout << "Up  Distance : " << distance << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::up, distance));
+		dep.push_back(ManhattanMoves(&Manhattan::Up, distance));
 	}
 	if (NodePos.Node_py < Size - 1) //down
 	{
 		distance = this->Theory(sPositions(NodePos.Node_px, NodePos.Node_py + 1), DestinationPos);
 		std::cout << "Down  Distance : " << distance << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::down, distance));
+		dep.push_back(ManhattanMoves(&Manhattan::Down, distance));
 	}
+	this->SortList(dep);
+	std::list<ManhattanMoves>::iterator itb = dep.begin();
+	std::list<ManhattanMoves>::iterator ite = dep.end();
+	std::cout << "===== the list sorted ======"<< std::endl;
+	for (; itb != ite; ++itb)
+	{
+		//std::cout << (*itb).NbMove << "-" ;
+		(this->*(*itb).Meth)(NodePos, DestinationPos);
+	}
+	std::cout << std::endl;
 	system("pause");
 // Compute Manhattan distance from the closest cases
 // Next, choose way and sort this choose
@@ -87,25 +97,26 @@ void					Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos, sPo
 	right(); 5*/
 }
 
-void						Manhattan::up()
+void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos)
+{
+
+	//stocker le chemin ds une liste
+	//arbre();
+}
+
+void						Manhattan::Down(sPositions Pos, sPositions& DestinationsPos)
 {
 	//stocker le chemin ds une liste
 	//arbre();
 }
 
-void						Manhattan::down()
+void						Manhattan::Left(sPositions Pos, sPositions& DestinationsPos)
 {
 	//stocker le chemin ds une liste
 	//arbre();
 }
 
-void						Manhattan::left()
-{
-	//stocker le chemin ds une liste
-	//arbre();
-}
-
-void						Manhattan::right()
+void						Manhattan::Right(sPositions Pos, sPositions& DestinationsPos)
 {
 	//stocker le chemin ds une liste
 	//arbre();
@@ -119,4 +130,31 @@ void						Manhattan::showDirection()
 void						Manhattan::MoveZeroToPosDestination()
 {
 
+}
+
+void						Manhattan::SortList(std::list<ManhattanMoves> & ListToSort) const
+{
+	std::list<ManhattanMoves>			ListSorted;
+	std::list<ManhattanMoves>::iterator BackUpIt;
+	int									Min;
+
+
+	while (! ListToSort.empty())
+	{
+		std::list<ManhattanMoves>::iterator	itb = ListToSort.begin();
+		std::list<ManhattanMoves>::iterator	ite = ListToSort.end();
+		Min = (*itb).NbMove;
+		BackUpIt = itb;
+		for (; itb != ite; ++itb)
+		{
+			if ((*itb).NbMove < Min)
+			{
+				Min = (*itb).NbMove;
+				BackUpIt = itb;
+			}
+		}
+		ListSorted.push_back(*BackUpIt);
+		ListToSort.erase(BackUpIt);
+	}
+	ListToSort = ListSorted;
 }

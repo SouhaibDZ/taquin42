@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include <list>
 #include "Variables.hpp"
 #include "Heuristics.hpp"
 
@@ -20,14 +21,14 @@ private:
 
 public:
   inline int				Theory(const sPositions & NodePos,
-				       	const sPositions & GoalNodePos)
+				       			const sPositions & GoalNodePos)
   {
 	  return (abs(NodePos.Node_px - GoalNodePos.Node_px) +
 		  abs(NodePos.Node_py - GoalNodePos.Node_py));
   }
   
   inline bool				CanMove(sPositions CurrentNodePos,
-						const int ** PuzzleMap)
+								const int ** PuzzleMap)
   {
     return (true);
   }
@@ -36,15 +37,16 @@ public:
   void						Run(Puzzle&);
 
 private:
-  void						NextNode(); // Go to the next node
+  void						NextNode();					// Go to the next node
   void						SearchNextPosZero(Puzzle&); // find destination of zero
   void						showDirection();
   void						MoveZeroToPosDestination();
   void						Arbre(int**, unsigned int, sPositions, sPositions&);
-  void						up();
-  void						down();
-  void						left();
-  void						right();
+  void						Up(sPositions Pos, sPositions& DestinationsPos);
+  void						Down(sPositions Pos, sPositions& DestinationsPos);
+  void						Left(sPositions Pos, sPositions& DestinationsPos);
+  void						Right(sPositions Pos, sPositions& DestinationsPos);
+  void						SortList(std::list<ManhattanMoves> &) const;
 
 private:
   int						PuzzleScale;
