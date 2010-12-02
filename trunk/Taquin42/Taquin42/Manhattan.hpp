@@ -42,7 +42,7 @@ private:
   void						showDirection();
   void						MoveZeroToPosDestination();
   void						Arbre(int**, unsigned int, sPositions, sPositions&);
-  void						Up(sPositions Pos, sPositions& DestinationsPos);
+  void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
   void						Down(sPositions Pos, sPositions& DestinationsPos);
   void						Left(sPositions Pos, sPositions& DestinationsPos);
   void						Right(sPositions Pos, sPositions& DestinationsPos);

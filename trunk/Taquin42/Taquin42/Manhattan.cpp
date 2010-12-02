@@ -97,26 +97,33 @@ void									Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos,
 	right(); 5*/
 }
 
-void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos)
+void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos,
+							      int** Map, int size)
 {
-
+  SPositions					NewZeroPos = Pos;
+  NewZeroPos.y--;
+  list_parcours.pushBack("up");
+  arbre(map, size, NewZeroPos, DestinationsPos);
 	//stocker le chemin ds une liste
 	//arbre();
 }
 
-void						Manhattan::Down(sPositions Pos, sPositions& DestinationsPos)
+void						Manhattan::Down(sPositions Pos, sPositions& DestinationsPos,
+								int** Map, int size)
 {
 	//stocker le chemin ds une liste
 	//arbre();
 }
 
-void						Manhattan::Left(sPositions Pos, sPositions& DestinationsPos)
+void						Manhattan::Left(sPositions Pos, sPositions& DestinationsPos,
+								int** Map, int size)
 {
 	//stocker le chemin ds une liste
 	//arbre();
 }
 
-void						Manhattan::Right(sPositions Pos, sPositions& DestinationsPos)
+void						Manhattan::Right(sPositions Pos, sPositions& DestinationsPos,
+								 int** Map, int size)
 {
 	//stocker le chemin ds une liste
 	//arbre();
