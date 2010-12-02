@@ -39,13 +39,12 @@ public:
 private:
   void						NextNode();					// Go to the next node
   void						SearchNextPosZero(Puzzle&); // find destination of zero
-  void						showDirection();
   void						MoveZeroToPosDestination();
   void						Arbre(int**, unsigned int, sPositions, sPositions&);
   void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
-  void						Down(sPositions Pos, sPositions& DestinationsPos);
-  void						Left(sPositions Pos, sPositions& DestinationsPos);
-  void						Right(sPositions Pos, sPositions& DestinationsPos);
+  void						Down(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
+  void						Left(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
+  void						Right(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
   void						SortList(std::list<ManhattanMoves> &) const;
 
 private:
@@ -54,6 +53,7 @@ private:
   sPositions				PosZeroDestination;
   char						Direction[5];
   int						CurrentNodeName;
+  std::list<std::string>	ListMovement;
 };
 
 #endif //_MANHATTAN_HPP_
