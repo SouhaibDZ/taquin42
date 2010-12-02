@@ -83,7 +83,7 @@ void									Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos,
 	std::cout << "===== the list sorted ======"<< std::endl;
 	for (; itb != ite; ++itb)
 	{
-		//std::cout << (*itb).NbMove << "-" ;
+		std::cout << (*itb).NbMove << "-" ;
 		(this->*(*itb).Meth)(NodePos, DestinationPos);
 	}
 	std::cout << std::endl;
@@ -98,40 +98,40 @@ void									Manhattan::Arbre(int ** Map, unsigned int Size, sPositions NodePos,
 }
 
 void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos,
-							      int** Map, int size)
+							      int** Map, int Size)
 {
-  SPositions					NewZeroPos = Pos;
-  NewZeroPos.y--;
-  list_parcours.pushBack("up");
-  arbre(map, size, NewZeroPos, DestinationsPos);
-	//stocker le chemin ds une liste
-	//arbre();
+	sPositions					NewZeroPos = Pos;
+	NewZeroPos.Node_py--;
+	this->ListMovement.push_back("Up");
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos);
 }
 
 void						Manhattan::Down(sPositions Pos, sPositions& DestinationsPos,
-								int** Map, int size)
+								int** Map, int Size)
 {
-	//stocker le chemin ds une liste
-	//arbre();
+	sPositions					NewZeroPos = Pos;
+	NewZeroPos.Node_py++;
+	this->ListMovement.push_back("Down");
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos);
 }
 
 void						Manhattan::Left(sPositions Pos, sPositions& DestinationsPos,
-								int** Map, int size)
+								int** Map, int Size)
 {
-	//stocker le chemin ds une liste
-	//arbre();
+	sPositions					NewZeroPos = Pos;
+	NewZeroPos.Node_px--;
+	this->ListMovement.push_back("Left");
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos);
 }
 
 void						Manhattan::Right(sPositions Pos, sPositions& DestinationsPos,
-								 int** Map, int size)
+								 int** Map, int Size)
 {
-	//stocker le chemin ds une liste
-	//arbre();
-}
-
-void						Manhattan::showDirection()
-{
-
+	sPositions					NewZeroPos = Pos;
+	NewZeroPos.Node_px++;
+	this->ListMovement.push_back("Right");
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos);
+	//Pos = NewZeroPos;
 }
 
 void						Manhattan::MoveZeroToPosDestination()
