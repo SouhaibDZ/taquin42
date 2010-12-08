@@ -55,6 +55,7 @@ private:
   int						CurrentNodeName;
   std::list<std::string>	ListMovement;
   bool						EndTree;
+  sPositions				ZeroPreviousPos;
 };
 
 #endif //_MANHATTAN_HPP_

@@ -66,17 +66,20 @@ std::list<std::string>		Manhattan::Arbre(int ** Map, unsigned int Size,
 {
 	std::list<ManhattanMoves>			dep;
 	int									distance;
+	sPositions							tmpPos;
+
 
 	if (this->EndTree)
 		return l;
-
 	std::cout << std::endl;
 	std::cout << "\t\t*-------------------------*" << std::endl;
 	std::cout << "\t\t*Distances Processing ....*" << std::endl;
 	std::cout << "\t\t*-------------------------*" << std::endl << std::endl;
-	if (NodePos.Node_px > 0)			//left
+
+	tmpPos = sPositions(NodePos.Node_px - 1, NodePos.Node_py);
+	if (NodePos.Node_px > 0 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos))			//left
 	{
-		distance = this->Theory(sPositions(NodePos.Node_px - 1, NodePos.Node_py), DestinationPos);
+		distance = this->Theory(tmpPos, DestinationPos);
 		if (distance == 0)
 		{
 			l.push_back("Left");
@@ -87,9 +90,10 @@ std::list<std::string>		Manhattan::Arbre(int ** Map, unsigned int Size,
 		std::cout << "*LEFT  DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << distance << "]" << std::endl;
 		dep.push_back(ManhattanMoves(&Manhattan::Left, distance));
 	}
-	if (NodePos.Node_px < Size - 1) 	//right
+	tmpPos = sPositions(NodePos.Node_px + 1, NodePos.Node_py);
+	if (NodePos.Node_px < Size - 1 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos)) 	//right
 	{
-		distance = this->Theory(sPositions(NodePos.Node_px + 1, NodePos.Node_py), DestinationPos);
+		distance = this->Theory(tmpPos, DestinationPos);
 		if (distance == 0)
 		{
 			l.push_back("Right");
@@ -100,9 +104,14 @@ std::list<std::string>		Manhattan::Arbre(int ** Map, unsigned int Size,
 		std::cout << "*RIGHT DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << distance << "]" << std::endl;
 		dep.push_back(ManhattanMoves(&Manhattan::Right, distance));
 	}
-	if (NodePos.Node_py > 0)			//up
+	std::cout << "PreviousZeroPos (" << this->ZeroPreviousPos.Node_px << "," << this->ZeroPreviousPos.Node_py << ")" << std::endl;
+	std::cout << "ZeroPos (" << NodePos.Node_px << "," << NodePos.Node_py << ")" << std::endl;
+
+	system("pause");
+	tmpPos = sPositions(NodePos.Node_px, NodePos.Node_py - 1);
+	if (NodePos.Node_py > 0 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos))			//up
 	{
-		distance = this->Theory(sPositions(NodePos.Node_px, NodePos.Node_py - 1), DestinationPos);
+		distance = this->Theory(tmpPos, DestinationPos);
 		if (distance == 0)
 		{
 			l.push_back("Up");
@@ -113,9 +122,10 @@ std::list<std::string>		Manhattan::Arbre(int ** Map, unsigned int Size,
 		std::cout << "*UP    DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << distance << "]" << std::endl;
 		dep.push_back(ManhattanMoves(&Manhattan::Up, distance));
 	}
-	if (NodePos.Node_py < Size - 1)		//down
+	tmpPos = sPositions(NodePos.Node_px, NodePos.Node_py + 1);
+	if (NodePos.Node_py < Size - 1 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos))		//down
 	{
-		distance = this->Theory(sPositions(NodePos.Node_px, NodePos.Node_py + 1), DestinationPos);
+		distance = this->Theory(tmpPos, DestinationPos);
 		if (distance == 0)
 		{
 			l.push_back("Down");
@@ -154,6 +164,7 @@ void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos,
 	sPositions				NewZeroPos = Pos;
 	NewZeroPos.Node_py--;
 	l.push_back("Up");
+	this->ZeroPreviousPos = Pos;
 	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
 }
 
@@ -163,6 +174,7 @@ void						Manhattan::Down(sPositions Pos, sPositions& DestinationsPos,
 	sPositions				NewZeroPos = Pos;
 	NewZeroPos.Node_py++;
 	l.push_back("Down");
+	this->ZeroPreviousPos = Pos;
 	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
 }
 
@@ -172,6 +184,7 @@ void						Manhattan::Left(sPositions Pos, sPositions& DestinationsPos,
 	sPositions					NewZeroPos = Pos;
 	NewZeroPos.Node_px--;
 	l.push_back("Left");
+	this->ZeroPreviousPos = Pos;
 	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
 }
 
@@ -181,6 +194,7 @@ void						Manhattan::Right(sPositions Pos, sPositions& DestinationsPos,
 	sPositions					NewZeroPos = Pos;
 	NewZeroPos.Node_px++;
 	l.push_back("Right");
+	this->ZeroPreviousPos = Pos;
 	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
 }
 
