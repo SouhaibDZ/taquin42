@@ -3,7 +3,7 @@
 
 SolutionGenerator::SolutionGenerator(unsigned int Scale)
 {
-	std::cout << "Solution Generating ....." << std::endl;
+	std::cout << "\tSolution Generating ....." << std::endl;
 	this->X_min = 0;
 	this->X_max = 0;
 	this->X_cur = 0;
