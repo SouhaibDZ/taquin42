@@ -54,6 +54,7 @@ private:
   char						Direction[5];
   int						CurrentNodeName;
   std::list<std::string>	ListMovement;
+  bool						EndTree;
 };
 
 #endif //_MANHATTAN_HPP_
