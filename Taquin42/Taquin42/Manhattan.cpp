@@ -117,6 +117,14 @@ void						Manhattan::Arbre(int ** Map, unsigned int Size,
 		(this->*(*itb).Meth)(NodePos, DestinationPos, Map, Size);
 	}
 	std::cout << std::endl;
+	std::cout << "* LIST MOUVEMENTS *" << std::endl;
+	std::list<std::string>::iterator ita = this->ListMovement.begin();
+	std::list<std::string>::iterator itd = this->ListMovement.end();
+	for (; ita != itd; ++ita)
+	{
+		std::cout << "<"<< (*ita) << ">";
+	}
+	std::cout << std::endl;
 // Compute Manhattan distance from the closest cases
 // Next, choose way and sort this choose
 	/*
@@ -129,7 +137,7 @@ void						Manhattan::Arbre(int ** Map, unsigned int Size,
 void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos,
 							      int** Map, int Size)
 {
-	sPositions					NewZeroPos = Pos;
+	sPositions				NewZeroPos = Pos;
 	NewZeroPos.Node_py--;
 	this->ListMovement.push_back("Up");
 	this->Arbre(Map, Size, NewZeroPos, DestinationsPos);
@@ -138,7 +146,7 @@ void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos,
 void						Manhattan::Down(sPositions Pos, sPositions& DestinationsPos,
 								int** Map, int Size)
 {
-	sPositions					NewZeroPos = Pos;
+	sPositions				NewZeroPos = Pos;
 	NewZeroPos.Node_py++;
 	this->ListMovement.push_back("Down");
 	this->Arbre(Map, Size, NewZeroPos, DestinationsPos);
