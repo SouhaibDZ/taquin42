@@ -68,7 +68,6 @@ std::list<std::string>		Manhattan::Arbre(int ** Map, unsigned int Size,
 	int									distance;
 	sPositions							tmpPos;
 
-
 	if (this->EndTree)
 		return l;
 	std::cout << std::endl;
