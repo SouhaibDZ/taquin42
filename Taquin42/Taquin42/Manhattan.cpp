@@ -46,6 +46,14 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	this->EndTree = false;
 	this->Arbre(p.GetMap(), p.GetScale(), ZeroNodePos, ZeroNodeDestinationPos);
 	std::cout << "Way found" << std::endl;
+	std::cout << "* LIST MOUVEMENTS *" << std::endl;
+	std::list<std::string>::iterator ita = this->ListMovement.begin();
+	std::list<std::string>::iterator itd = this->ListMovement.end();
+	for (; ita != itd; ++ita)
+	{
+		std::cout << "<"<< (*ita) << ">";
+	}
+	std::cout << std::endl;
 	system("pause");
 }
 
@@ -115,14 +123,6 @@ void						Manhattan::Arbre(int ** Map, unsigned int Size,
 	{
 		std::cout << "<"<< (*itb).NbMove << ">";
 		(this->*(*itb).Meth)(NodePos, DestinationPos, Map, Size);
-	}
-	std::cout << std::endl;
-	std::cout << "* LIST MOUVEMENTS *" << std::endl;
-	std::list<std::string>::iterator ita = this->ListMovement.begin();
-	std::list<std::string>::iterator itd = this->ListMovement.end();
-	for (; ita != itd; ++ita)
-	{
-		std::cout << "<"<< (*ita) << ">";
 	}
 	std::cout << std::endl;
 // Compute Manhattan distance from the closest cases
