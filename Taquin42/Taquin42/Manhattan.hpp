@@ -49,8 +49,8 @@ private:
 
 private:
   int						PuzzleScale;
-  sPositions				CurrentPos;
-  sPositions				PosZeroDestination;
+  sPositions				CurrentNodePos;
+  sPositions				CurrentNodeDestinationPos;
   char						Direction[5];
   int						CurrentNodeName;
   std::list<std::string>	ListMovement;
