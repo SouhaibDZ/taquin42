@@ -4,7 +4,6 @@
 #include "SolutionGenerator.hpp"
 #include "Manhattan.hpp"
 
-
 int main()
 {
 	FileLoader	F;
@@ -14,6 +13,5 @@ int main()
 	F.LoadFile("TaquinA5.txt", S);
 	Puzzle		P(S, man);
 	P.Resolve();
-
 	return (0);
 }

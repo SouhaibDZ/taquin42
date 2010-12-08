@@ -29,8 +29,8 @@ private:
 	int					X_min, X_max, X_cur;
 	int					Y_min, Y_max, Y_cur;
 	int					Num;
-	unsigned int				**Witness;
-	unsigned int				PuzzleScale;
+	unsigned int		**Witness;
+	unsigned int		PuzzleScale;
 };
 
 #endif /* _SOLUTIONGENERATOR_HPP_ */

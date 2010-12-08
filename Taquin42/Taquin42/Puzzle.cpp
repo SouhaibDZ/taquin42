@@ -3,7 +3,8 @@
 #include <sstream>
 #include "Variables.hpp"
 
-Puzzle::Puzzle(const std::string& Contents, Heuristics* Algo) : PuzzleMap(NULL), AlgoResolution(Algo), SolutionPlate(NULL)
+Puzzle::Puzzle(const std::string& Contents, Heuristics* Algo)
+	: PuzzleMap(NULL), AlgoResolution(Algo), SolutionPlate(NULL)
 {
 	this->CreatePuzzle(Contents);
 }
@@ -34,18 +35,21 @@ void									Puzzle::CreatePuzzle(const std::string & Contents)
 	}
 	// This part was put only for debug
 	// It will be deleted at the end of project.
+	std::cout << "2- File Map Content " << std::endl << std::endl;
 	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
 	{
 		for (unsigned int j = 0; j < this->PuzzleScale; ++j)
 			std::cout << this->PuzzleMap[i][j] << "\t";
 		std::cout << std::endl;
 	}
-	std::cout << "Puzzle Loaded successfully :)" << std::endl << std::endl;
-	std::cout << "##### Solution #####" << std::endl << std::endl;
+	std::cout << std::endl;
+	std::cout << "3- File Map Solution " << std::endl << std::endl;
 	this->SolutionPlate->GenerateSolution();
+	std::cout << std::endl << std::endl;
 }
 
-void									Puzzle::SearchCurrentNodePos(int CurrentNodeName, sPositions& sPos) const
+void									Puzzle::SearchCurrentNodePos(int CurrentNodeName,
+																	 sPositions& sPos) const
 {
 	unsigned int i = 0;
 	unsigned int j = 0;

@@ -9,7 +9,7 @@
 #include "Variables.hpp"
 #include "Heuristics.hpp"
 
-class					Manhattan : public Heuristics
+class						Manhattan : public Heuristics
 {
 public:
   Manhattan();

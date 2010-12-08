@@ -2,12 +2,10 @@
 
 FileLoader::FileLoader()
 {
-	std::cout << "Parsing ...." << std::endl;
 }
 
 FileLoader::~FileLoader()
 {
-	std::cout << "Parsing  done :)" << std::endl;
 }
 
 void				FileLoader::LoadFile(const std::string & Filename, std::string & out)
@@ -18,6 +16,7 @@ void				FileLoader::LoadFile(const std::string & Filename, std::string & out)
 	this->OpenFile(Filename.c_str());
 	while (std::getline(this->Infile, tmp))
 		out += tmp + "\n";
+	std::cout << "1- File Loaded !" << std::endl;
 }
 
 void				FileLoader::OpenFile(const std::string & Filename)
