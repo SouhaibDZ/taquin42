@@ -40,11 +40,11 @@ private:
   void						NextNode();					// Go to the next node
   void						SearchNextPosZero(Puzzle&); // find destination of zero
   void						MoveZeroToPosDestination(std::list<std::string>);
-  void						Arbre(int**, unsigned int, sPositions, sPositions&);
-  void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
-  void						Down(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
-  void						Left(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
-  void						Right(sPositions Pos, sPositions& DestinationsPos, int** Map, int size);
+  std::list<std::string>	Arbre(int**, unsigned int, sPositions, sPositions&, std::list<std::string>);
+  void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
+  void						Down(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
+  void						Left(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
+  void						Right(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
   void						SortList(std::list<ManhattanMoves> &) const;
 
 private:
