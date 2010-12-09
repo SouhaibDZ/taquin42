@@ -40,7 +40,7 @@ private:
   void						NextNode();					// Go to the next node
   void						SearchNextPosZero(Puzzle&); // find destination of zero
   void						MoveZeroToPosDestination(std::list<std::string>);
-  std::list<std::string>	Arbre(int**, unsigned int, sPositions, sPositions&, std::list<std::string>);
+  void						Arbre(int**, unsigned int, sPositions, sPositions&, std::list<std::string>);
   void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
   void						Down(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
   void						Left(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
@@ -48,14 +48,15 @@ private:
   void						SortList(std::list<ManhattanMoves> &) const;
 
 private:
-	std::list<std::string>	LeftBranches(sPositions & NodePos, sPositions & DestinationPos,
+	bool					LeftBranches(sPositions & NodePos, sPositions & DestinationPos,
 											sPositions & TmpPos, std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
-	std::list<std::string>	RightBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
+	bool					RightBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
 											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep, unsigned int Size);
-	std::list<std::string>	UpBranches(sPositions & NodePos, sPositions & DestinationPos,
+	bool					UpBranches(sPositions & NodePos, sPositions & DestinationPos,
 											sPositions & TmpPos, std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
-	std::list<std::string>	DownBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
+	bool					DownBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
 											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep, unsigned int Size);
+	void					moveZeroNode(sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p);
 
 private:
   int						PuzzleScale;
