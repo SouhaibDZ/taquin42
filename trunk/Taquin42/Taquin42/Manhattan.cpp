@@ -60,7 +60,8 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 		std::cout << p;
 		system("pause");
 	}
-	std::cout << std::endl;
+	p.SwapNode(ZeroNodePos, CurrentNodePos);
+	std::cout << p;
 }
 
 void					Manhattan::Arbre(int ** Map, unsigned int Size,
