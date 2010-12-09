@@ -56,7 +56,7 @@ private:
 											sPositions & TmpPos, std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
 	bool					DownBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
 											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep, unsigned int Size);
-	void					moveZeroNode(sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p);
+	void					moveZeroNode(const sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p);
 
 private:
   int						PuzzleScale;
