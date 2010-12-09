@@ -61,7 +61,6 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 		system("pause");
 	}
 	std::cout << std::endl;
-	system("pause");
 }
 
 void					Manhattan::Arbre(int ** Map, unsigned int Size,
@@ -270,18 +269,28 @@ bool			 Manhattan::DownBranches(sPositions & NodePos, sPositions & DestinationPo
 }
 
 
-void					Manhattan::moveZeroNode(const sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p)
+void					Manhattan::moveZeroNode(sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p)
 {
-	//x+1
+	sPositions			FomerZeroPos = ZeroNodePos;
+
 	if (Direction == "Right")
-		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px + 1, ZeroNodePos.Node_py));
-	//x-1
+	{
+		ZeroNodePos.Node_px += 1;
+		p.SwapNode(ZeroNodePos, FomerZeroPos);
+	}
 	if (Direction == "Left")
-		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px - 1, ZeroNodePos.Node_py));
-	//y-1
+	{
+		ZeroNodePos.Node_px -= 1;
+		p.SwapNode(ZeroNodePos, FomerZeroPos);
+	}
 	if (Direction == "Up")
-		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px, ZeroNodePos.Node_py - 1));
-	//y+1
+	{
+		ZeroNodePos.Node_py -= 1;
+		p.SwapNode(ZeroNodePos, FomerZeroPos);
+	}
 	if (Direction == "Down")
-		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px, ZeroNodePos.Node_py + 1));
+	{
+		ZeroNodePos.Node_py += 1;
+		p.SwapNode(ZeroNodePos, FomerZeroPos);
+	}
 }
