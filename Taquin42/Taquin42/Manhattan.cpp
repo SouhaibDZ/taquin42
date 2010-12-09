@@ -57,6 +57,8 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	{
 		std::cout << "<"<< (*ita) << ">";
 		moveZeroNode(ZeroNodePos, (*ita), p);
+		std::cout << p;
+		system("pause");
 	}
 	std::cout << std::endl;
 	system("pause");
@@ -82,7 +84,6 @@ void					Manhattan::Arbre(int ** Map, unsigned int Size,
 		return;
 	std::cout << "*PREVIOUS ZERO POSITIONS*				:\t["   << this->ZeroPreviousPos.Node_px << "," << this->ZeroPreviousPos.Node_py << "]" << std::endl;
 	std::cout << "*ZERO POSITIONS*					:\t["  << NodePos.Node_px << "," << NodePos.Node_py << "]" << std::endl;
-	system("pause");
 	if (this->UpBranches(NodePos, DestinationPos, TmpPos, MovesList, Dep))
 		return;
 	if (this->DownBranches(NodePos, DestinationPos, TmpPos, MovesList, Dep, Size))
@@ -269,18 +270,18 @@ bool			 Manhattan::DownBranches(sPositions & NodePos, sPositions & DestinationPo
 }
 
 
-void					Manhattan::moveZeroNode(sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p)
+void					Manhattan::moveZeroNode(const sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p)
 {
 	//x+1
 	if (Direction == "Right")
-		;
+		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px + 1, ZeroNodePos.Node_py));
 	//x-1
 	if (Direction == "Left")
-		;
+		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px - 1, ZeroNodePos.Node_py));
 	//y-1
 	if (Direction == "Up")
-		;
+		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px, ZeroNodePos.Node_py - 1));
 	//y+1
 	if (Direction == "Down")
-		;
+		p.SwapNode(ZeroNodePos, sPositions(ZeroNodePos.Node_px, ZeroNodePos.Node_py + 1));
 }

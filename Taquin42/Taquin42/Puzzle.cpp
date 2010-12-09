@@ -100,3 +100,25 @@ unsigned int					Puzzle::GetScale(void) const
 {
 	return (this->PuzzleScale);
 }
+
+void							Puzzle::SwapNode(const sPositions& pos1, const sPositions& pos2)
+{
+	int							save = this->PuzzleMap[pos1.Node_px][pos1.Node_py];
+	this->PuzzleMap[pos1.Node_px][pos1.Node_py] = this->PuzzleMap[pos2.Node_px][pos2.Node_py];
+	this->PuzzleMap[pos2.Node_px][pos2.Node_py] = save;
+	std::cout << "Node 1: " << this->PuzzleMap[pos1.Node_px][pos1.Node_py] << std::endl;
+	std::cout << "Node 2: " << this->PuzzleMap[pos2.Node_px][pos2.Node_py] << std::endl;
+}
+
+std::ostream&					operator<<(std::ostream& o, const Puzzle& p)
+{
+	for (unsigned int i = 0; i < p.PuzzleScale; ++i)
+	{
+		for (unsigned int j = 0; j < p.PuzzleScale; ++j)
+		{
+			std::cout << p.PuzzleMap[i][j] << "\t";
+		}
+		std::cout << std::endl;
+	}
+	return (o);
+}

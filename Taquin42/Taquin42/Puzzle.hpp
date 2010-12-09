@@ -32,6 +32,8 @@ private:
 public:
 	void									Resolve();
 	const SolutionGenerator*				GetSolutionGenerator() const;
+	void									SwapNode(const sPositions& , const sPositions&);
+	friend std::ostream&					operator<<(std::ostream&, const Puzzle&);
 	
 private:
 	int** 									PuzzleMap;
