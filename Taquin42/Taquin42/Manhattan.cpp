@@ -44,9 +44,9 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	std::cout << "*NODE ZERO DESTINATIONS POSITIONS*	\t\t:\t0[2,1]" << std::endl;
 
 	this->EndTree = false;
-	std::list<std::string> l;
+	std::list<std::string> MovesList;
 	std::list<std::string> t;
-	l = this->Arbre(p.GetMap(), p.GetScale(), ZeroNodePos, ZeroNodeDestinationPos, t);
+	MovesList = this->Arbre(p.GetMap(), p.GetScale(), ZeroNodePos, ZeroNodeDestinationPos, t);
 	std::cout << "Way found" << std::endl;
 	std::cout << "* LIST MOUVEMENTS *" << std::endl;
 	std::list<std::string>::iterator ita = this->ListMovement.begin();
@@ -61,140 +61,78 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	system("pause");
 }
 
-std::list<std::string>		Manhattan::Arbre(int ** Map, unsigned int Size,
-											 sPositions NodePos, sPositions& DestinationPos, std::list<std::string> l)
+std::list<std::string>					Manhattan::Arbre(int ** Map, unsigned int Size,
+														 sPositions NodePos, sPositions& DestinationPos,
+														 std::list<std::string> MovesList)
 {
-	std::list<ManhattanMoves>			dep;
-	int									distance;
-	sPositions							tmpPos;
-
+	sPositions							TmpPos;
+	std::list<ManhattanMoves>			Dep;
+	
 	if (this->EndTree)
-		return l;
+		return (MovesList);
 	std::cout << std::endl;
 	std::cout << "\t\t*-------------------------*" << std::endl;
 	std::cout << "\t\t*Distances Processing ....*" << std::endl;
 	std::cout << "\t\t*-------------------------*" << std::endl << std::endl;
-
-	tmpPos = sPositions(NodePos.Node_px - 1, NodePos.Node_py);
-	if (NodePos.Node_px > 0 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos))			//left
-	{
-		distance = this->Theory(tmpPos, DestinationPos);
-		if (distance == 0)
-		{
-			l.push_back("Left");
-			this->EndTree = true;
-			this->ListMovement = l;
-			return l;
-		}
-		std::cout << "*LEFT  DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << distance << "]" << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::Left, distance));
-	}
-	tmpPos = sPositions(NodePos.Node_px + 1, NodePos.Node_py);
-	if (NodePos.Node_px < Size - 1 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos)) 	//right
-	{
-		distance = this->Theory(tmpPos, DestinationPos);
-		if (distance == 0)
-		{
-			l.push_back("Right");
-			this->EndTree = true;
-			this->ListMovement = l;
-			return l;
-		}
-		std::cout << "*RIGHT DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << distance << "]" << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::Right, distance));
-	}
-	std::cout << "PreviousZeroPos (" << this->ZeroPreviousPos.Node_px << "," << this->ZeroPreviousPos.Node_py << ")" << std::endl;
-	std::cout << "ZeroPos (" << NodePos.Node_px << "," << NodePos.Node_py << ")" << std::endl;
-
+	MovesList = this->LeftBranches(NodePos, DestinationPos, TmpPos, MovesList, Dep);
+	MovesList = this->RightBranches(NodePos, DestinationPos, TmpPos, MovesList, Dep, Size);
+	std::cout << "*PREVIOUS ZERO POSITIONS*				:\t["   << this->ZeroPreviousPos.Node_px << "," << this->ZeroPreviousPos.Node_py << "]" << std::endl;
+	std::cout << "*ZERO POSITIONS*					:\t["  << NodePos.Node_px << "," << NodePos.Node_py << "]" << std::endl;
 	system("pause");
-	tmpPos = sPositions(NodePos.Node_px, NodePos.Node_py - 1);
-	if (NodePos.Node_py > 0 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos))			//up
-	{
-		distance = this->Theory(tmpPos, DestinationPos);
-		if (distance == 0)
-		{
-			l.push_back("Up");
-			this->EndTree = true;
-			this->ListMovement = l;
-			return l;
-		}
-		std::cout << "*UP    DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << distance << "]" << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::Up, distance));
-	}
-	tmpPos = sPositions(NodePos.Node_px, NodePos.Node_py + 1);
-	if (NodePos.Node_py < Size - 1 && (tmpPos != this->CurrentNodePos) && (tmpPos != this->ZeroPreviousPos))		//down
-	{
-		distance = this->Theory(tmpPos, DestinationPos);
-		if (distance == 0)
-		{
-			l.push_back("Down");
-			this->EndTree = true;
-			this->ListMovement = l;
-			return l;
-		}
-		std::cout << "*DOWN  DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << distance << "]" << std::endl;
-		dep.push_back(ManhattanMoves(&Manhattan::Down, distance));
-	}
-	this->SortList(dep);
-	std::cout << "===== The List is sorted ======"<< std::endl;
-	std::list<ManhattanMoves>::iterator itb = dep.begin();
-	std::list<ManhattanMoves>::iterator ite = dep.end();
-	//system("pause");
+	MovesList = this->UpBranches(NodePos, DestinationPos, TmpPos, MovesList, Dep);
+	MovesList = this->DownBranches(NodePos, DestinationPos, TmpPos, MovesList, Dep, Size);
+	this->SortList(Dep);
+	std::cout << "===== LIST SORTED ======"<< std::endl;
+	std::list<ManhattanMoves>::iterator itb = Dep.begin();
+	std::list<ManhattanMoves>::iterator ite = Dep.end();
 	std::cout << "* LIST CONTENTS *"<< std::endl;
 	for (; itb != ite; ++itb)
 	{
 		std::cout << "<"<< (*itb).NbMove << ">";
-		(this->*(*itb).Meth)(NodePos, DestinationPos, Map, Size, l);
+		(this->*(*itb).Meth)(NodePos, DestinationPos, Map, Size, MovesList);
 	}
 	std::cout << std::endl;
-// Compute Manhattan distance from the closest cases
-// Next, choose way and sort this choose
-	/*
-	damn(); 3
-	up(); 4
-	left(); 4 
-	right(); 5*/
-	return l;
+	return (MovesList);
 }
 
 void						Manhattan::Up(sPositions Pos, sPositions& DestinationsPos,
-										  int** Map, int Size, std::list<std::string> l)
+										  int** Map, int Size, std::list<std::string> MovesList)
 {
 	sPositions				NewZeroPos = Pos;
 	NewZeroPos.Node_py--;
-	l.push_back("Up");
+	MovesList.push_back("Up");
 	this->ZeroPreviousPos = Pos;
-	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, MovesList);
 }
 
 void						Manhattan::Down(sPositions Pos, sPositions& DestinationsPos,
-								int** Map, int Size, std::list<std::string> l)
+								int** Map, int Size, std::list<std::string> MovesList)
 {
 	sPositions				NewZeroPos = Pos;
 	NewZeroPos.Node_py++;
-	l.push_back("Down");
+	MovesList.push_back("Down");
 	this->ZeroPreviousPos = Pos;
-	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, MovesList);
 }
 
 void						Manhattan::Left(sPositions Pos, sPositions& DestinationsPos,
-								int** Map, int Size, std::list<std::string> l)
+								int** Map, int Size, std::list<std::string> MovesList)
 {
 	sPositions					NewZeroPos = Pos;
 	NewZeroPos.Node_px--;
-	l.push_back("Left");
+	MovesList.push_back("Left");
 	this->ZeroPreviousPos = Pos;
-	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, MovesList);
 }
 
 void						Manhattan::Right(sPositions Pos, sPositions& DestinationsPos,
-								 int** Map, int Size, std::list<std::string> l)
+								 int** Map, int Size, std::list<std::string> MovesList)
 {
 	sPositions					NewZeroPos = Pos;
 	NewZeroPos.Node_px++;
-	l.push_back("Right");
+	MovesList.push_back("Right");
 	this->ZeroPreviousPos = Pos;
-	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, l);
+	this->Arbre(Map, Size, NewZeroPos, DestinationsPos, MovesList);
 }
 
 void						Manhattan::MoveZeroToPosDestination(std::list<std::string> ListMovement)
@@ -232,4 +170,95 @@ void						Manhattan::SortList(std::list<ManhattanMoves> & ListToSort) const
 		ListToSort.erase(BackUpIt);
 	}
 	ListToSort = ListSorted;
+}
+
+std::list<std::string>			 Manhattan::LeftBranches(sPositions & NodePos, sPositions & DestinationPos,
+													sPositions & TmpPos, std::list<std::string> & MovesList,
+													std::list<ManhattanMoves> & Dep)
+{
+	int							Distance = 0;
+	TmpPos = sPositions(NodePos.Node_px - 1, NodePos.Node_py);
+	if (NodePos.Node_px > 0 && (TmpPos != this->CurrentNodePos) && (TmpPos != this->ZeroPreviousPos))
+	{
+		Distance = this->Theory(TmpPos, DestinationPos);
+		if (Distance == 0)
+		{
+			MovesList.push_back("Left");
+			this->EndTree = true;
+			this->ListMovement = MovesList;
+			return (MovesList);
+		}
+		std::cout << "*LEFT  DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << Distance << "]" << std::endl;
+		Dep.push_back(ManhattanMoves(&Manhattan::Left, Distance));
+	}
+	return (MovesList);
+}
+
+
+// This is the  Area of branches
+std::list<std::string>			 Manhattan::RightBranches(sPositions & NodePos, sPositions & DestinationPos,
+												sPositions & TmpPos, std::list<std::string> & MovesList,
+												std::list<ManhattanMoves> & Dep, unsigned int Size)
+{
+	int							Distance = 0;
+	TmpPos = sPositions(NodePos.Node_px + 1, NodePos.Node_py);
+	if (NodePos.Node_px < Size - 1 && (TmpPos != this->CurrentNodePos) && (TmpPos != this->ZeroPreviousPos))
+	{
+		Distance = this->Theory(TmpPos, DestinationPos);
+		if (Distance == 0)
+		{
+			MovesList.push_back("Right");
+			this->EndTree = true;
+			this->ListMovement = MovesList;
+			return (MovesList);
+		}
+		std::cout << "*RIGHT DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << Distance << "]" << std::endl;
+		Dep.push_back(ManhattanMoves(&Manhattan::Right, Distance));
+	}
+	return (MovesList);
+}
+
+
+std::list<std::string>			 Manhattan::UpBranches(sPositions & NodePos, sPositions & DestinationPos,
+												sPositions & TmpPos, std::list<std::string> & MovesList,
+												std::list<ManhattanMoves> & Dep)
+{
+	int							Distance = 0;
+	TmpPos = sPositions(NodePos.Node_px, NodePos.Node_py - 1);
+	if (NodePos.Node_py > 0 && (TmpPos != this->CurrentNodePos) && (TmpPos != this->ZeroPreviousPos))			//up
+	{
+		Distance = this->Theory(TmpPos, DestinationPos);
+		if (Distance == 0)
+		{
+			MovesList.push_back("Up");
+			this->EndTree = true;
+			this->ListMovement = MovesList;
+			return (MovesList);
+		}
+		std::cout << "*UP    DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << Distance << "]" << std::endl;
+		Dep.push_back(ManhattanMoves(&Manhattan::Up, Distance));
+	}
+	return (MovesList);
+}
+
+std::list<std::string>			 Manhattan::DownBranches(sPositions & NodePos, sPositions & DestinationPos,
+													 sPositions & TmpPos,std::list<std::string> & MovesList,
+													 std::list<ManhattanMoves> & Dep, unsigned int Size)
+{
+	int							Distance = 0;
+	TmpPos = sPositions(NodePos.Node_px, NodePos.Node_py + 1);
+	if (NodePos.Node_py < Size - 1 && (TmpPos != this->CurrentNodePos) && (TmpPos != this->ZeroPreviousPos))
+	{
+		Distance = this->Theory(TmpPos, DestinationPos);
+		if (Distance == 0)
+		{
+			MovesList.push_back("Down");
+			this->EndTree = true;
+			this->ListMovement = MovesList;
+			return (MovesList);
+		}
+		std::cout << "*DOWN  DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << Distance << "]" << std::endl;
+		Dep.push_back(ManhattanMoves(&Manhattan::Down, Distance));
+	}
+	return (MovesList);
 }
