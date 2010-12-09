@@ -2,6 +2,8 @@
 # define _VARIABLES_HPP_
 
 #include <list>
+#include <iostream>
+#include <string>
 
 class						Manhattan;
 

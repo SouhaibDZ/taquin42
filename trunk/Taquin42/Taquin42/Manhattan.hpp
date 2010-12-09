@@ -48,6 +48,16 @@ private:
   void						SortList(std::list<ManhattanMoves> &) const;
 
 private:
+	std::list<std::string>	LeftBranches(sPositions & NodePos, sPositions & DestinationPos,
+											sPositions & TmpPos, std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
+	std::list<std::string>	RightBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
+											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep, unsigned int Size);
+	std::list<std::string>	UpBranches(sPositions & NodePos, sPositions & DestinationPos,
+											sPositions & TmpPos, std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
+	std::list<std::string>	DownBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
+											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep, unsigned int Size);
+
+private:
   int						PuzzleScale;
   sPositions				CurrentNodePos;
   sPositions				CurrentNodeDestinationPos;
