@@ -24,30 +24,19 @@ void							Manhattan::Run(Puzzle& p)
 }
 
 void							Manhattan::ProccessNodeZeroDestinationsPos(sPositions & CurrentNodePos, sPositions & CurrentNodeDestinationPos,
-																sPositions & NodeZeroDestinationPos)
+																			sPositions & NodeZeroDestinationPos)
 {
-	if (CurrentNodePos.Node_px  == CurrentNodeDestinationPos.Node_px
-		&& CurrentNodePos.Node_py != CurrentNodeDestinationPos.Node_py)
-	{
-		NodeZeroDestinationPos.Node_py = (CurrentNodeDestinationPos.Node_py > CurrentNodePos.Node_py) ? (CurrentNodeDestinationPos.Node_py - 1) : (CurrentNodePos.Node_py - 1);
-		NodeZeroDestinationPos.Node_px = CurrentNodeDestinationPos.Node_px;
-	}
-	
-	if (CurrentNodePos.Node_py  == CurrentNodeDestinationPos.Node_py
-		&& CurrentNodePos.Node_px != CurrentNodeDestinationPos.Node_px)
-	{
-		NodeZeroDestinationPos.Node_px = (CurrentNodeDestinationPos.Node_px > CurrentNodePos.Node_px) ? (CurrentNodeDestinationPos.Node_px - 1) : (CurrentNodeDestinationPos.Node_px + 1);
-		NodeZeroDestinationPos.Node_py = CurrentNodeDestinationPos.Node_py;
-	}
-	
-	if (CurrentNodePos.Node_px != CurrentNodeDestinationPos.Node_px && 
-		CurrentNodePos.Node_py != CurrentNodeDestinationPos.Node_py)
-	{
-		NodeZeroDestinationPos.Node_px = (CurrentNodeDestinationPos.Node_px > CurrentNodePos.Node_px) ? (CurrentNodeDestinationPos.Node_px - 1) : (CurrentNodeDestinationPos.Node_px + 1);
-		NodeZeroDestinationPos.Node_py = (CurrentNodeDestinationPos.Node_py > CurrentNodePos.Node_py) ? (CurrentNodeDestinationPos.Node_py + 1) : (CurrentNodeDestinationPos.Node_py - 1);
-	}
-	NodeZeroDestinationPos.Node_px = (NodeZeroDestinationPos.Node_px > 3) ? (NodeZeroDestinationPos.Node_px - 1) : (NodeZeroDestinationPos.Node_px);
-	NodeZeroDestinationPos.Node_py = (NodeZeroDestinationPos.Node_py > 3) ? (NodeZeroDestinationPos.Node_py - 1) : (NodeZeroDestinationPos.Node_py);
+	NodeZeroDestinationPos.Node_px = CurrentNodePos.Node_px;
+	NodeZeroDestinationPos.Node_py = CurrentNodePos.Node_py;
+
+	if (CurrentNodePos.Node_px > CurrentNodeDestinationPos.Node_px)
+		NodeZeroDestinationPos.Node_px = CurrentNodePos.Node_px - 1;
+	else if (CurrentNodePos.Node_px < CurrentNodeDestinationPos.Node_px)
+		NodeZeroDestinationPos.Node_px = CurrentNodePos.Node_px + 1;
+	else if (CurrentNodePos.Node_py > CurrentNodeDestinationPos.Node_py)
+		NodeZeroDestinationPos.Node_py = CurrentNodePos.Node_py - 1;
+	else if (CurrentNodePos.Node_py < CurrentNodeDestinationPos.Node_py)
+		NodeZeroDestinationPos.Node_py = CurrentNodePos.Node_py + 1;
 }
 
 void						Manhattan::NextNode()
@@ -58,12 +47,12 @@ void						Manhattan::NextNode()
 void						Manhattan::SearchNextPosZero(Puzzle& p)
 {
 	sPositions ZeroNodePos;
-	sPositions ZeroNodeDestinationPos(2,1);
+	sPositions ZeroNodeDestinationPos(0, 0);
 
 	p.SearchCurrentNodePos(this->CurrentNodeName, this->CurrentNodePos);
 	p.SearchCurrentNodePos(0, ZeroNodePos);
 	p.GetSolutionGenerator()->SearchNodeGoalPos(this->CurrentNodeName, this->CurrentNodeDestinationPos);
-	
+	this->ProccessNodeZeroDestinationsPos(this->CurrentNodePos, this->CurrentNodeDestinationPos, ZeroNodeDestinationPos);
 	std::cout << "*CURRENT NODE NAME*					:\t#["  << this->CurrentNodeName << "]" << std::endl;
 	std::cout << "*CURRENT NODE POSITIONS*				:\t"   << this->CurrentNodeName << "[" << CurrentNodePos.Node_px << ","     << CurrentNodePos.Node_py << "]" << std::endl;
 	std::cout << "*CURRENT NODE DESTINATIONS POSITIONS*	\t\t:\t"   << this->CurrentNodeName << "[" << CurrentNodeDestinationPos.Node_px << "," << CurrentNodeDestinationPos.Node_py << "]" << std::endl;
@@ -278,6 +267,7 @@ bool							Manhattan::RightBranches(sPositions & NodePos, sPositions & Destinati
 	}
 	return (false);
 }
+
 
 bool							Manhattan::UpBranches(sPositions & NodePos, sPositions & DestinationPos, 
 													  sPositions & TmpPos, std::list<std::string> & MovesList, 
