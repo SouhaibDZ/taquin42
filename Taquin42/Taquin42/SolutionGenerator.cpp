@@ -68,6 +68,23 @@ void				SolutionGenerator::FillLeft()
 	this->X_cur++;
 }
 
+
+void				SolutionGenerator::DisplaySolution() const
+{
+	std::cout << "-------------------------------------" << std::endl;
+	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
+	{
+		for (unsigned int j = 0; j < this->PuzzleScale; ++j)
+		{
+			if (this->Witness[i][j] == this->PuzzleScale * this->PuzzleScale)
+				this->Witness[i][j] = 0;
+			std::cout << this->Witness[j][i] << "\t";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "-------------------------------------" << std::endl << std::endl;
+}
+
 bool				SolutionGenerator::GenerateSolution()
 {
 	if (this->PuzzleScale > 100)
@@ -89,22 +106,6 @@ bool				SolutionGenerator::GenerateSolution()
 	// This part is a debug displaying , can be removed after.
 	this->DisplaySolution();
 	return (true);
-}
-
-void				SolutionGenerator::DisplaySolution() const
-{
-	std::cout << "-------------------------------------" << std::endl;
-	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
-	{
-		for (unsigned int j = 0; j < this->PuzzleScale; ++j)
-		{
-			if (this->Witness[i][j] == this->PuzzleScale * this->PuzzleScale)
-				this->Witness[i][j] = 0;
-			std::cout << this->Witness[j][i] << "\t";
-		}
-		std::cout << std::endl;
-	}
-	std::cout << "-------------------------------------" << std::endl << std::endl;
 }
 
 void				SolutionGenerator::SearchNodeGoalPos(unsigned int CurrentNodeName, sPositions& pos) const

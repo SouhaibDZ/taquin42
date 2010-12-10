@@ -13,13 +13,13 @@ private:
 	SolutionGenerator(SolutionGenerator const&);
 
 private:
-	 void				DisplaySolution() const;
-
-private:
 	void				FillTop();
 	void				FillRight();
 	void				FillBottom();
 	void				FillLeft();
+
+private:
+	 void				DisplaySolution() const;
 
 public:
 	bool				GenerateSolution();

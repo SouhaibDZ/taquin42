@@ -15,6 +15,7 @@ class										Puzzle
 public:
 	Puzzle(const std::string&, Heuristics* AlgoResolution);
 	~Puzzle();
+	friend std::ostream&					operator<<(std::ostream&, const Puzzle&);
 
 private:
 	Puzzle(const Puzzle &);
@@ -23,6 +24,7 @@ private:
 public:
 	int**									GetMap(void) const;
 	unsigned int							GetScale(void) const;
+	const SolutionGenerator*				GetSolutionGenerator() const;
 	void									SearchCurrentNodePos(int CurrentNodeName, sPositions& sPos) const;
 
 private:
@@ -31,9 +33,7 @@ private:
 
 public:
 	void									Resolve();
-	const SolutionGenerator*				GetSolutionGenerator() const;
 	void									SwapNode(const sPositions& , const sPositions&);
-	friend std::ostream&					operator<<(std::ostream&, const Puzzle&);
 	
 private:
 	int** 									PuzzleMap;
