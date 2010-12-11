@@ -21,9 +21,9 @@ struct						sPositions
 struct						ManhattanMoves
 {
 	ManhattanMoves();
-	ManhattanMoves(void (Manhattan::*)(sPositions Pos, sPositions& DestinationsPos, int** Map, int Size, std::list<std::string>), int);
+	ManhattanMoves(void (Manhattan::*)(sPositions Pos, sPositions& DestinationsPos, int** Map, std::list<std::string>), int);
 
-	void					(Manhattan::*Meth)(sPositions Pos, sPositions& DestinationsPos, int** Map, int Size, std::list<std::string>);
+	void					(Manhattan::*Meth)(sPositions Pos, sPositions& DestinationsPos, int** Map, std::list<std::string>);
 	int						NbMove;
 };
 
