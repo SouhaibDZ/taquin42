@@ -66,8 +66,6 @@ void									Puzzle::CreatePuzzle(const std::string & Contents)
 		for(unsigned int j = 0; j < this->PuzzleScale; ++j)
 		  in >> this->PuzzleMap[i][j];
 	}
-	// This part was put only for debug
-	// It will be deleted at the end of project.
 	std::cout << "2- File Map Content " << std::endl << std::endl;
 	for (unsigned int i = 0; i < this->PuzzleScale; ++i)
 	{
@@ -107,8 +105,6 @@ void										Puzzle::SwapNode(const sPositions& pos1, const sPositions& pos2)
 	int										save = this->PuzzleMap[pos1.Node_py][pos1.Node_px];
 	this->PuzzleMap[pos1.Node_py][pos1.Node_px] = this->PuzzleMap[pos2.Node_py][pos2.Node_px];
 	this->PuzzleMap[pos2.Node_py][pos2.Node_px] = save;
-	std::cout << "Node 1: " << this->PuzzleMap[pos1.Node_py][pos1.Node_px] << std::endl;
-	std::cout << "Node 2: " << this->PuzzleMap[pos2.Node_py][pos2.Node_px] << std::endl;
 }
 
 std::ostream&					operator<<(std::ostream& o, const Puzzle& p)
