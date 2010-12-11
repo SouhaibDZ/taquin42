@@ -21,6 +21,7 @@ Manhattan::~Manhattan()
 void							Manhattan::Run(Puzzle& p)
 {
 	this->SearchNextPosZero(p);
+	this->Loop(p);
 }
 
 void							Manhattan::ProccessNodeZeroDestinationsPos(sPositions & CurrentNodePos, sPositions & CurrentNodeDestinationPos,
@@ -39,6 +40,14 @@ void							Manhattan::ProccessNodeZeroDestinationsPos(sPositions & CurrentNodePo
 		NodeZeroDestinationPos.Node_py = CurrentNodePos.Node_py + 1;
 }
 
+void						Manhattan::Loop(Puzzle & p)
+{
+	while (this->CurrentNodePos != this->CurrentNodeDestinationPos)
+	{
+		this->SearchNextPosZero(p);
+	}
+}
+
 void						Manhattan::NextNode()
 {
 	this->CurrentNodeName++;
@@ -54,32 +63,35 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	p.SearchCurrentNodePos(0, ZeroNodePos);
 	p.GetSolutionGenerator()->SearchNodeGoalPos(this->CurrentNodeName, this->CurrentNodeDestinationPos);
 	this->ProccessNodeZeroDestinationsPos(this->CurrentNodePos, this->CurrentNodeDestinationPos, ZeroNodeDestinationPos);
-
-	std::cout << "*CURRENT NODE NAME*					:\t#["  << this->CurrentNodeName << "]" << std::endl;
-	std::cout << "*CURRENT NODE POSITIONS*				:\t"   << this->CurrentNodeName << "[" << CurrentNodePos.Node_px << ","     << CurrentNodePos.Node_py << "]" << std::endl;
-	std::cout << "*CURRENT NODE DESTINATIONS POSITIONS*	\t\t:\t"   << this->CurrentNodeName << "[" << CurrentNodeDestinationPos.Node_px << "," << CurrentNodeDestinationPos.Node_py << "]" << std::endl;
-	std::cout << "*NODE ZERO POSITIONS*					:\t0[" << ZeroNodePos.Node_px   << "," << ZeroNodePos.Node_py    << "]"     << std::endl;
-	std::cout << "*NODE ZERO DESTINATIONS POSITIONS*	\t\t:\t0[2,1]" << std::endl;
-
-	this->EndTree = false;
-	std::list<std::string> MovesList;
-	std::list<std::string> t;
-	this->Arbre(p.GetMap(), ZeroNodePos, ZeroNodeDestinationPos, t);
-	std::cout << "Way found" << std::endl;
-	std::cout << "* LIST MOUVEMENTS *" << std::endl;
-	std::list<std::string>::iterator ita = this->ListMovement.begin();
-	std::list<std::string>::iterator itd = this->ListMovement.end();
-	std::cout << "Debut liste: " << std::endl;
-	system("pause");
-	for (; ita != itd; ++ita)
+	while (this->CurrentNodePos != this->CurrentNodeDestinationPos)
 	{
-		std::cout << "<"<< (*ita) << ">";
-		MoveZeroNode(ZeroNodePos, (*ita), p);
-		std::cout << p;
+		std::cout << "*CURRENT NODE NAME*					:\t#["  << this->CurrentNodeName << "]" << std::endl;
+		std::cout << "*CURRENT NODE POSITIONS*				:\t"   << this->CurrentNodeName << "[" << CurrentNodePos.Node_px << ","     << CurrentNodePos.Node_py << "]" << std::endl;
+		std::cout << "*CURRENT NODE DESTINATIONS POSITIONS*	\t\t:\t"   << this->CurrentNodeName << "[" << CurrentNodeDestinationPos.Node_px << "," << CurrentNodeDestinationPos.Node_py << "]" << std::endl;
+		std::cout << "*NODE ZERO POSITIONS*					:\t0[" << ZeroNodePos.Node_px   << "," << ZeroNodePos.Node_py    << "]"     << std::endl;
+		std::cout << "*NODE ZERO DESTINATIONS POSITIONS*	\t\t:\t0[2,1]" << std::endl;
+		this->EndTree = false;
+		std::list<std::string> MovesList;
+		std::list<std::string> t;
+		this->Arbre(p.GetMap(), ZeroNodePos, ZeroNodeDestinationPos, t);
+		std::cout << "Way found" << std::endl;
+		std::cout << "* LIST MOUVEMENTS *" << std::endl;
+		std::list<std::string>::iterator ita = this->ListMovement.begin();
+		std::list<std::string>::iterator itd = this->ListMovement.end();
+		std::cout << "Debut liste: " << std::endl;
 		system("pause");
+		for (; ita != itd; ++ita)
+		{
+			this->MoveZeroNode(ZeroNodePos, (*ita), p);
+			std::cout << p;
+ 			system("pause");
+		}
+		p.SwapNode(ZeroNodePos, CurrentNodePos);
+		std::cout << p;
+		p.SearchCurrentNodePos(this->CurrentNodeName, this->CurrentNodePos);
+		p.SearchCurrentNodePos(0, ZeroNodePos);
+		this->ProccessNodeZeroDestinationsPos(this->CurrentNodePos, this->CurrentNodeDestinationPos, ZeroNodeDestinationPos);
 	}
-	p.SwapNode(ZeroNodePos, CurrentNodePos);
-	std::cout << p;
 }
 
 void					Manhattan::MoveZeroNode(sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p)
@@ -239,7 +251,7 @@ bool							Manhattan::LeftBranches(sPositions & NodePos, sPositions & Destinatio
 			this->ListMovement = MovesList;
 			return (true);
 		}
-		std::cout << "*LEFT  DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << Distance << "]" << std::endl;
+		//std::cout << "*LEFT  DISTANCE  <-to-> ZERO DESTINATIONS*	\t:\t[" << Distance << "]" << std::endl;
 		Dep.push_back(ManhattanMoves(&Manhattan::Left, Distance));
 	}
 	return (false);
