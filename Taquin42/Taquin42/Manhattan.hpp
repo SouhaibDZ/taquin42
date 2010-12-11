@@ -39,26 +39,26 @@ public:
 private:
   void						NextNode();					// Go to the next node
   void						SearchNextPosZero(Puzzle&); // find destination of zero
-  void						Arbre(int**, unsigned int, sPositions, sPositions&, std::list<std::string>);
-  void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
-  void						Down(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
-  void						Left(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
-  void						Right(sPositions Pos, sPositions& DestinationsPos, int** Map, int size, std::list<std::string>);
+  void						Arbre(int**, sPositions, sPositions&, std::list<std::string>);
+  void						Up(sPositions Pos, sPositions& DestinationsPos, int** Map, std::list<std::string>);
+  void						Down(sPositions Pos, sPositions& DestinationsPos, int** Map, std::list<std::string>);
+  void						Left(sPositions Pos, sPositions& DestinationsPos, int** Map, std::list<std::string>);
+  void						Right(sPositions Pos, sPositions& DestinationsPos, int** Map, std::list<std::string>);
   void						SortList(std::list<ManhattanMoves> &) const;
 
 private:
 	bool					LeftBranches(sPositions & NodePos, sPositions & DestinationPos,
 											sPositions & TmpPos, std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
 	bool					RightBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
-											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep, unsigned int Size);
+											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
 	bool					UpBranches(sPositions & NodePos, sPositions & DestinationPos,
 											sPositions & TmpPos, std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
 	bool					DownBranches(sPositions & NodePos, sPositions & DestinationPos, sPositions & TmpPos,
-											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep, unsigned int Size);
-	void					moveZeroNode(sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p);
+											std::list<std::string> & MovesList, std::list<ManhattanMoves> & Dep);
+	void					MoveZeroNode(sPositions& ZeroNodePos, const std::string& Direction, Puzzle& p);
 
 private:
-  int						PuzzleScale;
+  unsigned int				PuzzleScale;
   int						CurrentNodeName;
   char						Direction[5];
   bool						EndTree;
