@@ -10,7 +10,7 @@ int main()
 	std::string S;
 	Heuristics* man = new Manhattan();
 
-	F.LoadFile("TaquinA5.txt", S);
+	F.LoadFile("TaquinA3.txt", S);
 	Puzzle		P(S, man);
 	P.Resolve();
 	return (0);
