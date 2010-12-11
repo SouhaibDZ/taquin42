@@ -65,6 +65,9 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 	this->ProccessNodeZeroDestinationsPos(this->CurrentNodePos, this->CurrentNodeDestinationPos, ZeroNodeDestinationPos);
 	while (this->CurrentNodePos != this->CurrentNodeDestinationPos)
 	{
+		this->ZeroPreviousPos.Node_px = -1;
+		this->ZeroPreviousPos.Node_py = -1;
+
 		std::cout << "*CURRENT NODE NAME*					:\t#["  << this->CurrentNodeName << "]" << std::endl;
 		std::cout << "*CURRENT NODE POSITIONS*				:\t"   << this->CurrentNodeName << "[" << CurrentNodePos.Node_px << ","     << CurrentNodePos.Node_py << "]" << std::endl;
 		std::cout << "*CURRENT NODE DESTINATIONS POSITIONS*	\t\t:\t"   << this->CurrentNodeName << "[" << CurrentNodeDestinationPos.Node_px << "," << CurrentNodeDestinationPos.Node_py << "]" << std::endl;
@@ -79,6 +82,9 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 		std::list<std::string>::iterator ita = this->ListMovement.begin();
 		std::list<std::string>::iterator itd = this->ListMovement.end();
 		std::cout << "Debut liste: " << std::endl;
+		
+		system("pause");
+		std::cout << p;
 		system("pause");
 		for (; ita != itd; ++ita)
 		{
@@ -88,9 +94,12 @@ void						Manhattan::SearchNextPosZero(Puzzle& p)
 		}
 		p.SwapNode(ZeroNodePos, CurrentNodePos);
 		std::cout << p;
+		system("pause");
 		p.SearchCurrentNodePos(this->CurrentNodeName, this->CurrentNodePos);
 		p.SearchCurrentNodePos(0, ZeroNodePos);
 		this->ProccessNodeZeroDestinationsPos(this->CurrentNodePos, this->CurrentNodeDestinationPos, ZeroNodeDestinationPos);
+		std::cout << "Zero Destination: x=" << ZeroNodeDestinationPos.Node_px << ", y=" << ZeroNodeDestinationPos.Node_py << std::endl;
+		system("pause");
 	}
 }
 
@@ -143,6 +152,7 @@ void									Manhattan::Arbre(int ** Map, sPositions NodePos,
 	{
 		if ((this->*(*itB))(NodePos, DestinationPos, TmpPos, MovesList, Dep))
 			return ;
+		system("pause");
 	}
 	this->SortList(Dep);
 	std::cout << "===== LIST SORTED ======"<< std::endl;
