@@ -18,7 +18,7 @@ ManhattanMoves::ManhattanMoves() : Meth(NULL), NbMove(0)
 {
 }
 
-ManhattanMoves::ManhattanMoves(void (Manhattan::*ptr)(sPositions Pos, sPositions& DestinationsPos, int** Map, int Size, std::list<std::string>), int nb)
+ManhattanMoves::ManhattanMoves(void (Manhattan::*ptr)(sPositions Pos, sPositions& DestinationsPos, int** Map, std::list<std::string>), int nb)
 	: Meth(ptr), NbMove(nb)
 {
 }
