@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Taquin Astar", "Taquin Astar.vcproj", "{E06EE8BD-03DA-48EC-8125-80E6AE839E74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E06EE8BD-03DA-48EC-8125-80E6AE839E74}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E06EE8BD-03DA-48EC-8125-80E6AE839E74}.Debug|Win32.Build.0 = Debug|Win32
+		{E06EE8BD-03DA-48EC-8125-80E6AE839E74}.Release|Win32.ActiveCfg = Release|Win32
+		{E06EE8BD-03DA-48EC-8125-80E6AE839E74}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
