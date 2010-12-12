@@ -178,6 +178,14 @@
 				RelativePath=".\main.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Puzzle.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SolutionGenerator.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Fichiers d&apos;en-tête"
@@ -186,6 +194,14 @@
 			>
 			<File
 				RelativePath=".\FileLoader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Puzzle.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SolutionGenerator.hpp"
 				>
 			</File>
 		</Filter>
