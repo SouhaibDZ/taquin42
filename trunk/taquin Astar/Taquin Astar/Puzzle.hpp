@@ -20,13 +20,15 @@ public:
 	short unsigned int**					CreatePuzzle(const std::string &);
 	static unsigned int						GetScale(void);
 	static short unsigned int**				GetSolutionGenerator();
-	int										ManhattanDistance(short unsigned int ** SolutionMap);
-
+	short unsigned int						ManhattanDistance(short unsigned int ** SolutionMap);
+	
 private:
 	unsigned int							CountScales(const std::string &) const;
+	void									SearchPos(short unsigned int** SolutionMap, int& x, int& y, short unsigned int & Node);
 
 private:
 	short unsigned int **					PuzzleMap;
+	short unsigned int						Distance;
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
 };

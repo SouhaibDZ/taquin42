@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Puzzle.hpp"
 #include "SolutionGenerator.hpp"
 #include <sstream>
@@ -20,7 +21,7 @@ unsigned int					Puzzle::GetScale(void)
 short unsigned int**			Puzzle::GetSolutionGenerator()
 {
 	if (Puzzle::SolutionMap == NULL)
-		;
+		return NULL;
 	return (Puzzle::SolutionMap);
 }
 
@@ -52,9 +53,49 @@ short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 	return (this->PuzzleMap);
 }
 
-int											Puzzle::ManhattanDistance(short unsigned int ** SolutionMap)
+void										Puzzle::SearchPos(short unsigned int** SolutionMap, int& x, int& y, short unsigned int & Node)
 {
+	short unsigned int						i = 0;
+	short unsigned int						j = 0;
+	bool									Found = false;
+	
+	while (i < Puzzle::PuzzleScale && !(Found))
+	{
+		j = 0;
+		while (j < Puzzle::PuzzleScale && !(Found))
+		{
+			short unsigned int toto = SolutionMap[i][j];
+			if (SolutionMap[i][j] == Node)
+			{
+				Found = true;
+				x = i;
+				y = j;
+			}
+			++j;
+		}
+		++i;
+	}
 }
+
+short unsigned int							Puzzle::ManhattanDistance(short unsigned int ** SolutionMap)
+{
+	short unsigned int						Distance = 0;
+	short unsigned int						CurrentNode;
+	int x, y;
+
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+	{
+		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
+		{
+			CurrentNode = this->PuzzleMap[i][j];
+			SearchPos(SolutionMap, x, y, CurrentNode);
+			Distance += abs(j - x) + abs(i - y);
+		}
+	}
+	return (Distance);
+}
+
+
 
 unsigned int								Puzzle::CountScales(const std::string & Contents) const
 {

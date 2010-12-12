@@ -15,12 +15,11 @@ int main()
 	std::list<Puzzle>		OpenedList;
 	std::list<Puzzle>		ClosedList;
 
-	OpenedList.push_back(Tab);
-
 	F.LoadFile("TaquinA4.txt", S);
 	std::istringstream		In(S);
 	Tab = P.CreatePuzzle(S);
 	SolutionMap = SG.GenerateSolution(P.GetScale());
+	std::cout << "Distance de Manhattan du Puzzle: " << P.ManhattanDistance(SolutionMap) << std::endl;
 
 	return (0);
 }
