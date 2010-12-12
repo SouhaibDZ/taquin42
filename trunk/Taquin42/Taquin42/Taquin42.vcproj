@@ -199,6 +199,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Manhattan_Star.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Puzzle.cpp"
 				>
 			</File>
@@ -242,6 +246,10 @@
 			</File>
 			<File
 				RelativePath=".\Manhattan.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Manhattan_Star.hpp"
 				>
 			</File>
 			<File

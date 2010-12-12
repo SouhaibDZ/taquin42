@@ -27,4 +27,13 @@ struct						ManhattanMoves
 	int						NbMove;
 };
 
+
+struct						AdjacentNodes
+{
+	int						NodeOnRight;
+	int						NodeOnLeft;
+	int						NodeOnTop;
+	int						NodeOnBottom;
+};
+
 #endif // _VARIABLES_HPP_
