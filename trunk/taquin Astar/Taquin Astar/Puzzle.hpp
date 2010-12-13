@@ -20,7 +20,6 @@ public:
 	short unsigned int**					CreatePuzzle(const std::string &);
 	static unsigned int						GetScale(void);
 	static short unsigned int**				GetSolutionGenerator();
-	void									ManhattanDistance();
 	bool									CanUp();
 	bool									CanDown();
 	bool									CanLeft();
@@ -29,10 +28,12 @@ public:
 	void									ExecDown();
 	void									ExecLeft();
 	void									ExecRight();
+	short unsigned int						GetManhattanDistance();
 	
 private:
 	unsigned int							CountScales(const std::string &) const;
 	void									SearchPos(int& x, int& y, short unsigned int & Node);
+	void									ManhattanDistance();
 	
 
 private:
