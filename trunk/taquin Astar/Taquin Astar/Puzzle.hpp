@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 #include "SolutionGenerator.hpp"
-#include "Variables.h"
 
 class										Puzzle
 {
@@ -13,10 +12,11 @@ public:
 	Puzzle();
 	~Puzzle();
 	Puzzle(const Puzzle &);
+	bool								operator==(const Puzzle &);
 
 private:
 	Puzzle &								operator=(const Puzzle &);
-
+	
 public:
 	short unsigned int**					CreatePuzzle(const std::string &);
 	static unsigned int						GetScale(void);
@@ -30,15 +30,15 @@ public:
 	void									ExecLeft();
 	void									ExecRight();
 	short unsigned int						GetManhattanDistance();
-
+	void									AffPuzzle(short unsigned int **) const;
 public:
-	std::string &							LookDirection(short unsigned int** PuzzleMap, int& x, int& y, short unsigned int & Node, std::string & Dir);
-	short unsigned int **					UpState(short unsigned int ** PuzzleMap, int & x, int &y);
-	short unsigned int **					RightState(short unsigned int ** PuzzleMap, int & x, int &y);
-	short unsigned int **					DownState(short unsigned int ** PuzzleMap, int & x, int &y);
-	short unsigned int **					LeftState(short unsigned int ** PuzzleMap, int & x, int &y);
-	void									CreatePossiblities(short unsigned int** PuzzleMap, int& x, int& y, short unsigned int & Node, std::string & Dir);
-	void									PrepareLists(FourTabs & BigStruct);
+	//std::string &							LookDirection(short unsigned int** PuzzleMap, int& x, int& y, short unsigned int & Node, std::string & Dir);
+	//short unsigned int **					UpState(short unsigned int ** PuzzleMap, int & x, int &y);
+	//short unsigned int **					RightState(short unsigned int ** PuzzleMap, int & x, int &y);
+	//short unsigned int **					DownState(short unsigned int ** PuzzleMap, int & x, int &y);
+	//short unsigned int **					LeftState(short unsigned int ** PuzzleMap, int & x, int &y);
+	//void									CreatePossiblities(short unsigned int** PuzzleMap, int& x, int& y, short unsigned int & Node, std::string & Dir);
+	//void									PrepareLists(FourTabs & BigStruct);
 
 private:
 	unsigned int							CountScales(const std::string &) const;

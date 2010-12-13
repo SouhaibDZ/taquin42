@@ -29,6 +29,25 @@ Puzzle::Puzzle(const Puzzle & p)
 	this->Distance = p.Distance;
 }
 
+Puzzle &								Puzzle::operator=(const Puzzle & as)
+{
+	if (this != &as)
+    {
+		this->PuzzleMap = as.PuzzleMap;
+		this->Distance = as.Distance;
+		this->x0 = as.x0;
+		this->y0 = as.y0;
+	}
+	return (*this);
+}
+
+bool								Puzzle::operator==(const Puzzle & ass)
+{
+	if (this == &ass)
+		return (true);
+	return (false);
+}
+
 Puzzle::~Puzzle()
 {
 }
@@ -125,6 +144,18 @@ void										Puzzle::ManhattanDistance()
 	}
 	std::cout << "Manhattan Distance = " << D << std::endl;
 	this->Distance = D;
+}
+
+void										Puzzle::AffPuzzle(short unsigned int ** PuzzleMap) const
+{
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+	{
+		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
+		{
+			std::cout << PuzzleMap[i][j] << "\t";
+		}
+		std::cout << std::endl;
+	}
 }
 
 bool										Puzzle::CanUp()
