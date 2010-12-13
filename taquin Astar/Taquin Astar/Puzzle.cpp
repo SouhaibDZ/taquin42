@@ -5,8 +5,28 @@
 
 unsigned int	Puzzle::PuzzleScale = 0;
 short unsigned int ** Puzzle::SolutionMap = NULL;
+
 Puzzle::Puzzle()
 {
+}
+
+Puzzle::Puzzle(const Puzzle & p)
+{
+	this->PuzzleMap = new unsigned short int*[Puzzle::PuzzleScale];
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+	{
+		this->PuzzleMap[i] = new unsigned short int[Puzzle::PuzzleScale];
+		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
+		{
+			this->PuzzleMap[i][j] = p.PuzzleMap[i][j];
+			if (this->PuzzleMap[i][j] == 0)
+			{
+				x0 = j;
+				y0 = i;
+			}
+		}
+	}
+	this->Distance = p.Distance;
 }
 
 Puzzle::~Puzzle()
@@ -28,6 +48,7 @@ short unsigned int**			Puzzle::GetSolutionGenerator()
 short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 {
 	std::istringstream					in(Contents);
+	SolutionGenerator					SG;
 
 	int	pos = Contents.find_first_of('\n');
 	Puzzle::PuzzleScale = this->CountScales(Contents.substr(0, pos));
@@ -38,7 +59,14 @@ short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 	{
 		this->PuzzleMap[i] = new short unsigned int[Puzzle::PuzzleScale];
 		for(unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
+		{
 		  in >> this->PuzzleMap[i][j];
+		  if (this->PuzzleMap[i][j] == 0)
+		  {
+			x0 = j;
+			y0 = i;
+		  }
+		}
 	}
 	std::cout << "2- File Map Content " << std::endl << std::endl;
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
@@ -50,10 +78,13 @@ short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 	std::cout << std::endl;
 	std::cout << "3- File Map Solution " << std::endl << std::endl;
 	std::cout << std::endl << std::endl;
+
+	Puzzle::SolutionMap = SG.GenerateSolution(Puzzle::PuzzleScale);
+	this->ManhattanDistance();
 	return (this->PuzzleMap);
 }
 
-void										Puzzle::SearchPos(short unsigned int** SolutionMap, int& x, int& y, short unsigned int & Node)
+void										Puzzle::SearchPos(int& x, int& y, short unsigned int & Node)
 {
 	short unsigned int						i = 0;
 	short unsigned int						j = 0;
@@ -64,8 +95,8 @@ void										Puzzle::SearchPos(short unsigned int** SolutionMap, int& x, int& y
 		j = 0;
 		while (j < Puzzle::PuzzleScale && !(Found))
 		{
-			short unsigned int toto = SolutionMap[i][j];
-			if (SolutionMap[i][j] == Node)
+			short unsigned int toto = Puzzle::SolutionMap[i][j];
+			if (Puzzle::SolutionMap[i][j] == Node)
 			{
 				Found = true;
 				x = i;
@@ -77,9 +108,9 @@ void										Puzzle::SearchPos(short unsigned int** SolutionMap, int& x, int& y
 	}
 }
 
-short unsigned int							Puzzle::ManhattanDistance(short unsigned int ** SolutionMap)
+void										Puzzle::ManhattanDistance()
 {
-	short unsigned int						Distance = 0;
+	short unsigned int						D = 0;
 	short unsigned int						CurrentNode;
 	int x, y;
 
@@ -88,14 +119,74 @@ short unsigned int							Puzzle::ManhattanDistance(short unsigned int ** Solutio
 		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
 		{
 			CurrentNode = this->PuzzleMap[i][j];
-			SearchPos(SolutionMap, x, y, CurrentNode);
-			Distance += abs(j - x) + abs(i - y);
+			this->SearchPos(x, y, CurrentNode);
+			D += abs(j - x) + abs(i - y);
 		}
 	}
-	return (Distance);
+	std::cout << "Manhattan Distance = " << D << std::endl;
+	this->Distance = D;
 }
 
+bool										Puzzle::CanUp()
+{
+	return (this->y0 > 0);
+}
 
+bool										Puzzle::CanDown()
+{
+	return (this->y0 < Puzzle::PuzzleScale - 1);
+}
+
+bool										Puzzle::CanLeft()
+{
+	return (this->x0 > 0);
+}
+
+bool										Puzzle::CanRight()
+{
+	return (this->x0 < Puzzle::PuzzleScale - 1);
+}
+
+void										Puzzle::ExecUp()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0 - 1][this->x0];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0 - 1][this->x0] = 0;
+	this->y0--;
+	std::cout << "Up : ";
+	this->ManhattanDistance();
+
+}
+
+void										Puzzle::ExecDown()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0 + 1][this->x0];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0 + 1][this->x0] = 0;
+	this->y0++;
+	std::cout << "Down : ";
+	this->ManhattanDistance();
+}
+
+void										Puzzle::ExecLeft()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0][this->x0 - 1];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0][this->x0 - 1] = 0;
+	this->x0--;
+	std::cout << "Left : ";
+	this->ManhattanDistance();
+}
+
+void										Puzzle::ExecRight()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0][this->x0 + 1];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0][this->x0 + 1] = 0;
+	this->x0++;
+	std::cout << "Right : ";
+	this->ManhattanDistance();
+}
 
 unsigned int								Puzzle::CountScales(const std::string & Contents) const
 {

@@ -11,24 +11,36 @@ class										Puzzle
 public:
 	Puzzle();
 	~Puzzle();
+	Puzzle(const Puzzle &);
 
 private:
-	Puzzle(const Puzzle &);
 	Puzzle &								operator=(const Puzzle &);
 
 public:
 	short unsigned int**					CreatePuzzle(const std::string &);
 	static unsigned int						GetScale(void);
 	static short unsigned int**				GetSolutionGenerator();
-	short unsigned int						ManhattanDistance(short unsigned int ** SolutionMap);
+	void									ManhattanDistance();
+	bool									CanUp();
+	bool									CanDown();
+	bool									CanLeft();
+	bool									CanRight();
+	void									ExecUp();
+	void									ExecDown();
+	void									ExecLeft();
+	void									ExecRight();
 	
 private:
 	unsigned int							CountScales(const std::string &) const;
-	void									SearchPos(short unsigned int** SolutionMap, int& x, int& y, short unsigned int & Node);
+	void									SearchPos(int& x, int& y, short unsigned int & Node);
+	
 
 private:
 	short unsigned int **					PuzzleMap;
 	short unsigned int						Distance;
+	short unsigned int						x0;
+	short unsigned int						y0;
+
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
 };
