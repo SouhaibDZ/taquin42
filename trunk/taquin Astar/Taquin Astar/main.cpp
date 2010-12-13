@@ -19,7 +19,11 @@ int main()
 	F.LoadFile("TaquinA4.txt", S);
 	std::istringstream		In(S);
 	Tab = P.CreatePuzzle(S);
-
+	int x, y = 0;
+	short unsigned int node = 10;
+	std::string Dir;
+	//std::cout << "Node Possibilities : " << node << " "<< P.LookDirection(Tab, x, y, node, Dir) << std::endl;
+	P.CreatePossiblities(Tab, x, y, node, Dir);
 	std::cout << std::endl;
 	OpenedList.push_back(P);
 	if (!OpenedList.empty())

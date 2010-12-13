@@ -204,6 +204,10 @@
 				RelativePath=".\SolutionGenerator.hpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Variables.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Fichiers de ressources"
