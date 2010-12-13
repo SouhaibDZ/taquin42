@@ -188,6 +188,11 @@ void										Puzzle::ExecRight()
 	this->ManhattanDistance();
 }
 
+short unsigned int							Puzzle::GetManhattanDistance()
+{
+	return (this->Distance);
+}
+
 unsigned int								Puzzle::CountScales(const std::string & Contents) const
 {
 	unsigned int							max = Contents.size();
