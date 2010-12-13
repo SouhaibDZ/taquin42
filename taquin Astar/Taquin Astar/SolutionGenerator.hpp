@@ -24,7 +24,8 @@ private:
 	int					X_min, X_max, X_cur;
 	int					Y_min, Y_max, Y_cur;
 	int					Num;
-	short unsigned int		**Witness;
+	int					Limit;
+	short unsigned int	**Witness;
 	unsigned int		PuzzleScale;
 };
 

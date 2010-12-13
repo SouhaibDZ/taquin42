@@ -17,6 +17,8 @@ SolutionGenerator::~SolutionGenerator() {}
 
 void				SolutionGenerator::FillTop()
 {
+	if (this->Num == this->Limit)
+		this->Num = 0;
 	while (this->X_cur < this->X_max)
 	{
 		this->Witness[this->X_cur][this->Y_cur] = this->Num;
@@ -30,6 +32,8 @@ void				SolutionGenerator::FillTop()
 
 void				SolutionGenerator::FillRight()
 {
+	if (this->Num == this->Limit)
+		this->Num = 0;
 	while (this->Y_cur < this->Y_max)
 	{
 		this->Witness[this->X_cur][this->Y_cur] = this->Num;
@@ -43,6 +47,8 @@ void				SolutionGenerator::FillRight()
 
 void				SolutionGenerator::FillBottom()
 {
+	if (this->Num == this->Limit)
+		this->Num = 0;
 	while (this->X_cur > this->X_min - 1)
 	{
 		this->Witness[this->X_cur][this->Y_cur] = this->Num;
@@ -56,6 +62,8 @@ void				SolutionGenerator::FillBottom()
 
 void				SolutionGenerator::FillLeft()
 {
+	if (this->Num == this->Limit)
+		this->Num = 0;
 	while (this->Y_cur > this->Y_min)
 	{
 		this->Witness[this->X_cur][this->Y_cur] = this->Num;
@@ -76,6 +84,7 @@ short unsigned int** 				SolutionGenerator::GenerateSolution(unsigned int Scale)
 	}
 	this->X_max = Scale;
 	this->Y_max = Scale;
+	this->Limit = Scale * Scale;
 	this->Witness = new short unsigned int*[Scale];
 	for (unsigned int i = 0; i < Scale; i++)
 		this->Witness[i] = new short unsigned int[Scale];

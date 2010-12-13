@@ -30,7 +30,9 @@ public:
 	void									ExecLeft();
 	void									ExecRight();
 	short unsigned int						GetManhattanDistance();
-	void									AffPuzzle(short unsigned int **) const;
+	void									AffPuzzle() const;
+	void									AffSolution() const;
+
 public:
 	//std::string &							LookDirection(short unsigned int** PuzzleMap, int& x, int& y, short unsigned int & Node, std::string & Dir);
 	//short unsigned int **					UpState(short unsigned int ** PuzzleMap, int & x, int &y);
@@ -43,6 +45,7 @@ public:
 private:
 	unsigned int							CountScales(const std::string &) const;
 	void									SearchPos(int& x, int& y, short unsigned int & Node);
+public:
 	void									ManhattanDistance();
 	
 

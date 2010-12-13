@@ -43,9 +43,22 @@ Puzzle &								Puzzle::operator=(const Puzzle & as)
 
 bool								Puzzle::operator==(const Puzzle & ass)
 {
-	if (this == &ass)
-		return (true);
-	return (false);
+	short unsigned int i = 0;
+	short unsigned int j = 0;
+	bool ret = true;
+
+	while (ret && i < Puzzle::PuzzleScale)
+	{
+		j = 0;
+		while (ret && j < Puzzle::PuzzleScale)
+		{
+			if (this->PuzzleMap[i][j] != ass.PuzzleMap[i][j])
+				ret = false;
+			++j;
+		}
+		++i;
+	}
+	return (ret);
 }
 
 Puzzle::~Puzzle()
@@ -142,17 +155,17 @@ void										Puzzle::ManhattanDistance()
 			D += abs(j - x) + abs(i - y);
 		}
 	}
-	std::cout << "Manhattan Distance = " << D << std::endl;
+	//std::cout << "Manhattan Distance = " << D << std::endl;
 	this->Distance = D;
 }
 
-void										Puzzle::AffPuzzle(short unsigned int ** PuzzleMap) const
+void										Puzzle::AffPuzzle() const
 {
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 	{
 		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
 		{
-			std::cout << PuzzleMap[i][j] << "\t";
+			std::cout << this->PuzzleMap[i][j] << "\t";
 		}
 		std::cout << std::endl;
 	}
@@ -184,7 +197,7 @@ void										Puzzle::ExecUp()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0 - 1][this->x0] = 0;
 	this->y0--;
-	std::cout << "Up : ";
+	//std::cout << "Up : ";
 	this->ManhattanDistance();
 
 }
@@ -195,7 +208,7 @@ void										Puzzle::ExecDown()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0 + 1][this->x0] = 0;
 	this->y0++;
-	std::cout << "Down : ";
+	//std::cout << "Down : ";
 	this->ManhattanDistance();
 }
 
@@ -205,7 +218,7 @@ void										Puzzle::ExecLeft()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0][this->x0 - 1] = 0;
 	this->x0--;
-	std::cout << "Left : ";
+	//std::cout << "Left : ";
 	this->ManhattanDistance();
 }
 
@@ -215,7 +228,7 @@ void										Puzzle::ExecRight()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0][this->x0 + 1] = 0;
 	this->x0++;
-	std::cout << "Right : ";
+	//std::cout << "Right : ";
 	this->ManhattanDistance();
 }
 
@@ -237,4 +250,16 @@ unsigned int								Puzzle::CountScales(const std::string & Contents) const
 		prev = Contents.at(i);
 	}
 	return (ret + 1);
+}
+
+void										Puzzle::AffSolution() const
+{
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+	{
+		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
+		{
+			std::cout << Puzzle::SolutionMap[i][j] << "\t";
+		}
+		std::cout << std::endl;
+	}
 }
