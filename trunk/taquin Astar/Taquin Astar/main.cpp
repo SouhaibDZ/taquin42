@@ -29,7 +29,8 @@ int main()
 		std::list<Puzzle>		ClosedList;
 		int x = 0, y = 0;
 
-		F.LoadFile("TaquinA4.txt", S);
+		DisplayLogo();
+		F.LoadFile("TaquinA3.txt", S);
 		std::istringstream		In(S);
 		Tab = P.CreatePuzzle(S);
 		std::list<Puzzle>::iterator FirstPuzzle;
@@ -52,6 +53,7 @@ int main()
 		Tmp = "End";
 		P.SetTime(Tmp);
 		P.TimeCounter();
+		ShowNbMoves();
 	}
 	system("pause");
 	return (0);
