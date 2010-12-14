@@ -7,7 +7,10 @@
 unsigned int			Puzzle::PuzzleScale = 0;
 short unsigned int **	Puzzle::SolutionMap = NULL;
 
-Puzzle::Puzzle() {}
+Puzzle::Puzzle() 
+{
+	this->NbMoves = 0;
+}
 
 Puzzle::~Puzzle(void)
 {
@@ -107,7 +110,7 @@ unsigned int					Puzzle::GetScale(void)
 	return (Puzzle::PuzzleScale);
 }
 
-short unsigned int**			Puzzle::GetSolutionGenerator()
+short unsigned int**						Puzzle::GetSolutionGenerator()
 {
 	if (Puzzle::SolutionMap == NULL)
 		return NULL;

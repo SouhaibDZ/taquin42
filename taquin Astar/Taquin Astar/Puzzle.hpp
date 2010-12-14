@@ -55,6 +55,7 @@ private:
 	static short unsigned int **			SolutionMap;
 	time_t									Begin;
 	time_t									End;
+	short unsigned int						NbMoves;
 };
 
 #endif //__PUZZLE_HPP__
