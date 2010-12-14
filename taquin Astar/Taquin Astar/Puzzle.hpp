@@ -53,8 +53,8 @@ private:
 	short unsigned int						y0;
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
-	time_t									Begin;
-	time_t									End;
+	//time_t									Begin;
+	//time_t									End;
 	short unsigned int						NbMoves;
 };
 

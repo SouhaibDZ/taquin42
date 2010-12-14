@@ -236,7 +236,7 @@ void										Puzzle::SearchPos(int& x, int& y, short unsigned int & Node)
 		++i;
 	}
 }
-
+/*
 void										Puzzle::SetTime(std::string & tmp)
 {
 	if (tmp == "Begin")
@@ -252,7 +252,7 @@ void										Puzzle::TimeCounter(void)
   TimeElasped = difftime(this->End, this->Begin);
   std::cout << std::endl;
   std::cout << "TIME ELAPSED			: \t\t [" << TimeElasped << "] Seconds." << std::endl;
-}
+}*/
 
 void										Puzzle::ManhattanDistance()
 {
