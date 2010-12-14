@@ -1,10 +1,10 @@
 #include <iostream>
-#include "FileLoader.h"
 #include <sstream>
-#include "Puzzle.hpp"
 #include <list>
 #include <iterator>
 #include "Extender.h"
+#include "Puzzle.hpp"
+#include "FileLoader.h"
 
 void	DisplayLogo()
 {
@@ -19,6 +19,7 @@ void	DisplayLogo()
 int main()
 {
 	{
+		clock_t timeDeb, timeEnd;
 		FileLoader				F;
 		std::string				S;
 		Puzzle					P;
@@ -29,12 +30,13 @@ int main()
 		std::list<Puzzle>		ClosedList;
 		int x = 0, y = 0;
 
+		timeDeb = clock();
 		DisplayLogo();
-		F.LoadFile("TaquinA3.txt", S);
+		F.LoadFile("TaquinA4.txt", S);
 		std::istringstream		In(S);
 		Tab = P.CreatePuzzle(S);
 		std::list<Puzzle>::iterator FirstPuzzle;
-		P.SetTime(Tmp);
+		//P.SetTime(Tmp);
 		OpenedList.push_back(P);
 		for (int i = 0; i < 120000; ++i)
 		{
@@ -51,9 +53,12 @@ int main()
 			}
 		}
 		Tmp = "End";
-		P.SetTime(Tmp);
-		P.TimeCounter();
+		timeEnd = clock();
+		//P.SetTime(Tmp);
+		//P.TimeCounter();
+		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();
+		system("pause");
 	}
 	system("pause");
 	return (0);
