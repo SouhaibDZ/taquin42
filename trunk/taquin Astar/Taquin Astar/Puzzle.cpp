@@ -2,13 +2,12 @@
 #include "Puzzle.hpp"
 #include "SolutionGenerator.hpp"
 #include <sstream>
+#include <math.h>
 
-unsigned int	Puzzle::PuzzleScale = 0;
-short unsigned int ** Puzzle::SolutionMap = NULL;
+unsigned int			Puzzle::PuzzleScale = 0;
+short unsigned int **	Puzzle::SolutionMap = NULL;
 
-Puzzle::Puzzle()
-{
-}
+Puzzle::Puzzle() {}
 
 Puzzle::~Puzzle(void)
 {
@@ -36,18 +35,6 @@ Puzzle::Puzzle(const Puzzle & p)
 	this->Distance = p.Distance;
 }
 
-Puzzle &								Puzzle::operator=(const Puzzle & as)
-{
-	if (this != &as)
-    {
-		this->PuzzleMap = as.PuzzleMap;
-		this->Distance = as.Distance;
-		this->x0 = as.x0;
-		this->y0 = as.y0;
-	}
-	return (*this);
-}
-
 bool								Puzzle::operator==(const Puzzle & ass)
 {
 	short unsigned int i = 0;
@@ -68,17 +55,18 @@ bool								Puzzle::operator==(const Puzzle & ass)
 	return (ret);
 }
 
-unsigned int					Puzzle::GetScale(void)
+Puzzle &								Puzzle::operator=(const Puzzle & as)
 {
-	return (Puzzle::PuzzleScale);
+	if (this != &as)
+    {
+		this->PuzzleMap = as.PuzzleMap;
+		this->Distance = as.Distance;
+		this->x0 = as.x0;
+		this->y0 = as.y0;
+	}
+	return (*this);
 }
 
-short unsigned int**			Puzzle::GetSolutionGenerator()
-{
-	if (Puzzle::SolutionMap == NULL)
-		return NULL;
-	return (Puzzle::SolutionMap);
-}
 
 short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 {
@@ -87,9 +75,7 @@ short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 
 	int	pos = Contents.find_first_of('\n');
 	Puzzle::PuzzleScale = this->CountScales(Contents.substr(0, pos));
-
 	this->PuzzleMap = new short unsigned int*[Puzzle::PuzzleScale];
-
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 	{
 		this->PuzzleMap[i] = new short unsigned int[Puzzle::PuzzleScale];
@@ -111,12 +97,117 @@ short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
-	std::cout << "3- File Map Solution " << std::endl << std::endl;
-	std::cout << std::endl << std::endl;
-
 	Puzzle::SolutionMap = SG.GenerateSolution(Puzzle::PuzzleScale);
 	this->ManhattanDistance();
 	return (this->PuzzleMap);
+}
+
+unsigned int					Puzzle::GetScale(void)
+{
+	return (Puzzle::PuzzleScale);
+}
+
+short unsigned int**			Puzzle::GetSolutionGenerator()
+{
+	if (Puzzle::SolutionMap == NULL)
+		return NULL;
+	return (Puzzle::SolutionMap);
+}
+
+bool										Puzzle::CanUp() const
+{
+	return (this->y0 > 0);
+}
+
+bool										Puzzle::CanDown() const
+{
+	return (this->y0 < Puzzle::PuzzleScale - 1);
+}
+
+bool										Puzzle::CanLeft() const
+{
+	return (this->x0 > 0);
+}
+
+bool										Puzzle::CanRight() const
+{
+	return (this->x0 < Puzzle::PuzzleScale - 1);
+}
+
+void										Puzzle::ExecUp()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0 - 1][this->x0];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0 - 1][this->x0] = 0;
+	this->y0--;
+	this->ManhattanDistance();
+}
+
+void										Puzzle::ExecDown()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0 + 1][this->x0];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0 + 1][this->x0] = 0;
+	this->y0++;
+	this->ManhattanDistance();
+}
+
+void										Puzzle::ExecLeft()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0][this->x0 - 1];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0][this->x0 - 1] = 0;
+	this->x0--;
+	this->ManhattanDistance();
+}
+
+void										Puzzle::ExecRight()
+{
+	short unsigned int tmp = this->PuzzleMap[this->y0][this->x0 + 1];
+	this->PuzzleMap[this->y0][this->x0] = tmp;
+	this->PuzzleMap[this->y0][this->x0 + 1] = 0;
+	this->x0++;
+	this->ManhattanDistance();
+}
+
+short unsigned int							Puzzle::GetDistance() const
+{
+	return (this->Distance);
+}
+
+void										Puzzle::AffPuzzle() const
+{
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+	{
+		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
+			std::cout << this->PuzzleMap[i][j] << "\t";
+		std::cout << std::endl;
+	}
+}
+
+void										Puzzle::AffSolution() const
+{
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+	{
+		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
+			std::cout << Puzzle::SolutionMap[i][j] << "\t";
+		std::cout << std::endl;
+	}
+}
+
+unsigned int								Puzzle::CountScales(const std::string & Contents) const
+{
+	unsigned int							max = Contents.size();
+	unsigned int							ret = 0;
+	char									prev = '0';
+
+	for (unsigned int i = 0; i < max; ++i)
+	{
+		if (prev != ' ' && Contents.at(i) == ' ')
+			ret++;
+		prev = Contents.at(i);
+	}
+	return (ret + 1);
 }
 
 void										Puzzle::SearchPos(int& x, int& y, short unsigned int & Node)
@@ -143,6 +234,23 @@ void										Puzzle::SearchPos(int& x, int& y, short unsigned int & Node)
 	}
 }
 
+void										Puzzle::SetTime(std::string & tmp)
+{
+	if (tmp == "Begin")
+		time(&(this->Begin));
+	else
+		time(&(this->End));
+}
+
+void										Puzzle::TimeCounter(void)
+{
+  double									TimeElasped;
+  
+  TimeElasped = difftime(this->End, this->Begin);
+  std::cout << std::endl;
+  std::cout << "TIME ELAPSED			: \t\t [" << TimeElasped << "] Seconds." << std::endl;
+}
+
 void										Puzzle::ManhattanDistance()
 {
 	short unsigned int						D = 0;
@@ -155,114 +263,54 @@ void										Puzzle::ManhattanDistance()
 		{
 			CurrentNode = this->PuzzleMap[i][j];
 			this->SearchPos(x, y, CurrentNode);
-			D += abs(j - x) + abs(i - y);
+			D += abs(static_cast<int>(j - x)) + abs(static_cast<int>(i - y));
 		}
 	}
-	//std::cout << "Manhattan Distance = " << D << std::endl;
 	this->Distance = D;
 }
 
-void										Puzzle::AffPuzzle() const
+void										Puzzle::ChebyshevDistance()
 {
+	short unsigned int						D = 0;
+	short unsigned int						CurrentNode;
+	int										x, y;
+	double									dx, dy;
+
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 	{
 		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
 		{
-			std::cout << this->PuzzleMap[i][j] << "\t";
+			CurrentNode = this->PuzzleMap[i][j];
+			this->SearchPos(x, y, CurrentNode);
+			dx = pow(static_cast<double>(i - x), 2);
+ 			dy = pow(static_cast<double>(j - y), 2);
+			D += static_cast<short unsigned int>(sqrt(dx + dy));
 		}
-		std::cout << std::endl;
 	}
+	this->Distance = D;
 }
 
-bool										Puzzle::CanUp()
+int											Max(int d1, int d2)
 {
-	return (this->y0 > 0);
+	return ((d1 > d2) ? d1 : d2);
 }
 
-bool										Puzzle::CanDown()
+void										Puzzle::EuclideanDistance()
 {
-	return (this->y0 < Puzzle::PuzzleScale - 1);
-}
+	short unsigned int						D = 0;
+	short unsigned int						CurrentNode;
+	int										x, y, dx, dy;
 
-bool										Puzzle::CanLeft()
-{
-	return (this->x0 > 0);
-}
-
-bool										Puzzle::CanRight()
-{
-	return (this->x0 < Puzzle::PuzzleScale - 1);
-}
-
-void										Puzzle::ExecUp()
-{
-	short unsigned int tmp = this->PuzzleMap[this->y0 - 1][this->x0];
-	this->PuzzleMap[this->y0][this->x0] = tmp;
-	this->PuzzleMap[this->y0 - 1][this->x0] = 0;
-	this->y0--;
-	//std::cout << "Up : ";
-	this->ManhattanDistance();
-
-}
-
-void										Puzzle::ExecDown()
-{
-	short unsigned int tmp = this->PuzzleMap[this->y0 + 1][this->x0];
-	this->PuzzleMap[this->y0][this->x0] = tmp;
-	this->PuzzleMap[this->y0 + 1][this->x0] = 0;
-	this->y0++;
-	//std::cout << "Down : ";
-	this->ManhattanDistance();
-}
-
-void										Puzzle::ExecLeft()
-{
-	short unsigned int tmp = this->PuzzleMap[this->y0][this->x0 - 1];
-	this->PuzzleMap[this->y0][this->x0] = tmp;
-	this->PuzzleMap[this->y0][this->x0 - 1] = 0;
-	this->x0--;
-	//std::cout << "Left : ";
-	this->ManhattanDistance();
-}
-
-void										Puzzle::ExecRight()
-{
-	short unsigned int tmp = this->PuzzleMap[this->y0][this->x0 + 1];
-	this->PuzzleMap[this->y0][this->x0] = tmp;
-	this->PuzzleMap[this->y0][this->x0 + 1] = 0;
-	this->x0++;
-	//std::cout << "Right : ";
-	this->ManhattanDistance();
-}
-
-short unsigned int							Puzzle::GetManhattanDistance()
-{
-	return (this->Distance);
-}
-
-unsigned int								Puzzle::CountScales(const std::string & Contents) const
-{
-	unsigned int							max = Contents.size();
-	unsigned int							ret = 0;
-	char									prev = '0';
-
-	for (unsigned int i = 0; i < max; ++i)
-	{
-		if (prev != ' ' && Contents.at(i) == ' ')
-			ret++;
-		prev = Contents.at(i);
-	}
-	return (ret + 1);
-}
-
-void										Puzzle::AffSolution() const
-{
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 	{
 		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
 		{
-			std::cout << Puzzle::SolutionMap[i][j] << "\t";
+			CurrentNode = this->PuzzleMap[i][j];
+			this->SearchPos(x, y, CurrentNode);
+			dx = abs(static_cast<int>(i - x));
+			dy = abs(static_cast<int>(j - y));
+			D += static_cast<short unsigned int>(Max(dx, dy));
 		}
-		std::cout << std::endl;
 	}
+	this->Distance = D;
 }
