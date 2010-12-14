@@ -10,6 +10,13 @@ Puzzle::Puzzle()
 {
 }
 
+Puzzle::~Puzzle(void)
+{
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+		delete this->PuzzleMap[i];
+	delete this->PuzzleMap;
+}
+
 Puzzle::Puzzle(const Puzzle & p)
 {
 	this->PuzzleMap = new unsigned short int*[Puzzle::PuzzleScale];
@@ -59,10 +66,6 @@ bool								Puzzle::operator==(const Puzzle & ass)
 		++i;
 	}
 	return (ret);
-}
-
-Puzzle::~Puzzle()
-{
 }
 
 unsigned int					Puzzle::GetScale(void)
