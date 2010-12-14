@@ -15,7 +15,7 @@ SolutionGenerator::SolutionGenerator()
 
 SolutionGenerator::~SolutionGenerator() {}
 
-void				SolutionGenerator::FillTop()
+void								SolutionGenerator::FillTop()
 {
 	if (this->Num == this->Limit)
 		this->Num = 0;
@@ -30,7 +30,7 @@ void				SolutionGenerator::FillTop()
 	this->Y_cur++;
 }
 
-void				SolutionGenerator::FillRight()
+void								SolutionGenerator::FillRight()
 {
 	if (this->Num == this->Limit)
 		this->Num = 0;
@@ -45,7 +45,7 @@ void				SolutionGenerator::FillRight()
 	this->X_cur--;
 }
 
-void				SolutionGenerator::FillBottom()
+void								SolutionGenerator::FillBottom()
 {
 	if (this->Num == this->Limit)
 		this->Num = 0;
@@ -60,7 +60,7 @@ void				SolutionGenerator::FillBottom()
 	this->Y_cur--;
 }
 
-void				SolutionGenerator::FillLeft()
+void								SolutionGenerator::FillLeft()
 {
 	if (this->Num == this->Limit)
 		this->Num = 0;

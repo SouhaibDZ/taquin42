@@ -1,12 +1,8 @@
 #include "FileLoader.h"
 
-FileLoader::FileLoader()
-{
-}
+FileLoader::FileLoader(){}
 
-FileLoader::~FileLoader()
-{
-}
+FileLoader::~FileLoader(){}
 
 void				FileLoader::LoadFile(const std::string & Filename, std::string & out)
 {
