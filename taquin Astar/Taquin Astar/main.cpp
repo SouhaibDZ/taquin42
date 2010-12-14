@@ -9,6 +9,7 @@ void	AddInList(std::list<Puzzle>&, std::list<Puzzle>&, Puzzle&);
 
 int main()
 {
+	{
 	FileLoader				F;
 	std::string				S;
 	Puzzle					P;
@@ -42,6 +43,7 @@ int main()
 				(*FirstPuzzle).ManhattanDistance();
 				(*FirstPuzzle).AffPuzzle();
 				system("pause");
+				i = 140000;
 			}
 			if ((*FirstPuzzle).CanUp())
 			{
@@ -85,6 +87,8 @@ int main()
 			std::cout << std::endl;*/
 		}
 	}
+	}
+	system("pause");
 	return (0);
 }
 
