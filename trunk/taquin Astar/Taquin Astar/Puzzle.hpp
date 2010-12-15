@@ -50,6 +50,7 @@ public:
 
 public:
 	const Puzzle*							Parent;
+	short unsigned int **					TabParent;
 	short unsigned int **					PuzzleMap;
 	short unsigned int						Distance;
 	short unsigned int						x0;
