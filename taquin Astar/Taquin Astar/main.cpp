@@ -42,11 +42,6 @@ int main()
 			if (!OpenedList.empty())
 			{
 				FirstPuzzle = OpenedList.begin();
-				ClosedList.push_back(*FirstPuzzle);
-				OpenedList.erase(FirstPuzzle);
-
-				FirstPuzzle = ClosedList.end();
-				--FirstPuzzle;
 
 				Resume(FirstPuzzle, OpenedList, ClosedList, i);
 				ProcessUp(FirstPuzzle, OpenedList, ClosedList);
@@ -54,6 +49,8 @@ int main()
 				ProcessRight(FirstPuzzle, OpenedList, ClosedList);
 				ProcessLeft(FirstPuzzle, OpenedList, ClosedList);
 				
+				ClosedList.push_back(*FirstPuzzle);
+				OpenedList.erase(FirstPuzzle);
 			}
 		}
 		Tmp = "End";
@@ -61,9 +58,6 @@ int main()
 		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();
 		system("pause");
-		/*FirstPuzzle = ClosedList.end();
-		--FirstPuzzle;
-		(*FirstPuzzle).Show();*/
 	}
 	system("pause");
 	return (0);

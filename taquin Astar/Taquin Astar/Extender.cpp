@@ -3,7 +3,7 @@
 void	Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 				  std::list<Puzzle> & ClosedList, int & i)
 {
-	if ((*It).GetDistance() == 0)
+	if ((*It).GetDistance() < 18)
 	{
 		std::cout << "RESULT FOUND AFTER ABOUT	: \t\t[" << i + 1 << "] Iterations" << std::endl; 
 		std::cout << "OPENED LIST NUMBER OF CONTENTS	: \t\t[" << OpenedList.size() << "]"<< std::endl;
@@ -22,7 +22,6 @@ void	ProcessUp(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 	{
 		Puzzle	P(*It);
 		P.ExecUp();
-		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}
@@ -35,7 +34,6 @@ void	ProcessRight(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLi
 	{
 		Puzzle	P(*It);
 		P.ExecRight();
-		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}
@@ -49,7 +47,6 @@ void	ProcessDown(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 	{
 		Puzzle	P(*It);
 		P.ExecDown();
-		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}
@@ -62,7 +59,6 @@ void	ProcessLeft(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 	{
 		Puzzle	P(*It);
 		P.ExecLeft();
-		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}

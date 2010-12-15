@@ -48,8 +48,8 @@ public:
 	void									ChebyshevDistance();
 	void									EuclideanDistance();
 
-private:
-	Puzzle*									Parent;
+public:
+	const Puzzle*							Parent;
 	short unsigned int **					PuzzleMap;
 	short unsigned int						Distance;
 	short unsigned int						x0;
