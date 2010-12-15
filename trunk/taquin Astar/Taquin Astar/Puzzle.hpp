@@ -36,6 +36,8 @@ public:
 	void									AffSolution() const;
 	void									SetTime(std::string & tmp);
 	void									TimeCounter(void);
+	void									Show() const;
+	void									SetParent(Puzzle& p);
 
 private:
 	unsigned int							CountScales(const std::string &) const;
@@ -47,14 +49,13 @@ public:
 	void									EuclideanDistance();
 
 private:
+	Puzzle*									Parent;
 	short unsigned int **					PuzzleMap;
 	short unsigned int						Distance;
 	short unsigned int						x0;
 	short unsigned int						y0;
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
-	//time_t									Begin;
-	//time_t									End;
 	short unsigned int						NbMoves;
 };
 

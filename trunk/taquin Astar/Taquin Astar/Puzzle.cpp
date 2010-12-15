@@ -7,7 +7,7 @@
 unsigned int			Puzzle::PuzzleScale = 0;
 short unsigned int **	Puzzle::SolutionMap = NULL;
 
-Puzzle::Puzzle() 
+Puzzle::Puzzle() : Parent(NULL)
 {
 	this->NbMoves = 0;
 }
@@ -19,7 +19,7 @@ Puzzle::~Puzzle(void)
 	delete this->PuzzleMap;
 }
 
-Puzzle::Puzzle(const Puzzle & p)
+Puzzle::Puzzle(const Puzzle & p) : Parent(NULL)
 {
 	this->PuzzleMap = new unsigned short int*[Puzzle::PuzzleScale];
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
@@ -236,23 +236,6 @@ void										Puzzle::SearchPos(int& x, int& y, short unsigned int & Node)
 		++i;
 	}
 }
-/*
-void										Puzzle::SetTime(std::string & tmp)
-{
-	if (tmp == "Begin")
-		time(&(this->Begin));
-	else
-		time(&(this->End));
-}
-
-void										Puzzle::TimeCounter(void)
-{
-  double									TimeElasped;
-  
-  TimeElasped = difftime(this->End, this->Begin);
-  std::cout << std::endl;
-  std::cout << "TIME ELAPSED			: \t\t [" << TimeElasped << "] Seconds." << std::endl;
-}*/
 
 void										Puzzle::ManhattanDistance()
 {
@@ -316,4 +299,19 @@ void										Puzzle::EuclideanDistance()
 		}
 	}
 	this->Distance = D;
+}
+
+void										Puzzle::Show() const
+{
+	std::cout << this->Parent << std::endl;
+	if (this->Parent != NULL)
+	{
+		this->AffPuzzle();
+		this->Parent->Show();
+	}
+}
+
+void										Puzzle::SetParent(Puzzle& p)
+{
+	this->Parent = &p;
 }
