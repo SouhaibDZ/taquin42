@@ -21,12 +21,15 @@ Puzzle::~Puzzle(void)
 Puzzle::Puzzle(const Puzzle & p) : Parent(&p)
 {
 	this->PuzzleMap = new unsigned short int*[Puzzle::PuzzleScale];
+	this->TabParent = new unsigned short int*[Puzzle::PuzzleScale];
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 	{
 		this->PuzzleMap[i] = new unsigned short int[Puzzle::PuzzleScale];
+		this->TabParent[i] = new unsigned short int[Puzzle::PuzzleScale];
 		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
 		{
 			this->PuzzleMap[i][j] = p.PuzzleMap[i][j];
+			this->TabParent[i][j] = p.PuzzleMap[i][j];
 			if (this->PuzzleMap[i][j] == 0)
 			{
 				x0 = j;
