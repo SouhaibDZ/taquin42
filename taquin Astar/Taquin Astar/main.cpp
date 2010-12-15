@@ -36,29 +36,34 @@ int main()
 		std::istringstream		In(S);
 		Tab = P.CreatePuzzle(S);
 		std::list<Puzzle>::iterator FirstPuzzle;
-		//P.SetTime(Tmp);
 		OpenedList.push_back(P);
 		for (int i = 0; i < 120000; ++i)
 		{
 			if (!OpenedList.empty())
 			{
 				FirstPuzzle = OpenedList.begin();
+				ClosedList.push_back(*FirstPuzzle);
+				OpenedList.erase(FirstPuzzle);
+
+				FirstPuzzle = ClosedList.end();
+				--FirstPuzzle;
+
 				Resume(FirstPuzzle, OpenedList, ClosedList, i);
 				ProcessUp(FirstPuzzle, OpenedList, ClosedList);
 				ProcessDown(FirstPuzzle, OpenedList, ClosedList);
 				ProcessRight(FirstPuzzle, OpenedList, ClosedList);
 				ProcessLeft(FirstPuzzle, OpenedList, ClosedList);
-				ClosedList.push_back(*FirstPuzzle);
-				OpenedList.erase(FirstPuzzle);
+				
 			}
 		}
 		Tmp = "End";
 		timeEnd = clock();
-		//P.SetTime(Tmp);
-		//P.TimeCounter();
 		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();
 		system("pause");
+		/*FirstPuzzle = ClosedList.end();
+		--FirstPuzzle;
+		(*FirstPuzzle).Show();*/
 	}
 	system("pause");
 	return (0);

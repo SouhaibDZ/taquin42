@@ -10,7 +10,7 @@ void	Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 		std::cout << "CLOSED LIST NUMBER OF CONTENTS	: \t\t[" << ClosedList.size() << "]"<< std::endl;
 		std::cout << std::endl;
 		(*It).ManhattanDistance();
-		(*It).AffPuzzle();
+		(*It).Show();
 		i = 140000;
 	}
 }
@@ -22,6 +22,7 @@ void	ProcessUp(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 	{
 		Puzzle	P(*It);
 		P.ExecUp();
+		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}
@@ -34,6 +35,7 @@ void	ProcessRight(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLi
 	{
 		Puzzle	P(*It);
 		P.ExecRight();
+		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}
@@ -47,6 +49,7 @@ void	ProcessDown(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 	{
 		Puzzle	P(*It);
 		P.ExecDown();
+		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}
@@ -59,6 +62,7 @@ void	ProcessLeft(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 	{
 		Puzzle	P(*It);
 		P.ExecLeft();
+		P.SetParent(*It);
 		AddInList(OpenedList, ClosedList, P);
 		NbMoves++;
 	}
