@@ -9,7 +9,6 @@ short unsigned int **	Puzzle::SolutionMap = NULL;
 
 Puzzle::Puzzle() : Parent(NULL)
 {
-	this->NbMoves = 0;
 }
 
 Puzzle::~Puzzle(void)
@@ -19,7 +18,7 @@ Puzzle::~Puzzle(void)
 	delete this->PuzzleMap;
 }
 
-Puzzle::Puzzle(const Puzzle & p) : Parent(NULL)
+Puzzle::Puzzle(const Puzzle & p) : Parent(&p)
 {
 	this->PuzzleMap = new unsigned short int*[Puzzle::PuzzleScale];
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
@@ -309,9 +308,4 @@ void										Puzzle::Show() const
 		this->AffPuzzle();
 		this->Parent->Show();
 	}
-}
-
-void										Puzzle::SetParent(Puzzle& p)
-{
-	this->Parent = &p;
 }
