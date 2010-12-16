@@ -35,12 +35,14 @@ public:
 	short unsigned int						GetDistance() const;
 	void									AffPuzzle() const;
 	void									AffSolution() const;
+	void									DeletePuzzle();
 	void									SetParent(Puzzle& p);
 	void									SetAlgo(const char c);
 	void									AddTab(Puzzle&);
 	void									ClearListTab();
 	void									ShowMoves() const;
 	void									EraseMap();
+
 
 private:
 	unsigned int							CountScales(const std::string &) const;

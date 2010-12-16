@@ -201,6 +201,12 @@ void										Puzzle::AffSolution() const
 		std::cout << std::endl;
 	}
 }
+void										Puzzle::DeletePuzzle()
+{
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+		delete this->PuzzleMap[i];
+	delete this->PuzzleMap;
+}
 
 unsigned int								Puzzle::CountScales(const std::string & Contents) const
 {
