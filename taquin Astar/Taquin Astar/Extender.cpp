@@ -1,18 +1,16 @@
 #include "Extender.h"
 
-void	Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
-				  std::list<Puzzle> & ClosedList, int & i)
+int		Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
+				  std::list<Puzzle> & ClosedList)
 {
-	if ((*It).GetDistance() < 18)
+	if ((*It).GetDistance() == 0)
 	{
-		std::cout << "RESULT FOUND AFTER ABOUT	: \t\t[" << i + 1 << "] Iterations" << std::endl; 
 		std::cout << "OPENED LIST NUMBER OF CONTENTS	: \t\t[" << OpenedList.size() << "]"<< std::endl;
 		std::cout << "CLOSED LIST NUMBER OF CONTENTS	: \t\t[" << ClosedList.size() << "]"<< std::endl;
 		std::cout << std::endl;
-		(*It).ManhattanDistance();
-		(*It).Show();
-		i = 140000;
+		//(*It).Show();
 	}
+	return ((*It).GetDistance());
 }
 
 void	ProcessUp(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
@@ -99,4 +97,14 @@ void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puz
 void										ShowNbMoves(void)
 {
 	std::cout << "NUMBER OF MOVES			: \t\t [" << NbMoves << "] Moves." << std::endl;
+}
+
+void							DisplayLogo()
+{
+	std::cout << "___________                   .__           _____ ________  " << std::endl;
+	std::cout << "\\__    ___/____    ________ __|__| ____    /  |  |\\_____  \\ " << std::endl;
+	std::cout << "  |    |  \\__  \\  / ____/  |  \\  |/    \\  /   |  |_/  ____/ " << std::endl;
+	std::cout << "  |    |   / __ \\< <_|  |  |  /  |   |  \\/    ^   /       \\ " << std::endl;
+	std::cout << "  |____|  (____  /\\__   |____/|__|___|  /\\____   |\\_______ \\" << std::endl;
+	std::cout << "               \\/    |__|             \\/      |__|        \\/" << std::endl;
 }

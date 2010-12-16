@@ -9,6 +9,7 @@ short unsigned int **	Puzzle::SolutionMap = NULL;
 
 Puzzle::Puzzle() : Parent(NULL)
 {
+
 }
 
 Puzzle::~Puzzle(void)
@@ -20,6 +21,7 @@ Puzzle::~Puzzle(void)
 
 Puzzle::Puzzle(const Puzzle & p) : Parent(&p)
 {
+	this->meth = p.meth;
 	this->PuzzleMap = new unsigned short int*[Puzzle::PuzzleScale];
 	this->TabParent = new unsigned short int*[Puzzle::PuzzleScale];
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
@@ -103,7 +105,7 @@ short unsigned int**					Puzzle::CreatePuzzle(const std::string & Contents)
 	}
 	std::cout << std::endl;
 	Puzzle::SolutionMap = SG.GenerateSolution(Puzzle::PuzzleScale);
-	this->ManhattanDistance();
+	(this->*meth)();
 	return (this->PuzzleMap);
 }
 
@@ -145,7 +147,8 @@ void										Puzzle::ExecUp()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0 - 1][this->x0] = 0;
 	this->y0--;
-	this->ManhattanDistance();
+	(this->*meth)();
+
 }
 
 void										Puzzle::ExecDown()
@@ -154,7 +157,7 @@ void										Puzzle::ExecDown()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0 + 1][this->x0] = 0;
 	this->y0++;
-	this->ManhattanDistance();
+	(this->*meth)();
 }
 
 void										Puzzle::ExecLeft()
@@ -163,7 +166,7 @@ void										Puzzle::ExecLeft()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0][this->x0 - 1] = 0;
 	this->x0--;
-	this->ManhattanDistance();
+	(this->*meth)();
 }
 
 void										Puzzle::ExecRight()
@@ -172,7 +175,7 @@ void										Puzzle::ExecRight()
 	this->PuzzleMap[this->y0][this->x0] = tmp;
 	this->PuzzleMap[this->y0][this->x0 + 1] = 0;
 	this->x0++;
-	this->ManhattanDistance();
+	(this->*meth)();
 }
 
 short unsigned int							Puzzle::GetDistance() const
@@ -311,4 +314,14 @@ void										Puzzle::Show() const
 		this->AffPuzzle();
 		this->Parent->Show();
 	}
+}
+
+void										Puzzle::SetAlgo(const char Name)
+{
+	if (Name == 'C')
+		this->meth = &Puzzle::ChebyshevDistance;
+	else if (Name == 'E')
+		this->meth = &Puzzle::EuclideanDistance;
+	else
+		this->meth = &Puzzle::ManhattanDistance;
 }
