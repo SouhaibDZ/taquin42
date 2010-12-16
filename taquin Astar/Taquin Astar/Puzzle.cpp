@@ -20,7 +20,7 @@ Puzzle::~Puzzle(void)
 	delete this->PuzzleMap;*/
 }
 
-Puzzle::Puzzle(const Puzzle & p) : Parent(&p)
+Puzzle::Puzzle(const Puzzle & p)
 {
 	this->meth = p.meth;
 	this->ListTab = p.ListTab;
