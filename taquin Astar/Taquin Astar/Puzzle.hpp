@@ -34,8 +34,6 @@ public:
 	short unsigned int						GetDistance() const;
 	void									AffPuzzle() const;
 	void									AffSolution() const;
-	void									SetTime(std::string & tmp);
-	void									TimeCounter(void);
 	void									Show() const;
 	void									SetParent(Puzzle& p);
 
@@ -57,7 +55,6 @@ public:
 	short unsigned int						y0;
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
-	short unsigned int						NbMoves;
 };
 
 #endif //__PUZZLE_HPP__

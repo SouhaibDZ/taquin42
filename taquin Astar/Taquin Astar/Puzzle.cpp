@@ -34,7 +34,7 @@ Puzzle::Puzzle(const Puzzle & p) : Parent(&p)
 			{
 				x0 = j;
 				y0 = i;
-			}
+			} 
 		}
 	}
 	this->Distance = p.Distance;
