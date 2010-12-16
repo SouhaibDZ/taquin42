@@ -23,7 +23,7 @@ int								main(int argc, char **argv)
 
 		timeDeb = clock();
 		DisplayLogo();
-		F.LoadFile("TaquinA4.txt", S);
+		F.LoadFile("TaquinA5_2.txt", S);
 		std::istringstream		In(S);
 		P.SetAlgo(Name);
 		Tab = P.CreatePuzzle(S);
@@ -42,6 +42,8 @@ int								main(int argc, char **argv)
 			ClosedList.push_back(*FirstPuzzle);
 			OpenedList.erase(FirstPuzzle);
 		}
+		if (fg != 0)
+			std::cout << "NO SOLUTION FOR THIS TAQUIN!!!" << std::endl;
 		timeEnd = clock();
 		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();

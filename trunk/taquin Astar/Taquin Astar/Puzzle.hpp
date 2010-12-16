@@ -52,15 +52,15 @@ public:
 	void									EuclideanDistance();
 
 private:
-	const Puzzle*							Parent;
 	short unsigned int **					PuzzleMap;
 	short unsigned int						Distance;
 	short unsigned int						x0;
 	short unsigned int						y0;
+	std::list<short unsigned int **>		ListTab;
+	void									(Puzzle::*meth)();
+
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
-	void									(Puzzle::*meth)();
-	std::list<short unsigned int **>		ListTab;
 };
 
 #endif //__PUZZLE_HPP__
