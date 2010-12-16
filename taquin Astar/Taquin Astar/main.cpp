@@ -9,7 +9,7 @@
 int								main(int argc, char **argv)
 {
 	char Name = 'E';
-	if (argc == 2)
+	if (argc == 1)
 		//Name = argv[1][0];
 	{
 		FileLoader				F;
@@ -23,7 +23,7 @@ int								main(int argc, char **argv)
 
 		timeDeb = clock();
 		DisplayLogo();
-		F.LoadFile("TaquinA5_2.txt", S);
+		F.LoadFile("TaquinA4.txt", S);
 		std::istringstream		In(S);
 		P.SetAlgo(Name);
 		Tab = P.CreatePuzzle(S);
@@ -45,6 +45,10 @@ int								main(int argc, char **argv)
 		timeEnd = clock();
 		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();
+		system("pause");
+		std::cout << "Cleaning..." << std::endl;
+		Clean(OpenedList, ClosedList);
+		std::cout << "Clean done" << std::endl;
 		system("pause");
 	}
 	system("pause");

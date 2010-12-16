@@ -9,7 +9,6 @@ int		Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 		std::cout << "CLOSED LIST NUMBER OF CONTENTS	: \t\t[" << ClosedList.size() << "]"<< std::endl;
 		std::cout << std::endl;
 		(*It).ShowMoves();
-		std::cout << "SIZE" << (*It).ListTab.size() << std::endl;
 	}
 	return ((*It).GetDistance());
 }
@@ -85,7 +84,11 @@ bool	IsInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzz
 void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle& P, Puzzle& Parent)
 {
 	if (IsInList(OpenedList, ClosedList, P) == true)
+	{
+		P.EraseMap();
+		P.ClearListTab();
 		return ;
+	}
 	short unsigned int d = P.GetDistance();
 	std::list<Puzzle>::iterator it = OpenedList.begin();
 	std::list<Puzzle>::iterator it_end = OpenedList.end();
@@ -109,4 +112,24 @@ void							DisplayLogo()
 	std::cout << "  |    |   / __ \\< <_|  |  |  /  |   |  \\/    ^   /       \\ " << std::endl;
 	std::cout << "  |____|  (____  /\\__   |____/|__|___|  /\\____   |\\_______ \\" << std::endl;
 	std::cout << "               \\/    |__|             \\/      |__|        \\/" << std::endl;
+}
+
+
+void	Clean(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList)
+{
+	std::list<Puzzle>::iterator it;
+	std::list<Puzzle>::iterator it_end = OpenedList.end();
+
+	for (it = OpenedList.begin(); it != it_end; ++it)
+	{
+		(*it).EraseMap();
+		(*it).ClearListTab();
+	}
+
+	it_end = ClosedList.end();
+	for (it = ClosedList.begin(); it != it_end; ++it)
+	{
+		(*it).EraseMap();
+		(*it).ClearListTab();
+	}
 }

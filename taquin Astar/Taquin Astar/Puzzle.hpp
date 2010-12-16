@@ -40,6 +40,7 @@ public:
 	void									AddTab(Puzzle&);
 	void									ClearListTab();
 	void									ShowMoves() const;
+	void									EraseMap();
 
 private:
 	unsigned int							CountScales(const std::string &) const;
@@ -50,7 +51,7 @@ public:
 	void									ChebyshevDistance();
 	void									EuclideanDistance();
 
-public:
+private:
 	const Puzzle*							Parent;
 	short unsigned int **					PuzzleMap;
 	short unsigned int						Distance;

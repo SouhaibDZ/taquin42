@@ -23,5 +23,6 @@ void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puz
 void	ShowNbMoves(void);
 void	ChooseAlgo(const char Name,  std::list<Puzzle>::iterator & It);
 void	DisplayLogo();
+void	Clean(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList);
 
 #endif //_EXTENDER_H_
