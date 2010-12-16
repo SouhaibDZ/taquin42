@@ -25,7 +25,6 @@ int main()
 		Puzzle					P;
 		SolutionGenerator		SG;
 		short unsigned int**	Tab;
-		std::string				Tmp("Begin");
 		std::list<Puzzle>		OpenedList;
 		std::list<Puzzle>		ClosedList;
 		int x = 0, y = 0;
@@ -53,7 +52,6 @@ int main()
 				OpenedList.erase(FirstPuzzle);
 			}
 		}
-		Tmp = "End";
 		timeEnd = clock();
 		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();
