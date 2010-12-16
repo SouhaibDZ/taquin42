@@ -36,6 +36,7 @@ public:
 	void									AffSolution() const;
 	void									Show() const;
 	void									SetParent(Puzzle& p);
+	void									SetAlgo(const char c);
 
 private:
 	unsigned int							CountScales(const std::string &) const;
@@ -55,6 +56,7 @@ public:
 	short unsigned int						y0;
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
+	void									(Puzzle::*meth)();
 };
 
 #endif //__PUZZLE_HPP__

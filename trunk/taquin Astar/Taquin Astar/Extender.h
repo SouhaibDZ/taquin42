@@ -8,8 +8,8 @@
 
 static int NbMoves;
 
-void	Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
-				  std::list<Puzzle> & ClosedList, int &);
+int		Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
+				  std::list<Puzzle> & ClosedList);
 void	ProcessUp(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 				  std::list<Puzzle> & ClosedList);
 void	ProcessRight(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
@@ -21,5 +21,7 @@ void	ProcessLeft(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 bool	IsInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle & P);
 void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle& P);
 void	ShowNbMoves(void);
+void	ChooseAlgo(const char Name,  std::list<Puzzle>::iterator & It);
+void	DisplayLogo();
 
 #endif //_EXTENDER_H_
