@@ -8,22 +8,24 @@
 
 int								main(int argc, char **argv)
 {
+	char Name = 'X';
+	if (argc == 2)
+		Name = argv[1][0];
 	{
-		clock_t timeDeb, timeEnd;
 		FileLoader				F;
 		std::string				S;
 		Puzzle					P;
 		SolutionGenerator		SG;
 		short unsigned int**	Tab;
-		std::list<Puzzle>		OpenedList;
-		std::list<Puzzle>		ClosedList;
+		clock_t					timeDeb, timeEnd;
+		std::list<Puzzle>		OpenedList, ClosedList;
 		int x = 0, y = 0, fg = -42;
 
 		timeDeb = clock();
 		DisplayLogo();
-		F.LoadFile("TaquinA3_2.txt", S);
+		F.LoadFile("TaquinA5_2.txt", S);
 		std::istringstream		In(S);
-		P.SetAlgo('E');
+		P.SetAlgo(Name);
 		Tab = P.CreatePuzzle(S);
 		std::list<Puzzle>::iterator FirstPuzzle;
 		OpenedList.push_back(P);
