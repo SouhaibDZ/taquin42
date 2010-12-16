@@ -343,3 +343,12 @@ void										Puzzle::SetAlgo(const char Name)
 	else
 		this->meth = &Puzzle::ManhattanDistance;
 }
+
+void									Puzzle::EraseMap()
+{
+	if (this->PuzzleMap == NULL)
+		return ;
+	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
+		delete[] this->PuzzleMap[i];
+	delete this->PuzzleMap;
+}
