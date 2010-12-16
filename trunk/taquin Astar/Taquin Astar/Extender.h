@@ -19,7 +19,7 @@ void	ProcessDown(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 void	ProcessLeft(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 				  std::list<Puzzle> & ClosedList);
 bool	IsInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle & P);
-void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle& P);
+void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle& P, Puzzle& Parent);
 void	ShowNbMoves(void);
 void	ChooseAlgo(const char Name,  std::list<Puzzle>::iterator & It);
 void	DisplayLogo();

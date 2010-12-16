@@ -6,6 +6,7 @@
 #include <vector>
 #include <time.h>
 #include <stdio.h>
+#include <list>
 #include "SolutionGenerator.hpp"
 
 class										Puzzle
@@ -34,9 +35,11 @@ public:
 	short unsigned int						GetDistance() const;
 	void									AffPuzzle() const;
 	void									AffSolution() const;
-	void									Show() const;
 	void									SetParent(Puzzle& p);
 	void									SetAlgo(const char c);
+	void									AddTab(Puzzle&);
+	void									ClearListTab();
+	void									ShowMoves() const;
 
 private:
 	unsigned int							CountScales(const std::string &) const;
@@ -49,7 +52,6 @@ public:
 
 public:
 	const Puzzle*							Parent;
-	short unsigned int **					TabParent;
 	short unsigned int **					PuzzleMap;
 	short unsigned int						Distance;
 	short unsigned int						x0;
@@ -57,6 +59,7 @@ public:
 	static unsigned int						PuzzleScale;
 	static short unsigned int **			SolutionMap;
 	void									(Puzzle::*meth)();
+	std::list<short unsigned int **>		ListTab;
 };
 
 #endif //__PUZZLE_HPP__
