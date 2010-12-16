@@ -8,7 +8,8 @@ int		Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 		std::cout << "OPENED LIST NUMBER OF CONTENTS	: \t\t[" << OpenedList.size() << "]"<< std::endl;
 		std::cout << "CLOSED LIST NUMBER OF CONTENTS	: \t\t[" << ClosedList.size() << "]"<< std::endl;
 		std::cout << std::endl;
-		//(*It).Show();
+		(*It).ShowMoves();
+		std::cout << "SIZE" << (*It).ListTab.size() << std::endl;
 	}
 	return ((*It).GetDistance());
 }
@@ -20,7 +21,7 @@ void	ProcessUp(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 	{
 		Puzzle	P(*It);
 		P.ExecUp();
-		AddInList(OpenedList, ClosedList, P);
+		AddInList(OpenedList, ClosedList, P, *It);
 		NbMoves++;
 	}
 }
@@ -32,7 +33,7 @@ void	ProcessRight(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLi
 	{
 		Puzzle	P(*It);
 		P.ExecRight();
-		AddInList(OpenedList, ClosedList, P);
+		AddInList(OpenedList, ClosedList, P, *It);
 		NbMoves++;
 	}
 }
@@ -45,7 +46,7 @@ void	ProcessDown(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 	{
 		Puzzle	P(*It);
 		P.ExecDown();
-		AddInList(OpenedList, ClosedList, P);
+		AddInList(OpenedList, ClosedList, P, *It);
 		NbMoves++;
 	}
 }
@@ -57,7 +58,7 @@ void	ProcessLeft(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedLis
 	{
 		Puzzle	P(*It);
 		P.ExecLeft();
-		AddInList(OpenedList, ClosedList, P);
+		AddInList(OpenedList, ClosedList, P, *It);
 		NbMoves++;
 	}
 }
@@ -81,7 +82,7 @@ bool	IsInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzz
 	return (false);
 }
 
-void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle& P)
+void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puzzle& P, Puzzle& Parent)
 {
 	if (IsInList(OpenedList, ClosedList, P) == true)
 		return ;
@@ -91,6 +92,7 @@ void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puz
 
 	while (it != it_end && (*it).GetDistance() < d)
 		++it;
+	P.AddTab(Parent);
 	OpenedList.insert(it, P);
 }
 

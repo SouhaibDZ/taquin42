@@ -7,31 +7,30 @@
 unsigned int			Puzzle::PuzzleScale = 0;
 short unsigned int **	Puzzle::SolutionMap = NULL;
 
-Puzzle::Puzzle() : Parent(NULL)
+Puzzle::Puzzle()
 {
 
 }
 
 Puzzle::~Puzzle(void)
 {
+	/*
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 		delete this->PuzzleMap[i];
-	delete this->PuzzleMap;
+	delete this->PuzzleMap;*/
 }
 
 Puzzle::Puzzle(const Puzzle & p) : Parent(&p)
 {
 	this->meth = p.meth;
+	this->ListTab = p.ListTab;
 	this->PuzzleMap = new unsigned short int*[Puzzle::PuzzleScale];
-	this->TabParent = new unsigned short int*[Puzzle::PuzzleScale];
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 	{
 		this->PuzzleMap[i] = new unsigned short int[Puzzle::PuzzleScale];
-		this->TabParent[i] = new unsigned short int[Puzzle::PuzzleScale];
 		for (unsigned int j = 0; j < Puzzle::PuzzleScale; ++j)
 		{
 			this->PuzzleMap[i][j] = p.PuzzleMap[i][j];
-			this->TabParent[i][j] = p.PuzzleMap[i][j];
 			if (this->PuzzleMap[i][j] == 0)
 			{
 				x0 = j;
@@ -306,14 +305,33 @@ void										Puzzle::EuclideanDistance()
 	this->Distance = D;
 }
 
-void										Puzzle::Show() const
+void										Puzzle::AddTab(Puzzle& P)
 {
-	std::cout << this->Parent << std::endl;
-	if (this->Parent != NULL)
+	this->ListTab.push_back(P.PuzzleMap);
+}
+
+void										Puzzle::ClearListTab()
+{
+	this->ListTab.clear();
+}
+
+void										Puzzle::ShowMoves() const
+{
+	std::list<short unsigned int **>::const_iterator it;
+	std::list<short unsigned int **>::const_iterator it_end = this->ListTab.end();
+	unsigned int i, j;
+
+	for (it = this->ListTab.begin(); it != it_end; ++it)
 	{
-		this->AffPuzzle();
-		this->Parent->Show();
+		for (i = 0; i < Puzzle::PuzzleScale; ++i)
+		{
+			for (j = 0; j < Puzzle::PuzzleScale; ++j)
+				std::cout << (*it)[i][j] << "\t";
+			std::cout << std::endl;
+		}
+		std::cout << std::endl << "--------------------------------------------" << std::endl;
 	}
+	this->AffPuzzle();
 }
 
 void										Puzzle::SetAlgo(const char Name)

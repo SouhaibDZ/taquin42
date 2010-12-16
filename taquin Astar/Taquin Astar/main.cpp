@@ -8,9 +8,9 @@
 
 int								main(int argc, char **argv)
 {
-	char Name = 'X';
+	char Name = 'E';
 	if (argc == 2)
-		Name = argv[1][0];
+		//Name = argv[1][0];
 	{
 		FileLoader				F;
 		std::string				S;
@@ -37,6 +37,8 @@ int								main(int argc, char **argv)
 			ProcessDown(FirstPuzzle, OpenedList, ClosedList);
 			ProcessRight(FirstPuzzle, OpenedList, ClosedList);
 			ProcessLeft(FirstPuzzle, OpenedList, ClosedList);
+
+			(*FirstPuzzle).ClearListTab();
 			ClosedList.push_back(*FirstPuzzle);
 			OpenedList.erase(FirstPuzzle);
 		}
