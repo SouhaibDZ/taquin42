@@ -321,24 +321,6 @@ void										Puzzle::ClearListTab()
 
 void										Puzzle::ShowMoves() const
 {
-	/*
-	std::list<short unsigned int **>::const_iterator it;
-	std::list<short unsigned int **>::const_iterator it_end = this->ListTab.end();
-	unsigned int i, j;
-
-	for (it = this->ListTab.begin(); it != it_end; ++it)
-	{
-		for (i = 0; i < Puzzle::PuzzleScale; ++i)
-		{
-			for (j = 0; j < Puzzle::PuzzleScale; ++j)
-				std::cout << (*it)[i][j] << "\t";
-			std::cout << std::endl;
-		}
-		std::cout << std::endl << "--------------------------------------------" << std::endl;
-	}
-	this->AffPuzzle();
-	*/
-
 	std::filebuf fb;
 	fb.open ("out.txt",std::ios::out);
 	std::ostream os(&fb);

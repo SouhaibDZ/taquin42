@@ -46,7 +46,8 @@ int								main(int argc, char **argv)
 		}
 		if (fg != 0)
 			std::cout << "NO SOLUTION FOR THIS TAQUIN!!!" << std::endl;
-		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
+		std::cout << "CLOSED LIST NUMBER OF CONTENTS	: \t\t[" << ClosedList.size() << "]"<< std::endl;
+		std::cout << "TIME ELAPSED			: \t\t[" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();
 		std::cout << "Cleaning..." << std::endl;
 		Clean(OpenedList, ClosedList);
