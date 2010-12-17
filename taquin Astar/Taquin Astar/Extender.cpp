@@ -7,10 +7,9 @@ int		Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 	{
 		timeEnd = clock();
 		(*It).ShowMoves();
+		std::cout << "TAQUIN SOLUTION FOUND!!! ;)" << std::endl << std::endl;
 		std::cout << "OPENED LIST NUMBER OF CONTENTS	: \t\t[" << OpenedList.size() << "]"<< std::endl;
-		std::cout << "CLOSED LIST NUMBER OF CONTENTS	: \t\t[" << ClosedList.size() << "]"<< std::endl;
 		std::cout << "NUMBER OF MOVES CROSSED		: \t\t[" << (*It).GetNbMoves() << "]" << std::endl;
-		std::cout << std::endl;
 	}
 	return ((*It).GetDistance());
 }
@@ -103,7 +102,7 @@ void	AddInList(std::list<Puzzle>& OpenedList, std::list<Puzzle>& ClosedList, Puz
 
 void										ShowNbMoves(void)
 {
-	std::cout << "NUMBER OF MOVES			: \t\t [" << NbMoves << "] Moves." << std::endl;
+	std::cout << "NUMBER OF MOVES			: \t\t[" << NbMoves << "] Moves." << std::endl;
 }
 
 void							DisplayLogo()
