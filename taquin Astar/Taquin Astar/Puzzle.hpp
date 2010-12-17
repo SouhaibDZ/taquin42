@@ -51,7 +51,7 @@ private:
 
 public:
 	void									ManhattanDistance();
-	void									ChebyshevDistance();
+	void									TChebyshevDistance();
 	void									EuclideanDistance();
 
 private:
