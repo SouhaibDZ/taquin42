@@ -2,6 +2,7 @@
 #include <sstream>
 #include <list>
 #include <iterator>
+#include <fstream>
 #include "Extender.h"
 #include "Puzzle.hpp"
 #include "FileLoader.h"
@@ -11,8 +12,15 @@ int								main(int argc, char **argv)
 	char Name = 'M';
 	std::string taq = "TaquinA5_2.txt";
 	if (argc == 3)
-		//Name = argv[1][0];
 	{
+		std::ifstream infile;
+		infile.open(argv[2]);
+		if (!infile.is_open())
+		{
+			std::cout << "Error: file <" << argv[2] << ">" << " not found" << std::endl; 
+			return (-1);
+		}
+		infile.close();
 		taq = argv[2];
 		FileLoader				F;
 		std::string				S;
