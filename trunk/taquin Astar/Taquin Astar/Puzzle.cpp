@@ -12,12 +12,8 @@ Puzzle::Puzzle()
 
 }
 
-Puzzle::~Puzzle(void)
+Puzzle::~Puzzle()
 {
-	/*
-	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
-		delete this->PuzzleMap[i];
-	delete this->PuzzleMap;*/
 }
 
 Puzzle::Puzzle(const Puzzle & p)
