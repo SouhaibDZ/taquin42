@@ -263,7 +263,7 @@ void										Puzzle::ManhattanDistance()
 	this->Distance = D;
 }
 
-void										Puzzle::ChebyshevDistance()
+void										Puzzle::TChebyshevDistance()
 {
 	short unsigned int						D = 0;
 	short unsigned int						CurrentNode;
@@ -345,7 +345,7 @@ void										Puzzle::ShowMoves() const
 void										Puzzle::SetAlgo(const char Name)
 {
 	if (Name == 'C')
-		this->meth = &Puzzle::ChebyshevDistance;
+		this->meth = &Puzzle::TChebyshevDistance;
 	else if (Name == 'E')
 		this->meth = &Puzzle::EuclideanDistance;
 	else
