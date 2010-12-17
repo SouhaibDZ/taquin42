@@ -1,14 +1,16 @@
 #include "Extender.h"
 
 int		Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
-				  std::list<Puzzle> & ClosedList)
+				  std::list<Puzzle> & ClosedList, clock_t& timeEnd)
 {
 	if ((*It).GetDistance() == 0)
 	{
+		timeEnd = clock();
+		(*It).ShowMoves();
 		std::cout << "OPENED LIST NUMBER OF CONTENTS	: \t\t[" << OpenedList.size() << "]"<< std::endl;
 		std::cout << "CLOSED LIST NUMBER OF CONTENTS	: \t\t[" << ClosedList.size() << "]"<< std::endl;
+		std::cout << "NUMBER OF MOVES CROSSED		: \t\t[" << (*It).GetNbMoves() << "]" << std::endl;
 		std::cout << std::endl;
-		(*It).ShowMoves();
 	}
 	return ((*It).GetDistance());
 }

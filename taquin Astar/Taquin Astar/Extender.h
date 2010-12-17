@@ -9,7 +9,7 @@
 static int NbMoves;
 
 int		Resume(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
-				  std::list<Puzzle> & ClosedList);
+				  std::list<Puzzle> & ClosedList, clock_t&);
 void	ProcessUp(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,
 				  std::list<Puzzle> & ClosedList);
 void	ProcessRight(std::list<Puzzle>::iterator & It, std::list<Puzzle> & OpenedList,

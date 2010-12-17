@@ -8,10 +8,12 @@
 
 int								main(int argc, char **argv)
 {
-	char Name = 'E';
-	if (argc == 1)
+	char Name = 'M';
+	std::string taq = "TaquinA5_2.txt";
+	if (argc == 3)
 		//Name = argv[1][0];
 	{
+		taq = argv[2];
 		FileLoader				F;
 		std::string				S;
 		Puzzle					P;
@@ -23,7 +25,7 @@ int								main(int argc, char **argv)
 
 		timeDeb = clock();
 		DisplayLogo();
-		F.LoadFile("TaquinA5_2.txt", S);
+		F.LoadFile(taq.c_str(), S);
 		std::istringstream		In(S);
 		P.SetAlgo(Name);
 		Tab = P.CreatePuzzle(S);
@@ -32,7 +34,7 @@ int								main(int argc, char **argv)
 		while (fg != 0 && !OpenedList.empty())
 		{
 			FirstPuzzle = OpenedList.begin();
-			fg = Resume(FirstPuzzle, OpenedList, ClosedList);
+			fg = Resume(FirstPuzzle, OpenedList, ClosedList, timeEnd);
 			ProcessUp(FirstPuzzle, OpenedList, ClosedList);
 			ProcessDown(FirstPuzzle, OpenedList, ClosedList);
 			ProcessRight(FirstPuzzle, OpenedList, ClosedList);
@@ -44,15 +46,11 @@ int								main(int argc, char **argv)
 		}
 		if (fg != 0)
 			std::cout << "NO SOLUTION FOR THIS TAQUIN!!!" << std::endl;
-		timeEnd = clock();
 		std::cout << "TIME ELAPSED			: \t\t [" << static_cast<double>(timeEnd - timeDeb) << "] ms." << std::endl;
 		ShowNbMoves();
-		system("pause");
 		std::cout << "Cleaning..." << std::endl;
 		Clean(OpenedList, ClosedList);
 		std::cout << "Clean done" << std::endl;
-		system("pause");
 	}
-	system("pause");
 	return (0);
 }

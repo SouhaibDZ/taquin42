@@ -42,6 +42,7 @@ public:
 	void									ClearListTab();
 	void									ShowMoves() const;
 	void									EraseMap();
+	short unsigned int						GetNbMoves() const;
 
 
 private:

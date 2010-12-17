@@ -1,8 +1,10 @@
 #include <iostream>
-#include "Puzzle.hpp"
-#include "SolutionGenerator.hpp"
 #include <sstream>
 #include <math.h>
+#include <fstream>
+#include "Puzzle.hpp"
+#include "SolutionGenerator.hpp"
+
 
 unsigned int			Puzzle::PuzzleScale = 0;
 short unsigned int **	Puzzle::SolutionMap = NULL;
@@ -319,6 +321,7 @@ void										Puzzle::ClearListTab()
 
 void										Puzzle::ShowMoves() const
 {
+	/*
 	std::list<short unsigned int **>::const_iterator it;
 	std::list<short unsigned int **>::const_iterator it_end = this->ListTab.end();
 	unsigned int i, j;
@@ -332,6 +335,27 @@ void										Puzzle::ShowMoves() const
 			std::cout << std::endl;
 		}
 		std::cout << std::endl << "--------------------------------------------" << std::endl;
+	}
+	this->AffPuzzle();
+	*/
+
+	std::filebuf fb;
+	fb.open ("out.txt",std::ios::out);
+	std::ostream os(&fb);
+
+	std::list<short unsigned int **>::const_iterator it;
+	std::list<short unsigned int **>::const_iterator it_end = this->ListTab.end();
+	unsigned int i, j;
+
+	for (it = this->ListTab.begin(); it != it_end; ++it)
+	{
+		os << "--------------------------------" << std::endl;
+		for (i = 0; i < Puzzle::PuzzleScale; ++i)
+		{
+			for (j = 0; j < Puzzle::PuzzleScale; ++j)
+				os << (*it)[i][j] << "\t";
+			os << std::endl;
+		}
 	}
 	this->AffPuzzle();
 }
@@ -353,4 +377,10 @@ void									Puzzle::EraseMap()
 	for (unsigned int i = 0; i < Puzzle::PuzzleScale; ++i)
 		delete[] this->PuzzleMap[i];
 	delete this->PuzzleMap;
+}
+
+
+short unsigned int						Puzzle::GetNbMoves() const
+{
+	return (this->ListTab.size() + 1);
 }
